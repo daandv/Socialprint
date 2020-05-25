@@ -80,9 +80,6 @@ fetch("./api/printers")
 
 
 
-
-
-
   })
   .catch(function(error) {
     console.log(error);

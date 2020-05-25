@@ -12,4 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .js('resources/js/leaflet.js', 'public/js')
+    .js('resources/js/leaflet.markercluster.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .copy('resources/css/leaflet.css', 'public/css')
+    .copy('resources/css/MarkerCluster.css', 'public/css')
+    .copy('resources/css/MarkerCluster.Default.css', 'public/css');
