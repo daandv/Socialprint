@@ -12026,5 +12026,10 @@ a.text-dark:focus {
 
 #mymap {
   height: 700px;
+  z-index: 1;
+}
+
+.algoliabox {
+  z-index: 2;
 }
 

@@ -1,5 +1,7 @@
 require('./bootstrap');
 
+
+//LEAFLET MAP ------------------------------------------------------
 var map = L.map('mymap',
 {
     // options
@@ -32,11 +34,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
             noWrap: true
         }).addTo(map);
 
-// var marker = L.marker([51.5, -0.09]).addTo(map);
-// L.marker([51.5, -0.08]).addTo(map);
 
 // api data inladen (printers) origineel
-
 fetch("./api/printers")
   .then(response => response.json())
   .then(data => {
@@ -64,7 +63,6 @@ fetch("./api/printers")
 
       markerClusters.addLayer( m );
     }
-
     map.addLayer( markerClusters );
 
     //ZICHTBARE MARKERS
@@ -79,8 +77,30 @@ fetch("./api/printers")
     });
 
 
-
   })
   .catch(function(error) {
     console.log(error);
   });
+
+
+  //ALGOLIA SEARCH ---------------------------------------------------
+  (function() {
+    var placesAutoComplete = places({
+      appId: 'plL558Q5UN5X',
+      apiKey: 'b5ab61c4e307a747f2dd28a70860d19a',
+      container: document.querySelector('#adress'),
+      templates: {
+        value: function(suggestion) {
+          return suggestion.name;
+        }
+      }
+    }).configure({
+      type: 'city',
+      countries: ['BE']
+    });
+
+    placesAutoComplete.on('change', function resultSelected(e) {
+      console.log(e.suggestion);
+      map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 13);
+    })
+  })();

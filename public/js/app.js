@@ -37225,7 +37225,8 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //LEAFLET MAP ------------------------------------------------------
+
 
 var map = L.map('mymap', {// options
 }).locate({
@@ -37257,9 +37258,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
   id: 'mapbox.light',
   accessToken: 'pk.eyJ1IjoiZGR2bWFwcyIsImEiOiJjamhuaTNlNzgzcWtlM2NwZTA0MDF1YmE5In0._G6QYZsmQZpYEuCD3br8VA',
   noWrap: true
-}).addTo(map); // var marker = L.marker([51.5, -0.09]).addTo(map);
-// L.marker([51.5, -0.08]).addTo(map);
-// api data inladen (printers) origineel
+}).addTo(map); // api data inladen (printers) origineel
 
 fetch("./api/printers").then(function (response) {
   return response.json();
@@ -37299,7 +37298,27 @@ fetch("./api/printers").then(function (response) {
   });
 })["catch"](function (error) {
   console.log(error);
-});
+}); //ALGOLIA SEARCH ---------------------------------------------------
+
+(function () {
+  var placesAutoComplete = places({
+    appId: 'plL558Q5UN5X',
+    apiKey: 'b5ab61c4e307a747f2dd28a70860d19a',
+    container: document.querySelector('#adress'),
+    templates: {
+      value: function value(suggestion) {
+        return suggestion.name;
+      }
+    }
+  }).configure({
+    type: 'city',
+    countries: ['BE']
+  });
+  placesAutoComplete.on('change', function resultSelected(e) {
+    console.log(e.suggestion);
+    map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 13);
+  });
+})();
 
 /***/ }),
 
