@@ -1,0 +1,9 @@
+autoprefixer
+------------
+package.json toevoegen:
+"browserslist": [
+  "last 3 versions"
+]
+
+bootstrap toegevoegd
+--------------------
