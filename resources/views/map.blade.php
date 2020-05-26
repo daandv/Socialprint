@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('script')
+<script src="{{ asset('js/mainmap.js') }}" defer></script>
+@endpush
+
 @section('content')
 <div class="container">
   <form class="algoliabox">

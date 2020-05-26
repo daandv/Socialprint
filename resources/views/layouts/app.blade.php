@@ -19,13 +19,15 @@
 
 
     <!-- Scripts -->
-    <script src="{{ asset('js/leaflet.js') }}" ></script>
-    <script src="{{ asset('js/leaflet.markercluster.js') }}" ></script>
+    <!-- <script src="{{ asset('js/leaflet.js') }}" ></script>
+    <script src="{{ asset('js/leaflet.markercluster.js') }}" ></script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.18.2"></script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- File specific js -->
+    @stack('script')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
