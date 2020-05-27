@@ -7,18 +7,18 @@
 @section('content')
 <div class="container">
 
-  <h3>Please complete your account</h3>
-  <form class="" action="index.html" method="post">
+  <h3>Nog enkele vraagjes</h3>
+  <form>
     <div class="row">
 
       <div class="col md-6">
         <label for="address">Straat + nr</label>
-        <input class="form-control" id="address" type="text">
+        <input id="address" class="form-control" type="text">
       </div>
 
       <div class="col md-6">
         <label for="city">Gemeente</label>
-        <input class="form-control" id="city" type="text">
+        <input id="city" class="form-control" type="text">
       </div>
 
     </div>
