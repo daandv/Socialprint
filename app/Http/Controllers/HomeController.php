@@ -14,7 +14,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       //dit toevoegen aan controllers die beschermd moeten worden
         $this->middleware(['auth','verified']);
     }
 
@@ -25,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Check if account is completed:
+        if (!Auth::user()->account_completed) {
+          return redirect()->route('complete');
+        }
+
+        // Anders:
         $user = Auth::user();
         return view('home', compact('user'));
     }
