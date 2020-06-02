@@ -23,6 +23,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/map', 'MapController@index')->name('map');
 Route::get('/account', 'UserController@show')->name('account');
+Route::get('/print_at/{id}', 'PrintController@index')->name('account');
 // Route::get('/complete', function () {
 //     return view('accountcomplete');
 // });

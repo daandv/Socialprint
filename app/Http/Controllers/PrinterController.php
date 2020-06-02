@@ -28,7 +28,7 @@ class PrinterController extends Controller
       ->where('available','=',1)
       ->join('user_address_infos','users.address_id','=','user_address_infos.id')
       ->join('printers','users.id','=','printers.user_id')
-      ->select('users.name', 'user_address_infos.lat', 'user_address_infos.lng', 'printers.price', 'printers.format_id', 'printers.color_id')
+      ->select('users.name', 'users.id', 'user_address_infos.lat', 'user_address_infos.lng', 'printers.price', 'printers.format_id', 'printers.color_id')
       ->get();
 
       $array = json_decode(json_encode($printers), true);
