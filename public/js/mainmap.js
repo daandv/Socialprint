@@ -99,7 +99,7 @@ var map = L.map('mymap', {
 }).locate({
   setView: true,
   maxZoom: 16
-}); // map.setMaxBounds(  [[-90,-180],   [90,180]]  );
+});
 
 function onLocationFound(e) {
   console.log("Locatie gevonden"); // var radius = e.accuracy;
@@ -127,7 +127,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
   noWrap: true
 }).addTo(map); // api data inladen (printers) origineel
 
-fetch("./api/printers").then(function (response) {
+fetch("./printers").then(function (response) {
   return response.json();
 }).then(function (data) {
   var printers = data.data; // console.log(printers);

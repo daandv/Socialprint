@@ -4,7 +4,6 @@ var map = L.map('mymap',
 {
     maxBounds: [[-90,-180],   [90,180]],
 }).locate({setView: true, maxZoom: 16});
-// map.setMaxBounds(  [[-90,-180],   [90,180]]  );
 
 function onLocationFound(e) {
   console.log("Locatie gevonden")
@@ -35,7 +34,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 
 // api data inladen (printers) origineel
-fetch("./api/printers")
+fetch("./printers")
   .then(response => response.json())
   .then(data => {
     var printers = data.data;
@@ -101,5 +100,7 @@ fetch("./api/printers")
     placesAutoComplete.on('change', function resultSelected(e) {
       console.log(e.suggestion);
       map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 13);
-    })
+
+
+    });
   })();

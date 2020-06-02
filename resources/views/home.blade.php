@@ -13,6 +13,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
+
                      U bent ingelogd:
                     {{ $user->name }}
                 </div>

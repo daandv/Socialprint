@@ -8,7 +8,12 @@ use App\Http\Resources\Printer as PrinterResource;
 
 class PrinterController extends Controller
 {
-    public function index() {
+  public function __construct()
+  {
+     //dit toevoegen aan controllers die beschermd moeten worden
+      $this->middleware(['auth','verified']);
+  }
+  public function index() {
       $printers = collect([
   [
     'name'=> 'Frieda Rocha',

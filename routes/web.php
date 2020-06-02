@@ -28,3 +28,9 @@ Route::get('/map', 'MapController@index')->name('map');
 Route::get('/complete', 'AccountCompleteController@index')->name('complete');
 Route::get('/notaprinter', 'AccountCompleteController@notaprinter')->name('notaprinter');
 Route::get('/addprinter', 'AccountCompleteController@addprinter')->name('addprinter');
+
+Route::post('/adduserprinter', 'UserPrinterController@complete');
+
+
+//API
+Route::get('/printers', 'PrinterController@index');

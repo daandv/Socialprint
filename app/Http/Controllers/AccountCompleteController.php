@@ -11,7 +11,7 @@ class AccountCompleteController extends Controller
 {
     public function __construct()
     {
-       //dit toevoegen aan controllers die beschermd moeten worden
+       // Protected controller
         $this->middleware(['auth','verified']);
     }
 
@@ -36,7 +36,7 @@ class AccountCompleteController extends Controller
       $user->account_completed = 1;
       $user->save();
 
-      return redirect()->route('home');
+      return redirect()->route('home')->with('status', "profiel in orde");
     }
 
     public function addprinter()
@@ -46,8 +46,7 @@ class AccountCompleteController extends Controller
         return redirect()->route('home');
       }
 
-
-      // Make user account status 'complete' and add printer details(not here)
+      // Return view for adding printer
       return view('accountcomplete');
     }
 

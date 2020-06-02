@@ -10,6 +10,7 @@
     <label for="adress">Typ in</label>
     <input type="text" id="adress">
   </form>
+
   <br><br>
   <div id="mymap"></div>
 </div>
