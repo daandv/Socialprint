@@ -14,6 +14,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/mainmap.js', 'public/js')
     .js('resources/js/accountcomplete.js', 'public/js')
+    .js('resources/js/accountedit.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .copy('resources/css/leaflet.css', 'public/css')
     .copy('resources/css/MarkerCluster.css', 'public/css')

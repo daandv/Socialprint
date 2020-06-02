@@ -20,10 +20,12 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/map', 'MapController@index')->name('map');
-Route::get('/account', 'UserController@show')->name('account');
-Route::get('/print_at/{id}', 'PrintController@index')->name('account');
+Route::get('/home', 'HomeController@index');
+Route::get('/map', 'MapController@index');
+Route::get('/editaccount', 'UserController@show');
+Route::get('/profile/{id}', 'ProfileController@index');
+
+Route::get('/print_at/{id}', 'PrintController@index');
 // Route::get('/complete', function () {
 //     return view('accountcomplete');
 // });
@@ -32,7 +34,7 @@ Route::get('/notaprinter', 'AccountCompleteController@notaprinter')->name('notap
 Route::get('/addprinter', 'AccountCompleteController@addprinter')->name('addprinter');
 
 Route::post('/adduserprinter', 'UserController@complete');
+Route::post('/account/update', 'UserController@update');
 
-
-//API
+//SMALL API
 Route::get('/printers', 'PrinterController@index');

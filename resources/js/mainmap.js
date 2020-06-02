@@ -42,7 +42,7 @@ fetch("./printers")
     //cluster
     var markerClusters = L.markerClusterGroup({
       showCoverageOnHover:false,
-      maxClusterRadius:100,
+      maxClusterRadius:30,
     });
 
     for ( var i = 0; i < printers.length; ++i )

@@ -31,14 +31,8 @@ class PrinterController extends Controller
       ->select('users.name', 'users.id', 'user_address_infos.lat', 'user_address_infos.lng', 'printers.price', 'printers.format_id', 'printers.color_id')
       ->get();
 
-      $array = json_decode(json_encode($printers), true);
-
-      // $printers = DB::table('users')
-      //     ->select('user.name', 'user.id')
-      //     ->join('user_address_infos','user.address_id','=','school_status.link_id')
-      //     ->where('links.id','!=',35)
-      //     ->where('school_status.academic_year','=','2014-15')
-      //     ->get();
-      return PrinterResource::collection($array);
+      // $printersInArray = json_decode(json_encode($printers), true);
+      // return PrinterResource::collection($printersInArray);
+      return new PrinterResource($printers);
     }
 }

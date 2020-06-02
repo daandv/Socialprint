@@ -66,12 +66,74 @@ class UserController extends Controller
 
     public function show() {
       $user = User::find(Auth::user()->id);
-      $address = UserAddressInfo::find($user->address_id);
-      $name = $user->name;
-      $address = $address->street_and_number;
+      $address = UserAddressInfo::where('id',$user->address_id)->first();
+      $printer = Printer::where('user_id',$user->id)->first();
 
-      // dd($user->name);
-      return view('account', ['name' => $name, 'address' => $address]);
+      $name = $user->name;
+      $fullAddress = $address->street_and_number;
+      $lat = $address->lat;
+      $lng = $address->lng;
+      $city = $address->city;
+      $colorId = $printer->color_id;
+      $pp = $printer->price;
+      $zip = $address->zip;
+
+      return view('account', [
+        'name' => $name,
+        'address' => $fullAddress,
+        'city' => $city,
+        'colorId' => $colorId,
+        'pp' => $pp,
+        'lat' => $lat,
+        'lng' => $lng,
+        'zip' => $zip
+      ]);
+    }
+
+
+
+
+
+    public function update(Request $request) {
+
+      $validatedData = $request->validate([
+          'lat' => 'required',
+          'lng' => 'required',
+          'pp' => 'required'
+
+      ]);
+
+
+      $user = User::find(Auth::user()->id);
+
+      $useraddressinfo = UserAddressInfo::find($user->address_id);
+      $useraddressinfo->street_and_number = $request->address;
+      $useraddressinfo->city = $request->city;
+      $useraddressinfo->zip = $request->zip;
+      $useraddressinfo->lat = $request->lat;
+      $useraddressinfo->lng = $request->lng;
+      $useraddressinfo->save();
+
+      // Update printer
+      $printer = Printer::where('user_id', $user->id)->first();
+      $printer->price = $request->pp;
+
+      switch ($request->printColor) {
+        case 'bw':
+          $printer->color_id = 2;
+          // Only A4 for the moment (futureproof)
+          $printer->format_id = 1;
+          break;
+        case 'color':
+          $printer->color_id = 1;
+          // Only A4 for the moment (futureproof)
+          $printer->format_id = 1;
+          break;
+      }
+
+      $printer->save();
+
+      return redirect()->route('home')->with('status', "Profiel geupdate");
     }
 
 
