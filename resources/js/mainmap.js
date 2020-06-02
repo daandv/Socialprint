@@ -54,9 +54,9 @@ fetch("./printers")
       //             '<br/><b>Altitude:</b> ' + Math.round( markers[i].alt * 0.3048 ) + ' m' +
       //             '<br/><b>Timezone:</b> ' + markers[i].tz;
 
-      var popup = printers[i].lat + '<br>' + printers[i].long;
+      var popup = printers[i].name + '<br>' + printers[i].lat + '<br>' + printers[i].lng;
 
-      var m = L.marker( [printers[i].lat, printers[i].long], {title:printers[i].name} )
+      var m = L.marker( [printers[i].lat, printers[i].lng], {title:printers[i].name} )
                       .bindPopup( popup );
 
       markerClusters.addLayer( m );
@@ -79,6 +79,10 @@ fetch("./printers")
   .catch(function(error) {
     console.log(error);
   });
+
+
+
+
 
 
   //ALGOLIA SEARCH ---------------------------------------------------

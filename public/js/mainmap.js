@@ -145,8 +145,8 @@ fetch("./printers").then(function (response) {
     //             '<br/><b>ICAO:</b> ' + markers[i].icao +
     //             '<br/><b>Altitude:</b> ' + Math.round( markers[i].alt * 0.3048 ) + ' m' +
     //             '<br/><b>Timezone:</b> ' + markers[i].tz;
-    var popup = printers[i].lat + '<br>' + printers[i]["long"];
-    var m = L.marker([printers[i].lat, printers[i]["long"]], {
+    var popup = printers[i].name + '<br>' + printers[i].lat + '<br>' + printers[i].lng;
+    var m = L.marker([printers[i].lat, printers[i].lng], {
       title: printers[i].name
     }).bindPopup(popup);
     markerClusters.addLayer(m);

@@ -9,8 +9,13 @@ use App\User;
 use App\Printer;
 use App\UserAddressInfo;
 
-class UserPrinterController extends Controller
+class UserController extends Controller
 {
+    public function __construct()
+    {
+       // Protected controller
+        $this->middleware(['auth','verified']);
+    }
     public function complete(Request $request)
     {
       $validatedData = $request->validate([
@@ -57,6 +62,17 @@ class UserPrinterController extends Controller
       $printer->save();
 
       return redirect()->route('home')->with('status', "Profiel in orde");
-
     }
+
+    public function show() {
+      $user = User::find(Auth::user()->id);
+      $address = UserAddressInfo::find($user->address_id);
+      $name = $user->name;
+      $address = $address->street_and_number;
+
+      // dd($user->name);
+      return view('account', ['name' => $name, 'address' => $address]);
+    }
+
+
 }
