@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use AnthonyMartin\GeoLocation\GeoPoint;
+
 use App\User;
 use App\Printer;
 use App\UserAddressInfo;
@@ -90,17 +90,12 @@ class UserController extends Controller
       ]);
     }
 
-
-
-
-
     public function update(Request $request) {
 
       $validatedData = $request->validate([
           'lat' => 'required',
           'lng' => 'required',
           'pp' => 'required'
-
       ]);
 
 

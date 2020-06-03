@@ -1,0 +1,25 @@
+@extends('layouts.app')
+
+@push('script')
+
+@endpush
+
+@section('content')
+<div class="container">
+  {{$userThatPrintsId}}
+  <br>
+  {{$requesterId}}
+  <div class="form-group">
+       <label class="col-sm-3 control-label">
+           Attachment(s)
+           (Attach multiple files.)
+       </label>
+       <div class="col-sm-9">
+           <span class="btn btn-default btn-file">
+               <input id="input-2" name="input2[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
+           </span>
+       </div>
+   </div>
+
+</div>
+@endsection

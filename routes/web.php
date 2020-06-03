@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/map', 'MapController@index');
 Route::get('/editaccount', 'UserController@show');
 Route::get('/profile/{id}', 'ProfileController@index');
@@ -37,4 +37,4 @@ Route::post('/adduserprinter', 'UserController@complete');
 Route::post('/account/update', 'UserController@update');
 
 //SMALL API
-Route::get('/printers', 'PrinterController@index');
+Route::get('/printers', 'Api\PrinterController@index');

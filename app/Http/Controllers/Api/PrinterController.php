@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api; // Change folder to Api
 
+use App\Http\Controllers\Controller; // Threating this file like a controller
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
