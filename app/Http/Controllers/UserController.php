@@ -91,7 +91,6 @@ class UserController extends Controller
     }
 
     public function update(Request $request) {
-
       $validatedData = $request->validate([
           'lat' => 'required',
           'lng' => 'required',

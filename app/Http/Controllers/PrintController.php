@@ -30,10 +30,14 @@ class PrintController extends Controller
         return redirect()->route('home')->with('status', "Bij jezelf afdrukken gaat niet ;)");
       }
 
+      $userThatPrintsName = User::find($userThatPrintsId)->name;
+      $requesterName = User::find($requesterId)->name;
 
       return view('fileupload', [
         'userThatPrintsId' => $userThatPrintsId,
-        'requesterId' => $requesterId
+        'requesterId' => $requesterId,
+        'userThatPrintsName' => $userThatPrintsName,
+        'requesterName' => $requesterName,
       ]);
 
     }

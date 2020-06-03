@@ -21,6 +21,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.18.2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 

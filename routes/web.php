@@ -34,6 +34,10 @@ Route::get('/notaprinter', 'AccountCompleteController@notaprinter')->name('notap
 Route::get('/addprinter', 'AccountCompleteController@addprinter')->name('addprinter');
 
 Route::post('/adduserprinter', 'UserController@complete');
+// For error when getting to post method
+// Route::get('/adduserprinter', function () {
+//   return "dit gaat niet";
+// });
 Route::post('/account/update', 'UserController@update');
 
 //SMALL API
