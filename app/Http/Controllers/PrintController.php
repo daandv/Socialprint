@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Route;
 use Str;
 
@@ -48,6 +49,7 @@ class PrintController extends Controller
 
     public function uploadFiles(Request $request)
     {
+              $fileName;
       if ($request->hasFile('file')) {
         // return $request->all();
         foreach ($request->file as $file) {
@@ -59,13 +61,27 @@ class PrintController extends Controller
         }
 
 
-
+        return redirect()->route('getfile', ['fileName' => $fileName]);
         // Add new printjob to db here
-        return $fileSize;
+        // return $fileSize;
+
       }
 
       // return "test";
       // return redirect()->route('home')->with('status', "Werkt");
+    }
+
+    public function getFile()
+    {
+
+      // Request $file
+      try {
+          return Storage::disk('s3')->response('documents/' . Route::current()->parameter('fileName'));
+      } catch (\Exception $e) {
+          return redirect()->route('home')->with('status', "Bestand niet gevonden");
+      }
+
+
     }
 
 

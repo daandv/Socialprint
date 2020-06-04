@@ -25,22 +25,25 @@ Route::get('/map', 'MapController@index');
 Route::get('/editaccount', 'UserController@show');
 Route::get('/profile/{id}', 'ProfileController@index');
 
-Route::get('/print_at/{id}', 'PrintController@index');
-Route::post('/print_at/uploadprintjob', 'PrintController@uploadFiles');
 
-// Route::get('/complete', function () {
-//     return view('accountcomplete');
-// });
+
 Route::get('/complete', 'AccountCompleteController@index')->name('complete');
 Route::get('/notaprinter', 'AccountCompleteController@notaprinter')->name('notaprinter');
 Route::get('/addprinter', 'AccountCompleteController@addprinter')->name('addprinter');
+
 
 Route::post('/adduserprinter', 'UserController@complete');
 // For error when getting to post method
 // Route::get('/adduserprinter', function () {
 //   return "dit gaat niet";
 // });
-Route::post('/account/update', 'UserController@update');
+
+Route::post('/account/update', 'UserController@update'); // For form
+
+
+Route::get('/print_at/{id}', 'PrintController@index');
+Route::post('/print_at/uploadprintjob', 'PrintController@uploadFiles');
+Route::get('/getfile/{fileName}', 'PrintController@getFile')->name('getfile');
 
 //SMALL API
 Route::get('/printers', 'Api\PrinterController@index');
