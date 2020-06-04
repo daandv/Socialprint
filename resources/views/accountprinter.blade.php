@@ -8,9 +8,15 @@
 @section('content')
 <div class="container">
 
+
+  @if($available)
+    <a href="./notavailable">Ik wil niet meer printen</a>
+  @else
+    <a href="./setavailable">Ik wil weer printen</a>
+  @endif
+
   <form action="./account/update" method="POST">
     @csrf
-
     <label for="name">Naam</label>
     <input type="text" id="name" class="form-control" name="name" value="{{$name}}">
 

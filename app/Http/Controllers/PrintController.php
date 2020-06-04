@@ -49,7 +49,7 @@ class PrintController extends Controller
 
     public function uploadFiles(Request $request)
     {
-              $fileName;
+      $fileName;
       if ($request->hasFile('file')) {
         // return $request->all();
         foreach ($request->file as $file) {

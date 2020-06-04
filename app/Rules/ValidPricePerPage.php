@@ -25,7 +25,13 @@ class ValidPricePerPage implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        if ($value > 1) {
+          return false;
+        } else if ($value < 0) {
+          return false;
+        } else {
+          return true;
+        }
     }
 
     /**

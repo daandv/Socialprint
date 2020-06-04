@@ -9,6 +9,8 @@ use App\User;
 use App\Printer;
 use App\UserAddressInfo;
 
+use App\Rules\ValidPricePerPage;
+
 class UserController extends Controller
 {
     public function __construct()
@@ -21,8 +23,7 @@ class UserController extends Controller
       $validatedData = $request->validate([
           'lat' => 'required',
           'lng' => 'required',
-          'pp' => 'required'
-
+          'pp' => ['required', new ValidPricePerPage]
       ]);
 
       // Fill in address info
@@ -64,8 +65,113 @@ class UserController extends Controller
       return redirect()->route('home')->with('status', "Profiel in orde");
     }
 
-    public function show() {
+
+
+
+
+
+    public function changeToPrinter() {
       $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // If user has printer
+      if ($printer) {
+        return redirect()->route('home')->with('status', "Foute route");
+      }
+
+      return view('changetoprinter');
+    }
+
+    public function changeToPrinterUpdate(Request $request)
+    {
+      $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // If user has printer
+      if ($printer) {
+        return redirect()->route('home')->with('status', "Foute route");
+      }
+
+      $validatedData = $request->validate([
+          'lat' => 'required',
+          'lng' => 'required',
+          'pp' => ['required', new ValidPricePerPage]
+      ]);
+
+      // Fill in address info
+      $useraddressinfo = new UserAddressInfo();
+      $useraddressinfo->street_and_number = $request->address;
+      $useraddressinfo->city = $request->city;
+      $useraddressinfo->zip = $request->zip;
+      $useraddressinfo->lat = $request->lat;
+      $useraddressinfo->lng = $request->lng;
+      $useraddressinfo->save();
+
+      // Make user account status 'complete' and set 'available'
+      $user = User::find(Auth::user()->id);
+      $user->account_completed = 1;
+      $user->available = 1;
+      $user->address_id=$useraddressinfo->id;
+      $user->save();
+
+      // Add new printer
+      $printer = new Printer();
+      $printer->user_id = $user->id;
+      $printer->price = $request->pp;
+
+      switch ($request->printColor) {
+        case 'bw':
+          $printer->color_id = 2;
+          // Only A4 for the moment (futureproof)
+          $printer->format_id = 1;
+          break;
+        case 'color':
+          $printer->color_id = 1;
+          // Only A4 for the moment (futureproof)
+          $printer->format_id = 1;
+          break;
+      }
+
+      $printer->save();
+
+      return redirect()->route('home')->with('status', "Profiel in orde");
+    }
+
+
+    public function reRouteShow() {
+      $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // If user has printer
+      if ($printer) {
+        return redirect()->route('showprinter');
+      } else {
+        return redirect()->route('shownonprinter');
+      }
+    }
+
+    public function reRouteUpdate(Request $request) {
+      // $user = User::find(Auth::user()->id);
+      //
+      //
+      // // User is not a printer
+      // if () {
+      //   // return redirect()->route('shownonprinter');
+      // } else {
+      //   // return redirect()->route('showprinter');
+      // }
+    }
+
+    public function showPrinter() {
+      $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // If user has printer
+      if (!$printer) {
+          return redirect()->route('shownonprinter');
+      }
+
+
       $address = UserAddressInfo::where('id',$user->address_id)->first();
       $printer = Printer::where('user_id',$user->id)->first();
 
@@ -77,8 +183,9 @@ class UserController extends Controller
       $colorId = $printer->color_id;
       $pp = $printer->price;
       $zip = $address->zip;
+      $availability = $user->available;
 
-      return view('account', [
+      return view('accountprinter', [
         'name' => $name,
         'address' => $fullAddress,
         'city' => $city,
@@ -86,18 +193,51 @@ class UserController extends Controller
         'pp' => $pp,
         'lat' => $lat,
         'lng' => $lng,
-        'zip' => $zip
+        'zip' => $zip,
+        'available' => $availability
       ]);
     }
+
+    public function showNonPrinter() {
+      $user = User::find(Auth::user()->id);
+
+      // User is a printer
+      if ($user->available) {
+        return redirect()->route('showprinter');
+      }
+
+      $name = $user->name;
+
+      return view('accountnonprinter', [
+        'name' => $name,
+      ]);
+    }
+
+    public function removeAvailability() {
+      $user = User::find(Auth::user()->id);
+      $user->available=0;
+      $user->save();
+      return redirect()->route('editaccount');
+    }
+
+    public function addAvailability() {
+      $user = User::find(Auth::user()->id);
+      $user->available=1;
+      $user->save();
+      return redirect()->route('editaccount');
+    }
+
 
     public function update(Request $request) {
       $validatedData = $request->validate([
           'lat' => 'required',
           'lng' => 'required',
-          'pp' => 'required'
+          'pp' => ['required', new ValidPricePerPage]
       ]);
 
       $user = User::find(Auth::user()->id);
+      $user->name = $request->name;
+      $user->save();
 
       $useraddressinfo = UserAddressInfo::find($user->address_id);
       $useraddressinfo->street_and_number = $request->address;
