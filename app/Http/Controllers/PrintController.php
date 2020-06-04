@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Route;
+use Str;
 
 use App\User;
+use App\Printer;
 
 class PrintController extends Controller
 {
@@ -32,13 +34,40 @@ class PrintController extends Controller
 
       $userThatPrintsName = User::find($userThatPrintsId)->name;
       $requesterName = User::find($requesterId)->name;
+      $printer = Printer::where('user_id', $userThatPrintsId)->first();
+      $pp = $printer->price;
 
       return view('fileupload', [
         'userThatPrintsId' => $userThatPrintsId,
         'requesterId' => $requesterId,
         'userThatPrintsName' => $userThatPrintsName,
         'requesterName' => $requesterName,
+        'pp' => $pp,
       ]);
-
     }
+
+    public function uploadFiles(Request $request)
+    {
+      if ($request->hasFile('file')) {
+        // return $request->all();
+        foreach ($request->file as $file) {
+          $key = Str::random(32);
+          $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . "_". $key .".pdf";
+          $fileSize = $file->getSize();
+
+          $file->storeAs('documents', $fileName, 's3');
+        }
+
+
+
+        // Add new printjob to db here
+        return $fileSize;
+      }
+
+      // return "test";
+      // return redirect()->route('home')->with('status', "Werkt");
+    }
+
+
+
 }

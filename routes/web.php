@@ -26,6 +26,8 @@ Route::get('/editaccount', 'UserController@show');
 Route::get('/profile/{id}', 'ProfileController@index');
 
 Route::get('/print_at/{id}', 'PrintController@index');
+Route::post('/print_at/uploadprintjob', 'PrintController@uploadFiles');
+
 // Route::get('/complete', function () {
 //     return view('accountcomplete');
 // });

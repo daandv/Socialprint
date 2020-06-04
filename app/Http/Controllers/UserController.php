@@ -97,7 +97,6 @@ class UserController extends Controller
           'pp' => 'required'
       ]);
 
-
       $user = User::find(Auth::user()->id);
 
       $useraddressinfo = UserAddressInfo::find($user->address_id);
