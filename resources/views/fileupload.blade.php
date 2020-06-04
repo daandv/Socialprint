@@ -20,6 +20,8 @@
      <input id="pp" type="hidden" name="pp" value="{{$pp}}">
      <button id="verzendbtn" type="submit" class="btn btn-primary" disabled="disabled">Verstuur printopdracht</button>
   </form>
+  <br><br>
+  <p id="calculations"></p>
 
 
 </div>

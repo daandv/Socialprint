@@ -921,17 +921,21 @@ $(document).ready(function () {
             if (this.files.length >= 1) {
               if (!pagesFound) {
                 console.log("Er kan helaas geen automatische kostenschatting worden gemaakt");
+                $("#calculations").html("Wij kunnen helaas geen automatische kostenschatting maken");
               } else if (validFileType && validFileSize) {
                 console.log(totalPages);
                 console.log("€", userPP * totalPages);
+                $("#calculations").html(totalPages + "paginas X " + userPP + " per pagina = €" + userPP * totalPages);
                 $("#verzendbtn").prop("disabled", false);
               } else {
                 console.log("Ongeldige file(s)");
+                $("#calculations").html("Ongeldige file, te groot (max 40mb) of verkeerd formaat (alleen pdf).");
                 $("#verzendbtn").prop("disabled", true);
               }
             } else {
               console.log("selecteer een document");
               $("#verzendbtn").prop("disabled", true);
+              $("#calculations").html(" ");
             }
 
           case 26:

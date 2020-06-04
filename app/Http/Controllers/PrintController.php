@@ -58,13 +58,16 @@ class PrintController extends Controller
           $fileSize = $file->getSize();
 
           $file->storeAs('documents', $fileName, 's3');
+          return Storage::url($file);
         }
 
 
-        return redirect()->route('getfile', ['fileName' => $fileName]);
+        // return redirect()->route('getfile', ['fileName' => $fileName]);
+
         // Add new printjob to db here
         // return $fileSize;
 
+        // return redirect()->route('home')->with('status', "File geupload naar Amazon S3 en in database verwerkt.");
       }
 
       // return "test";
