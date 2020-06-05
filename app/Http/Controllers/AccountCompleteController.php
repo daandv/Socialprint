@@ -28,7 +28,7 @@ class AccountCompleteController extends Controller
       return view('accounttype');
     }
 
-    public function notaprinter()
+    public function notAPrinter()
     {
       // Check if user completed account
       if (Auth::user()->account_completed) {
@@ -51,7 +51,7 @@ class AccountCompleteController extends Controller
       }
 
       // Return view for adding printer
-      return view('accountcomplete');
+      return view('printercomplete');
     }
 
     public function addPrinterStore(Request $request) {

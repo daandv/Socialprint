@@ -23,17 +23,17 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/map', 'MapController@index');
-Route::get('/editaccount', 'UserController@reRouteShow')->name('editaccount'); //+
-Route::get('/showprinter', 'UserController@showPrinter')->name('showprinter'); //+
-Route::get('/shownonprinter', 'UserController@showNonPrinter')->name('shownonprinter'); //+
-Route::get('/notavailable', 'UserController@removeAvailability'); //+
-Route::get('/setavailable', 'UserController@addAvailability'); //+
+Route::get('/editaccount', 'UserController@reRouteShow')->name('editaccount');
+Route::get('/showprinter', 'UserController@showPrinter')->name('showprinter');
+Route::get('/shownonprinter', 'UserController@showNonPrinter')->name('shownonprinter');
+Route::get('/notavailable', 'UserController@removeAvailability');
+Route::get('/setavailable', 'UserController@addAvailability');
 
 // Route::get('/profile/{id}', 'ProfileController@index');
 
-Route::get('/complete', 'AccountCompleteController@index')->name('complete'); //+
-Route::get('/notaprinter', 'AccountCompleteController@notaprinter')->name('notaprinter'); //+
-Route::get('/addprinter', 'AccountCompleteController@addPrinter')->name('addprinter'); //+
+Route::get('/complete', 'AccountCompleteController@index')->name('complete');
+Route::get('/notaprinter', 'AccountCompleteController@notAPrinter')->name('notaprinter');
+Route::get('/addprinter', 'AccountCompleteController@addPrinter')->name('addprinter');
 Route::post('/adduserprinter', 'AccountCompleteController@addPrinterStore');
 
 Route::get('/changetoprinter', 'UserController@changeToPrinter');

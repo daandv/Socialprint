@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified', 'completed']);
+        $this->middleware(['auth','verified']);
     }
 
     /**
@@ -27,12 +27,12 @@ class HomeController extends Controller
         if (session('verified')) {
           return view('verified');
         }
-        // Check if account is completed:
-        // if (!Auth::user()->account_completed) {
-        //   return redirect()->route('complete');
-        // }
 
-        // Anders:
+        // Check if account is completed (not middleware because of mail animation)
+        if (!Auth::user()->account_completed) {
+          return redirect()->route('complete');
+        }
+
         $user = Auth::user();
         return view('home', compact('user'));
     }
