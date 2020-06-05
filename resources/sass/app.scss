@@ -1,39 +1,55 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
+@import 'verifiedLoader';
 // Variables
 @import 'variables';
 
 // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
-
-#mymap {
-  height: calc(100vh - 94.8px);
-  z-index: 1;
-}
-
 #minimap {
   height: 300px;
   z-index: 1;
 }
 
+
+// HOME
+#mymap {
+  height: calc(100vh - 112.781px);
+  z-index: 1;
+}
+
 .algoliabox {
   position: absolute;
-  top: 50px;
-  left: 40px;
+  top: 20px;
+  left: 20px;
   z-index: 900;
+  width: 450px;
   input {
     border-radius: 50px !important;
     box-shadow: rgba(0, 0, 0, 0.2) 0 2px 12px 0;
-    height: 70px;
-    width: 400px;
+    height: 60px;
     border: none;
   }
 }
-
-
-
+.ap-dropdown-menu {
+  width: calc(100% - 40px) !important;
+  left: 20px !important;
+  right: 20px !important;
+}
+.logo_icon {
+  position: absolute;
+  bottom: 35px;
+  right: 65px;
+  z-index: 900;
+  height: 28px;
+}
+@media (max-width: 1025px) {
+  .algoliabox {
+    width: calc(100% - 40px);
+    right: 20px;
+  }
+}
 
 
 // Navbar
@@ -65,14 +81,14 @@ a {
 }
 .logo a,
 .main-nav a {
-	padding: 10px 15px;
+	padding: 10px 6px;
 	text-align: center;
 	display: block;
 }
 
 .main-nav a {
 	color: #fff;
-	font-size: .99em;
+	font-size: 12px !important;
 }
 
 .main-nav a:hover {
@@ -109,12 +125,16 @@ a {
 
 
 @media (min-width: 1025px) {
+  #mymap{
+    height: calc(100vh - 94.8px);
+  }
 	.header {
 		flex-direction: row;
 		justify-content: space-between;
 	}
   .main-nav a {
     padding: 10px 25px;
+    font-size: 0.99em !important;
   }
   .main-nav {
     margin-right: 40px !important;

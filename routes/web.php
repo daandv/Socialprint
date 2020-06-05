@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
+Route::get('/verifiedMessage', 'HomeController@verifiedMessage')->name('verifiedMessage');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/map', 'MapController@index');
@@ -28,7 +29,7 @@ Route::get('/shownonprinter', 'UserController@showNonPrinter')->name('shownonpri
 Route::get('/notavailable', 'UserController@removeAvailability'); //+
 Route::get('/setavailable', 'UserController@addAvailability'); //+
 Route::get('/changetoprinter', 'UserController@changeToPrinter');
-Route::get('/profile/{id}', 'ProfileController@index');
+// Route::get('/profile/{id}', 'ProfileController@index');
 
 
 
@@ -43,6 +44,10 @@ Route::post('/changetoprinterupdate', 'UserController@changeToPrinterUpdate')->n
 // Route::get('/adduserprinter', function () {
 //   return "dit gaat niet";
 // });
+
+Route::get('/test', function () {
+  return view("verified");
+});
 
 Route::post('/account/update', 'UserController@update'); // For form
 

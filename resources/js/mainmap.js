@@ -4,6 +4,9 @@ var map = L.map('mymap',
 {
     maxBounds: [[-90,-180],   [90,180]],
     keyboard: false,
+    zoomControl: false,
+    zoomSnap: 0.1,
+    wheelPxPerZoomLevel: 100
 }).locate({setView: true, maxZoom: 16});
 
 function onLocationFound(e) {
@@ -30,10 +33,25 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
             minZoom: 3,
             id: 'mapbox.light',
             accessToken: 'pk.eyJ1IjoiZGR2bWFwcyIsImEiOiJjamhuaTNlNzgzcWtlM2NwZTA0MDF1YmE5In0._G6QYZsmQZpYEuCD3br8VA',
-            noWrap: true
+            noWrap: true,
         }).addTo(map);
 
-// api data inladen (printers) origineel
+L.control.zoom({
+    position: 'bottomright',
+}).addTo(map);
+
+var greenIcon = L.icon({
+    iconUrl: './images/marker_pink.png',
+    // shadowUrl: 'leaf-shadow.png',
+
+    iconSize:     [28, 34.5], // size of the icon
+    // shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [10, 45], // point of the icon which will correspond to marker's location
+    // shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [0, -60] // point from which the popup should open relative to the iconAnchor
+});
+
+// Load api data
 fetch("./printers")
   .then(response => response.json())
   .then(data => {
@@ -56,7 +74,7 @@ fetch("./printers")
 
       var popup = printers[i].name + '<br>' + printers[i].lat + '<br>' + printers[i].lng + '<br><a class="btn btn-light" role="button" href="./print_at/' + printers[i].id + '">Print hier</a>';
 
-      var m = L.marker( [printers[i].lat, printers[i].lng], {title:printers[i].name} )
+      var m = L.marker( [printers[i].lat, printers[i].lng], {title:printers[i].name, icon:greenIcon} )
                       .bindPopup( popup );
 
       markerClusters.addLayer( m );

@@ -24,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (session('verified')) {
+          return view('verified');
+        }
         // Check if account is completed:
         if (!Auth::user()->account_completed) {
           return redirect()->route('complete');
@@ -32,5 +35,10 @@ class HomeController extends Controller
         // Anders:
         $user = Auth::user();
         return view('home', compact('user'));
+    }
+
+    public function verifiedMessage() {
+      smilify('success', 'Je email is gevalideerd.');
+      return redirect()->route('home');
     }
 }

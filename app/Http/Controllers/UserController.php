@@ -266,7 +266,9 @@ class UserController extends Controller
 
       $printer->save();
 
-      return redirect()->route('home')->with('status', "Profiel geupdate");
+      // return redirect()->route('home')->with('status', "Profiel geupdate");
+      smilify('success', 'You are successfully reconnected');
+      return redirect()->route('home');
     }
 
 

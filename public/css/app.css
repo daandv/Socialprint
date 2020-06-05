@@ -1,6 +1,156 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);#mymap {
-  height: calc(100vh - 94.8px);
-  z-index: 1;
+@import url(https://fonts.googleapis.com/css?family=Nunito);.verifiedwrapper {
+  margin-top: 40vh;
+  text-align: center;
+}
+
+@-webkit-keyframes outline {
+  from {
+    stroke-dasharray: 0, 345.576px;
+  }
+
+  to {
+    stroke-dasharray: 345.576px, 345.576px;
+  }
+}
+
+@keyframes outline {
+  from {
+    stroke-dasharray: 0, 345.576px;
+  }
+
+  to {
+    stroke-dasharray: 345.576px, 345.576px;
+  }
+}
+
+#outline {
+  -webkit-animation: 0.38s ease-in outline;
+          animation: 0.38s ease-in outline;
+  -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
+}
+
+@-webkit-keyframes circle {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+
+  to {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes circle {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+
+  to {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+#white-circle {
+  -webkit-animation: 0.35s ease-in 0.35s forwards circle;
+          animation: 0.35s ease-in 0.35s forwards circle;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
+}
+
+@-webkit-keyframes check {
+  from {
+    stroke-dasharray: 0, 75px;
+  }
+
+  to {
+    stroke-dasharray: 75px, 75px;
+  }
+}
+
+@keyframes check {
+  from {
+    stroke-dasharray: 0, 75px;
+  }
+
+  to {
+    stroke-dasharray: 75px, 75px;
+  }
+}
+
+#check {
+  -webkit-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  stroke-dasharray: 75;
+  stroke-dashoffset: 75;
+  -webkit-animation: stroke 0.3s cubic-bezier(0.65, 0, 1, 1) 3s forwards;
+          animation: stroke 0.3s cubic-bezier(0.65, 0, 1, 1) 3s forwards;
+}
+
+@-webkit-keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes check-group {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.09);
+            transform: scale(1.09);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes check-group {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.09);
+            transform: scale(1.09);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+#check-group {
+  -webkit-animation: 0.32s ease-in-out 1.03s check-group;
+          animation: 0.32s ease-in-out 1.03s check-group;
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
 }
 
 #minimap {
@@ -8,20 +158,46 @@
   z-index: 1;
 }
 
+#mymap {
+  height: calc(100vh - 112.781px);
+  z-index: 1;
+}
+
 .algoliabox {
   position: absolute;
-  top: 50px;
-  left: 40px;
+  top: 20px;
+  left: 20px;
   z-index: 900;
+  width: 450px;
 }
 
 .algoliabox input {
   border-radius: 50px !important;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 12px 0;
           box-shadow: rgba(0, 0, 0, 0.2) 0 2px 12px 0;
-  height: 70px;
-  width: 400px;
+  height: 60px;
   border: none;
+}
+
+.ap-dropdown-menu {
+  width: calc(100% - 40px) !important;
+  left: 20px !important;
+  right: 20px !important;
+}
+
+.logo_icon {
+  position: absolute;
+  bottom: 35px;
+  right: 65px;
+  z-index: 900;
+  height: 28px;
+}
+
+@media (max-width: 1025px) {
+  .algoliabox {
+    width: calc(100% - 40px);
+    right: 20px;
+  }
 }
 
 * {
@@ -54,14 +230,14 @@ a {
 
 .logo a,
 .main-nav a {
-  padding: 10px 15px;
+  padding: 10px 6px;
   text-align: center;
   display: block;
 }
 
 .main-nav a {
   color: #fff;
-  font-size: 0.99em;
+  font-size: 12px !important;
 }
 
 .main-nav a:hover {
@@ -104,6 +280,10 @@ a {
 ==================================== */
 
 @media (min-width: 1025px) {
+  #mymap {
+    height: calc(100vh - 94.8px);
+  }
+
   .header {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -116,6 +296,7 @@ a {
 
   .main-nav a {
     padding: 10px 25px;
+    font-size: 0.99em !important;
   }
 
   .main-nav {

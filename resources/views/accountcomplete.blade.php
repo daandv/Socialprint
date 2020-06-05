@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@notifyCss
+
 @push('script')
 <script src="{{ asset('js/accountcomplete.js') }}" defer></script>
 @endpush
@@ -50,8 +52,9 @@
 
   </form>
 
-
-
-
 </div>
+@include('notify::messages')
+
+@notifyJs
+
 @endsection
