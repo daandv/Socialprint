@@ -32,9 +32,9 @@ Route::get('/profile/{id}', 'ProfileController@index');
 
 
 
-Route::get('/complete', 'AccountCompleteController@index')->name('complete');
-Route::get('/notaprinter', 'AccountCompleteController@notaprinter')->name('notaprinter');
-Route::get('/addprinter', 'AccountCompleteController@addprinter')->name('addprinter');
+Route::get('/complete', 'AccountCompleteController@index')->name('complete'); //+
+Route::get('/notaprinter', 'AccountCompleteController@notaprinter')->name('notaprinter'); //+
+Route::get('/addprinter', 'AccountCompleteController@addprinter')->name('addprinter'); //+
 
 
 Route::post('/adduserprinter', 'UserController@complete');

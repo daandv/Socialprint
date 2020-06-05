@@ -1,6 +1,9 @@
-//Front end validation and pagecount for price etc before uploading (real calculations are done serverside)
+// Front end validation and pagecount for price etc before uploading (real calculations are done serverside)
 $(document).ready(function(){
   var pagesFound=true;
+
+  // Empty input when user presses "back".
+  $("#f").replaceWith($("#f").val('').clone(true));
 
   document.getElementById('f').oninput = async function() {
     var userPP=$("#pp").val()

@@ -5,8 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+
+use setasign\Fpdi\Fpdi;
+use setasign\Fpdi\PdfReader;
+use setasign\Fpdi\PdfParser\StreamReader;
+
 use Route;
 use Str;
+
 
 use App\User;
 use App\Printer;
@@ -49,17 +56,37 @@ class PrintController extends Controller
 
     public function uploadFiles(Request $request)
     {
-      $fileName;
+
+      $rules = [
+        'file' => 'required',
+        'file.*' => 'mimes:pdf|max:40000'
+      ];
+      $customMessages = [
+        'max' => 'De maximum filegrootte is 40MB.',
+        'required' => 'Geen file gevonden.',
+        'mimes' => 'Enkel PDF bestanden toegelaten'
+      ];
+      $this->validate($request, $rules, $customMessages);
+
       if ($request->hasFile('file')) {
-        // return $request->all();
+        $pageCounter=0;
         foreach ($request->file as $file) {
           $key = Str::random(32);
           $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . "_". $key .".pdf";
           $fileSize = $file->getSize();
 
           $file->storeAs('documents', $fileName, 's3');
-          return Storage::url($file);
+
+          // Temporary url for counting pages
+          $tempUrl = Storage::disk('s3')->temporaryUrl(
+             'documents/' . $fileName, Carbon::now()->addMinutes(5)
+          );
+
+          $pdftext = file_get_contents($tempUrl);
+          $num = preg_match_all("/\/Page\W/", $pdftext);
+          $pageCounter += $num;
         }
+        // return $pageCounter;
 
 
         // return redirect()->route('getfile', ['fileName' => $fileName]);
@@ -67,7 +94,7 @@ class PrintController extends Controller
         // Add new printjob to db here
         // return $fileSize;
 
-        // return redirect()->route('home')->with('status', "File geupload naar Amazon S3 en in database verwerkt.");
+        return redirect()->route('home')->with('status', "File geupload naar Amazon S3 en in database verwerkt.");
       }
 
       // return "test";

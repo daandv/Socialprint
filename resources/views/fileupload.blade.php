@@ -6,6 +6,16 @@
 
 @section('content')
 <div class="container">
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
+
   <span>Ik ga de opdracht verwerken: </span>{{$userThatPrintsName}}
   <br>
   <span>Ik ben de aanvrager: </span>{{$requesterName}}
