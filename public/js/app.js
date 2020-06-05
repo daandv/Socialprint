@@ -37229,7 +37229,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./leaflet.js */ "./resources/js/leaflet.js");
 
-__webpack_require__(/*! ./leaflet.markercluster.js */ "./resources/js/leaflet.markercluster.js");
+__webpack_require__(/*! ./leaflet.markercluster.js */ "./resources/js/leaflet.markercluster.js"); // Navbar
 
 /***/ }),
 
