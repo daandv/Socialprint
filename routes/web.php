@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
-Route::get('/verifiedMessage', 'HomeController@verifiedMessage')->name('verifiedMessage');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/map', 'MapController@index');
@@ -28,17 +28,15 @@ Route::get('/showprinter', 'UserController@showPrinter')->name('showprinter'); /
 Route::get('/shownonprinter', 'UserController@showNonPrinter')->name('shownonprinter'); //+
 Route::get('/notavailable', 'UserController@removeAvailability'); //+
 Route::get('/setavailable', 'UserController@addAvailability'); //+
-Route::get('/changetoprinter', 'UserController@changeToPrinter');
+
 // Route::get('/profile/{id}', 'ProfileController@index');
-
-
 
 Route::get('/complete', 'AccountCompleteController@index')->name('complete'); //+
 Route::get('/notaprinter', 'AccountCompleteController@notaprinter')->name('notaprinter'); //+
-Route::get('/addprinter', 'AccountCompleteController@addprinter')->name('addprinter'); //+
+Route::get('/addprinter', 'AccountCompleteController@addPrinter')->name('addprinter'); //+
+Route::post('/adduserprinter', 'AccountCompleteController@addPrinterStore');
 
-
-Route::post('/adduserprinter', 'UserController@complete');
+Route::get('/changetoprinter', 'UserController@changeToPrinter');
 Route::post('/changetoprinterupdate', 'UserController@changeToPrinterUpdate')->name('changetoprinterupdate');
 // For error when getting to post method
 // Route::get('/adduserprinter', function () {

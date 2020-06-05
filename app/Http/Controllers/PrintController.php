@@ -37,7 +37,8 @@ class PrintController extends Controller
 
       // Check if not own id
       if ($userThatPrintsId==$requesterId) {
-        return redirect()->route('home')->with('status', "Bij jezelf afdrukken gaat niet ;)");
+        smilify('error', 'Bij jezelf afdrukken gaat niet ;)');
+        return redirect()->route('home');
       }
 
       $userThatPrintsName = User::find($userThatPrintsId)->name;

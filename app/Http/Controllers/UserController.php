@@ -16,59 +16,12 @@ class UserController extends Controller
     public function __construct()
     {
        // Protected controller
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth','verified', 'completed']);
     }
-    public function complete(Request $request)
-    {
-      $validatedData = $request->validate([
-          'lat' => 'required',
-          'lng' => 'required',
-          'pp' => ['required', new ValidPricePerPage]
-      ]);
-
-      // Fill in address info
-      $useraddressinfo = new UserAddressInfo();
-      $useraddressinfo->street_and_number = $request->address;
-      $useraddressinfo->city = $request->city;
-      $useraddressinfo->zip = $request->zip;
-      $useraddressinfo->lat = $request->lat;
-      $useraddressinfo->lng = $request->lng;
-      $useraddressinfo->save();
-
-      // Make user account status 'complete' and set 'available'
-      $user = User::find(Auth::user()->id);
-      $user->account_completed = 1;
-      $user->available = 1;
-      $user->address_id=$useraddressinfo->id;
-      $user->save();
-
-      // Add new printer
-      $printer = new Printer();
-      $printer->user_id = $user->id;
-      $printer->price = $request->pp;
-
-      switch ($request->printColor) {
-        case 'bw':
-          $printer->color_id = 2;
-          // Only A4 for the moment (futureproof)
-          $printer->format_id = 1;
-          break;
-        case 'color':
-          $printer->color_id = 1;
-          // Only A4 for the moment (futureproof)
-          $printer->format_id = 1;
-          break;
-      }
-
-      $printer->save();
-
-      return redirect()->route('home')->with('status', "Profiel in orde");
-    }
-
-
-
-
-
+    // public function complete(Request $request)
+    // {
+    //
+    // }
 
     public function changeToPrinter() {
       $user = User::find(Auth::user()->id);
@@ -87,7 +40,7 @@ class UserController extends Controller
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
-      // If user has printer
+      // User has printer
       if ($printer) {
         return redirect()->route('home')->with('status', "Foute route");
       }
@@ -109,7 +62,6 @@ class UserController extends Controller
 
       // Make user account status 'complete' and set 'available'
       $user = User::find(Auth::user()->id);
-      $user->account_completed = 1;
       $user->available = 1;
       $user->address_id=$useraddressinfo->id;
       $user->save();
@@ -142,7 +94,7 @@ class UserController extends Controller
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
-      // If user has printer
+      // User has printer
       if ($printer) {
         return redirect()->route('showprinter');
       } else {
@@ -166,7 +118,7 @@ class UserController extends Controller
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
-      // If user has printer
+      // User has no printer
       if (!$printer) {
           return redirect()->route('shownonprinter');
       }
@@ -200,10 +152,11 @@ class UserController extends Controller
 
     public function showNonPrinter() {
       $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
 
       // User is a printer
-      if ($user->available) {
-        return redirect()->route('showprinter');
+      if ($printer) {
+          return redirect()->route('showprinter');
       }
 
       $name = $user->name;
@@ -215,6 +168,15 @@ class UserController extends Controller
 
     public function removeAvailability() {
       $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // User has no printer
+      if (!$printer) {
+          smilify('error', 'Dit is een foute route.');
+          return redirect()->route('home');
+      }
+
+
       $user->available=0;
       $user->save();
       return redirect()->route('editaccount');
@@ -222,6 +184,14 @@ class UserController extends Controller
 
     public function addAvailability() {
       $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // User has no printer
+      if (!$printer) {
+          smilify('error', 'Dit is een foute route.');
+          return redirect()->route('home');
+      }
+
       $user->available=1;
       $user->save();
       return redirect()->route('editaccount');

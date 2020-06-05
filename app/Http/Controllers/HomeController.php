@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth','verified', 'completed']);
     }
 
     /**
@@ -28,17 +28,13 @@ class HomeController extends Controller
           return view('verified');
         }
         // Check if account is completed:
-        if (!Auth::user()->account_completed) {
-          return redirect()->route('complete');
-        }
+        // if (!Auth::user()->account_completed) {
+        //   return redirect()->route('complete');
+        // }
 
         // Anders:
         $user = Auth::user();
         return view('home', compact('user'));
     }
 
-    public function verifiedMessage() {
-      smilify('success', 'Je email is gevalideerd.');
-      return redirect()->route('home');
-    }
 }
