@@ -95,7 +95,8 @@
 
 //LEAFLET MAP ------------------------------------------------------
 var map = L.map('mymap', {
-  maxBounds: [[-90, -180], [90, 180]]
+  maxBounds: [[-90, -180], [90, 180]],
+  keyboard: false
 }).locate({
   setView: true,
   maxZoom: 16

@@ -3,6 +3,7 @@
 var map = L.map('mymap',
 {
     maxBounds: [[-90,-180],   [90,180]],
+    keyboard: false,
 }).locate({setView: true, maxZoom: 16});
 
 function onLocationFound(e) {
@@ -31,7 +32,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
             accessToken: 'pk.eyJ1IjoiZGR2bWFwcyIsImEiOiJjamhuaTNlNzgzcWtlM2NwZTA0MDF1YmE5In0._G6QYZsmQZpYEuCD3br8VA',
             noWrap: true
         }).addTo(map);
-
 
 // api data inladen (printers) origineel
 fetch("./printers")

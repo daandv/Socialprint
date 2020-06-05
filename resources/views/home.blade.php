@@ -12,13 +12,12 @@
         </div>
     @endif
 
-    <form class="algoliabox">
-      <label for="adress">Typ in</label>
-      <input type="text" id="adress">
-    </form>
+    <div id="mymap">
+      <form class="algoliabox">
+        <input type="text" id="adress">
+      </form>
+    </div>
 
-    <br><br>
-    <div id="mymap"></div>
 
 
 </div>
