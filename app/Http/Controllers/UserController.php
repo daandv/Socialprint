@@ -103,7 +103,8 @@ class UserController extends Controller
 
       $printer->save();
 
-      return redirect()->route('home')->with('status', "Profiel in orde");
+      smilify('success', 'U bent nu een printer, mensen kunnen je printer nu vinden op de kaart, bekijk binnenkomende printopdrachten bij "afdruktaken".');
+      return redirect()->route('home');
     }
 
 
@@ -257,13 +258,17 @@ class UserController extends Controller
 
     public function updateNonPrinterStore(Request $request) {
       $rules = [
-        'name' => 'required',
+        'name' => 'required|max:50',
       ];
       $customMessages = [
         'required' => 'Deze naam is niet geldig.',
+        'max' => 'Naam maximum 50 tekens.'
       ];
       $this->validate($request, $rules, $customMessages);
 
+      $user = User::find(Auth::user()->id);
+      $user->name = $request->name;
+      $user->save();
 
       smilify('success', 'Profiel geüpdatet.');
       return redirect()->route('home');

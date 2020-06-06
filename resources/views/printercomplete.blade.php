@@ -24,7 +24,7 @@
     @csrf
 
     <label for="address">Straat + nr</label>
-    <input class="algoliabox" type="text" id="address" class="form-control" name="address">
+    <input class="algoliabox" type="search" id="address" class="form-control" name="address">
 
     <label for="city">Gemeente</label>
     <input type="text" id="city" class="form-control" name="city" readonly>

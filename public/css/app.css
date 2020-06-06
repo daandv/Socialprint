@@ -163,7 +163,7 @@
   z-index: 1;
 }
 
-.algoliabox {
+.algoliaboxmap {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -171,7 +171,7 @@
   width: 450px;
 }
 
-.algoliabox input {
+.algoliaboxmap input {
   border-radius: 50px !important;
   -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 2px 12px 0;
           box-shadow: rgba(0, 0, 0, 0.2) 0 2px 12px 0;
