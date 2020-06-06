@@ -47,7 +47,7 @@ Route::get('/profile/{id}', 'ProfileController@index');
 //   return "dit gaat niet";
 // });
 
-Route::get('/printjobs', 'PrintjobController@index')->name('printjobs');
+Route::get('/printjobs', 'PrintJobController@index')->name('printjobs');
 
 
 Route::get('/print_at/{id}', 'PrintController@index');

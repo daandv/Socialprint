@@ -9,7 +9,7 @@
 @endpush
 
 @section('content')
-<div class="container">
+
 
     <!-- @if (session('status'))
         <div class="alert alert-success" role="alert">
@@ -21,6 +21,9 @@
         </script>
     @endif -->
 
+    @if(session('notification'))
+      <p> U heeft meldingen </p>
+    @endif
     <div id="mymap">
       <form class="algoliabox algoliaboxmap">
         <input type="text" id="adress" placeholder="Zoek in een gemeente">
@@ -29,7 +32,7 @@
     </div>
 
 
-</div>
+
 @include('notify::messages')
 
 @notifyJs

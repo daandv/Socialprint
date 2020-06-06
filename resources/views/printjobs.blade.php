@@ -6,29 +6,47 @@
 
 @section('content')
 <div class="container">
-    <table>
-      <tr>
-        <th>Van</th>
-      </tr>
-      @foreach ($printJobs as $printJob)
-        @if ($printJob->requester_id == $userId)
-        <tr>
-          <td>Jij aangevraagd: {{ $printJob->id }}</td>
-        </tr>
-        @endif
 
-        @if ($printJob->printer_id == $userId)
+    <table class="printTasksContainer">
+      <tr>
+        <th>Actions</th>
+        <th>Datum</th>
+        <th>Aangevraagd door</th>
+        <th>Afgedrukt door</th>
+        <th>Prijs</th>
+      </tr>
+      @foreach ($fullPrintJobInfo as $printJob)
+      <tr>
+        <td>
+          <a href="#">geprint</a>
+          <a href="#">cancel</a>
+        </td>
+        <td>{{$printJob['date']}}</td>
+        <td>{{$printJob['requesterName']}}</td>
+        <td>{{$printJob['userThatPrintsName']}}</td>
+        <td>{{$printJob['price']}}</td>
+      </tr>
+
+        <!-- @if ($printJob['requesterId'] == $userId)
         <tr>
-          <td>Binnengekomen: {{ $printJob->id }}</td>
+          <td>Jij aangevraagd: {{ $printJob['id'] }}</td>
         </tr>
-        @endif
+        @endif -->
+
+        <!-- @if ($printJob['userThatPrintsId'] == $userId)
+        <tr>
+          <td>Binnengekomen: {{ $printJob['id'] }}</td>
+        </tr>
+        @endif -->
       @endforeach
+
     </table>
 
-    <div class="cards">
-      <div class="card">ONE</div>
-      <div class="card">TWO</div>
-    </div>
+<!--
+    <div class="row">
+      <div class="item">ONE</div>
+      <div class="item">TWO</div>
+    </div> -->
 
 
 

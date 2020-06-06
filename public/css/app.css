@@ -165,22 +165,21 @@
   border: 1px solid black;
 }
 
-.cards {
+.row {
   display: grid;
   grid-gap: 1rem;
 }
 
-.card {
+.item {
   background-color: dodgerblue;
   color: white;
   padding: 1rem;
   height: 4rem;
 }
 
-table,
-td,
-th {
-  border: 1px solid black;
+.printTasksContainer {
+  width: 100%;
+  text-align: center;
 }
 
 #mymap {
@@ -346,7 +345,7 @@ a {
     height: 50px;
   }
 
-  .cards {
+  .row {
     grid-template-columns: repeat(2, 1fr);
   }
 }
