@@ -17,6 +17,7 @@ use Str;
 
 use App\User;
 use App\Printer;
+use App\Printjob;
 
 class PrintController extends Controller
 {
@@ -25,32 +26,40 @@ class PrintController extends Controller
        // Protected controller
         $this->middleware(['auth','verified']);
     }
+
     public function index() {
-      $userThatPrintsId = Route::current()->parameter('id');
+      $printer = Printer::find(Route::current()->parameter('id'));
       $requesterId = Auth::user()->id;
-      $exists = User::where('id', '=', $userThatPrintsId)->where('available', '=', 1)->first();
 
       // Check for valid url
-      if (!$exists) {
-        smilify('error', 'Deze printer is niet beschikbaar.');
+      if (!$printer) {
+        notify()->error('Deze printer is niet beschikbaar.', 'Error!');
         return redirect()->route('home');
       }
 
+      $userThatPrintsId = User::find($printer->user_id)->id;
       // Check if not own id
       if ($userThatPrintsId==$requesterId) {
-        smilify('error', 'Bij jezelf afdrukken gaat niet ;)');
+        notify()->error('Bij jezelf afdrukken gaat niet.', 'Error!');
+        return redirect()->route('home');
+      }
+
+      // Check if available
+      if (User::find($userThatPrintsId)->available==0) {
+        notify()->error('Deze printer is niet beschikbaar.', 'Error!');
         return redirect()->route('home');
       }
 
       $userThatPrintsName = User::find($userThatPrintsId)->name;
       $requesterName = User::find($requesterId)->name;
-      $printer = Printer::where('user_id', $userThatPrintsId)->first();
+      // $printer = Printer::where('user_id', $userThatPrintsId)->first();
       $pp = $printer->price;
 
       return view('fileupload', [
         'userThatPrintsId' => $userThatPrintsId,
-        'requesterId' => $requesterId,
         'userThatPrintsName' => $userThatPrintsName,
+        'printerId' => $printer->id,
+        'requesterId' => $requesterId,
         'requesterName' => $requesterName,
         'pp' => $pp,
       ]);
@@ -88,16 +97,50 @@ class PrintController extends Controller
           $num = preg_match_all("/\/Page\W/", $pdftext);
           $pageCounter += $num;
         }
-        // return $pageCounter;
 
 
-        // return redirect()->route('getfile', ['fileName' => $fileName]);
+
+        $printer = Printer::find(Route::current()->parameter('id'));
+        $requesterId = Auth::user()->id;
+
+        // Check for valid url
+        if (!$printer) {
+          notify()->error('Deze printer is niet beschikbaar.', 'Error!');
+          return redirect()->route('home');
+        }
+
+        $userThatPrintsId = User::find($printer->user_id)->id;
+        // Check if not own id
+        if ($userThatPrintsId==$requesterId) {
+          notify()->error('Bij jezelf afdrukken gaat niet.', 'Error!');
+          return redirect()->route('home');
+        }
+
+        // Check if available
+        if (User::find($userThatPrintsId)->available==0) {
+          notify()->error('Deze printer is niet beschikbaar.', 'Error!');
+          return redirect()->route('home');
+        }
+
+        $userThatPrintsName = User::find($userThatPrintsId)->name;
+        $requesterName = User::find($requesterId)->name;
+
+
 
         // Add new printjob to db here
+        $printjob = new Printjob;
+        $printjob->printer_id = Route::current()->parameter('id');
+        $printjob->requester_id = $requesterId;
+        $printjob->status = "Verzonden";
+        $printjob->notification_printer = 1;
+        $printjob->save();
         // return $fileSize;
 
-        return redirect()->route('home')->with('status', "File geupload naar Amazon S3 en in database verwerkt.");
+        notify()->success('File geupload naar s3 en DB.', 'Joepie!');
+        return redirect()->route('home');
       }
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
 
       // return "test";
       // return redirect()->route('home')->with('status', "Werkt");

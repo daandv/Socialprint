@@ -20,7 +20,7 @@
   <br>
   <span>Ik ben de aanvrager: </span>{{$requesterName}}
   <br><br>
-  <form class="" action="uploadprintjob" method="post" enctype="multipart/form-data">
+  <form class="" action="{{ route('upload', [$printerId]) }}" method="post" enctype="multipart/form-data">
     @csrf
      <div class="form-group">
        <label for="f">Example file input</label>

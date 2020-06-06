@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/MarkerCluster.css') }}">
     <link rel="stylesheet" href="{{ asset('css/MarkerCluster.Default.css') }}">
 
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
@@ -75,7 +76,7 @@
 
           <ul class="main-nav">
               <li><a href="{{ route('home') }}">Kaart</a></li>
-              <li><a href="#">Afdruktaken</a></li>
+              <li><a href="{{ route('printjobs') }}">Afdruktaken</a></li>
               <li><a href="#">Favorieten</a></li>
               <li><a href="{{ route('editaccount') }}">Profiel</a></li>
           </ul>

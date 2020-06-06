@@ -25,12 +25,14 @@ class PrinterController extends Controller
       // $printers = User::where('available', 1)->userAddressInfo;
       // $printers = User::find(1)->get();
       //normaal model in printers variabele steken
+
       $printers = DB::table('users')
       ->where('available','=',1)
       ->join('user_address_infos','users.address_id','=','user_address_infos.id')
       ->join('printers','users.id','=','printers.user_id')
-      ->select('users.name', 'users.id', 'user_address_infos.lat', 'user_address_infos.lng', 'printers.price', 'printers.format_id', 'printers.color_id')
+      ->select('users.name', 'users.id', 'user_address_infos.lat', 'user_address_infos.lng', 'printers.id as printer_id', 'printers.price', 'printers.format_id', 'printers.color_id')
       ->get();
+
 
       // $printersInArray = json_decode(json_encode($printers), true);
       // return PrinterResource::collection($printersInArray);

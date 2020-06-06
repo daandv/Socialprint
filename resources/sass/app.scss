@@ -1,6 +1,7 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 @import 'verifiedLoader';
+
 // Variables
 @import 'variables';
 
@@ -11,6 +12,30 @@
   height: 300px;
   z-index: 1;
 }
+
+
+// GENERAL
+.container {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 1rem;
+  border: 1px solid black;
+}
+.cards {
+  display: grid;
+  grid-gap: 1rem;
+}
+.card {
+  background-color: dodgerblue;
+  color: white;
+  padding: 1rem;
+  height: 4rem;
+}
+table, td, th {
+  border: 1px solid black;
+}
+
+
 
 
 // HOME
@@ -61,6 +86,8 @@
     background-color: #FF0066;
   }
 }
+
+
 
 
 
@@ -131,6 +158,8 @@ a {
   display: flex;
 }
 
+
+
 /* =================================
   Media Queries
 ==================================== */
@@ -159,4 +188,5 @@ a {
     }
   }
 
+  .cards { grid-template-columns: repeat(2, 1fr); }
 }

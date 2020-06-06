@@ -158,6 +158,31 @@
   z-index: 1;
 }
 
+.container {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+.cards {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.card {
+  background-color: dodgerblue;
+  color: white;
+  padding: 1rem;
+  height: 4rem;
+}
+
+table,
+td,
+th {
+  border: 1px solid black;
+}
+
 #mymap {
   height: calc(100vh - 112.781px);
   z-index: 1;
@@ -319,6 +344,10 @@ a {
   .logo img {
     vertical-align: bottom;
     height: 50px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

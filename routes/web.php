@@ -42,22 +42,33 @@ Route::get('/changetoprinter', 'UserController@changeToPrinter');
 Route::post('/changetoprinterstore', 'UserController@changeToPrinterStore')->name('changetoprinterstore');
 Route::get('/profile/{id}', 'ProfileController@index');
 
-
 // For error when getting to post method
 // Route::get('/adduserprinter', function () {
 //   return "dit gaat niet";
 // });
 
-Route::get('/test', function () {
-  return view("verified");
-});
-
-
+Route::get('/printjobs', 'PrintjobController@index')->name('printjobs');
 
 
 Route::get('/print_at/{id}', 'PrintController@index');
-Route::post('/print_at/uploadprintjob', 'PrintController@uploadFiles');
+Route::post('/upload_at/{id}', 'PrintController@uploadFiles')->name('upload');
+
 Route::get('/getfile/{fileName}', 'PrintController@getFile')->name('getfile');
+
+
+
+
+
+
+
+
 
 //SMALL API
 Route::get('/printers', 'Api\PrinterController@index');
+
+
+
+
+Route::get('/test', function () {
+  return view("verified");
+});

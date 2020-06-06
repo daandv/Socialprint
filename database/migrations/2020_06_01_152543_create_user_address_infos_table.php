@@ -18,7 +18,7 @@ class CreateUserAddressInfosTable extends Migration
             $table->string('street_and_number');
             $table->string('city');
             $table->string('zip');
-            $table->string('bus_number')->nullable();;
+            $table->string('bus_number')->nullable();
             $table->decimal('lng', 10, 7);
             $table->decimal('lat', 10, 7);
         });
