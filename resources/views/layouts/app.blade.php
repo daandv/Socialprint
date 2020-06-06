@@ -39,7 +39,7 @@
 <body>
     <div id="app">
 
-      @guest
+      <!-- @guest
           <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
           </li>
@@ -66,7 +66,7 @@
                   </form>
               </div>
           </li>
-      @endguest
+      @endguest -->
 
       <header class="header">
     		<a class="logo" href="#">
@@ -74,10 +74,10 @@
         </a>
 
           <ul class="main-nav">
-              <li><a href="./home">Kaart</a></li>
+              <li><a href="{{ route('home') }}">Kaart</a></li>
               <li><a href="#">Afdruktaken</a></li>
               <li><a href="#">Favorieten</a></li>
-              <li><a href="./editaccount">Profiel</a></li>
+              <li><a href="{{ route('editaccount') }}">Profiel</a></li>
           </ul>
     	</header>
 

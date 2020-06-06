@@ -32,7 +32,8 @@ class PrintController extends Controller
 
       // Check for valid url
       if (!$exists) {
-        return redirect()->route('home')->with('status', "Deze printer is op dit moment helaas niet beschikbaar");
+        smilify('error', 'Deze printer is niet beschikbaar.');
+        return redirect()->route('home');
       }
 
       // Check if not own id

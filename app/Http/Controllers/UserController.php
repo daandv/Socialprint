@@ -35,7 +35,7 @@ class UserController extends Controller
       return view('changetoprinter');
     }
 
-    public function changeToPrinterUpdate(Request $request)
+    public function changeToPrinterStore(Request $request)
     {
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
@@ -45,11 +45,28 @@ class UserController extends Controller
         return redirect()->route('home')->with('status', "Foute route");
       }
 
-      $validatedData = $request->validate([
-          'lat' => 'required',
-          'lng' => 'required',
-          'pp' => ['required', new ValidPricePerPage]
-      ]);
+      // $validatedData = $request->validate([
+      //     'lat' => 'required',
+      //     'lng' => 'required',
+      //     'pp' => ['required', new ValidPricePerPage]
+      // ]);
+
+
+      $rules = [
+        'address' => 'required',
+        'lat' => 'required',
+        'lng' => 'required',
+        'pp' => ['required', new ValidPricePerPage]
+      ];
+      $customMessages = [
+        'address.required' => 'Geef een geldig adres.',
+        'pp.required' => 'Geef je prijs per pagina.',
+        'lat.required' => 'Geef een geldig adres.',
+        'lng.required' => 'Geef een geldig adres.',
+      ];
+      $this->validate($request, $rules, $customMessages);
+
+
 
       // Fill in address info
       $useraddressinfo = new UserAddressInfo();
@@ -100,18 +117,6 @@ class UserController extends Controller
       } else {
         return redirect()->route('shownonprinter');
       }
-    }
-
-    public function reRouteUpdate(Request $request) {
-      // $user = User::find(Auth::user()->id);
-      //
-      //
-      // // User is not a printer
-      // if () {
-      //   // return redirect()->route('shownonprinter');
-      // } else {
-      //   // return redirect()->route('showprinter');
-      // }
     }
 
     public function showPrinter() {
@@ -198,12 +203,21 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $request) {
-      $validatedData = $request->validate([
-          'lat' => 'required',
-          'lng' => 'required',
-          'pp' => ['required', new ValidPricePerPage]
-      ]);
+    public function updatePrinterStore(Request $request) {
+      $rules = [
+        'address' => 'required',
+        'lat' => 'required',
+        'lng' => 'required',
+        'pp' => ['required', new ValidPricePerPage]
+      ];
+      $customMessages = [
+        'address.required' => 'Geef een geldig adres.',
+        'pp.required' => 'Geef je prijs per pagina.',
+        'lat.required' => 'Geef een geldig adres.',
+        'lng.required' => 'Geef een geldig adres.',
+      ];
+      $this->validate($request, $rules, $customMessages);
+
 
       $user = User::find(Auth::user()->id);
       $user->name = $request->name;
@@ -237,7 +251,21 @@ class UserController extends Controller
       $printer->save();
 
       // return redirect()->route('home')->with('status', "Profiel geupdate");
-      smilify('success', 'You are successfully reconnected');
+      smilify('success', 'Profiel geüpdatet.');
+      return redirect()->route('home');
+    }
+
+    public function updateNonPrinterStore(Request $request) {
+      $rules = [
+        'name' => 'required',
+      ];
+      $customMessages = [
+        'required' => 'Deze naam is niet geldig.',
+      ];
+      $this->validate($request, $rules, $customMessages);
+
+
+      smilify('success', 'Profiel geüpdatet.');
       return redirect()->route('home');
     }
 

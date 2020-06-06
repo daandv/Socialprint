@@ -9,9 +9,8 @@
 <div class="container">
 
   <a href="./changetoprinter">Ik wil mijn printer beschikbaar stellen</a>
-  <form action="./account/update" method="POST">
+  <form action="{{ route('update.storenonprinter') }}" method="POST">
     @csrf
-
     <label for="name">Naam</label>
     <input type="text" id="name" class="form-control" name="name" value="{{$name}}">
     <br>
@@ -20,5 +19,14 @@
 
   </form>
 
+  <a class="" href="{{ route('logout') }}"
+     onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+      {{ __('Logout') }}
+  </a>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+  </form>
+  
 </div>
 @endsection

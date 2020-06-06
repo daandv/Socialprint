@@ -18,7 +18,7 @@
   @endif
 
   <h3>Nog enkele vraagjes</h3>
-  <form action="changetoprinterupdate" method="POST">
+  <form action="changetoprinterstore" method="POST">
     @csrf
 
     <label for="address">Straat + nr</label>

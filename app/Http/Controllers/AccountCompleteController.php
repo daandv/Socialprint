@@ -40,7 +40,9 @@ class AccountCompleteController extends Controller
       $user->account_completed = 1;
       $user->save();
 
-      return redirect()->route('home')->with('status', "profiel in orde");
+      smilify('success', 'Je kan nu beschikbare printers zoeken en bij hen afdrukken.');
+      return redirect()->route('home');
+
     }
 
     public function addPrinter()
@@ -55,11 +57,26 @@ class AccountCompleteController extends Controller
     }
 
     public function addPrinterStore(Request $request) {
-      $validatedData = $request->validate([
-          'lat' => 'required',
-          'lng' => 'required',
-          'pp' => ['required', new ValidPricePerPage]
-      ]);
+      // $validatedData = $request->validate([
+      //     'lat' => 'required',
+      //     'lng' => 'required',
+      //     'pp' => ['required', new ValidPricePerPage]
+      // ]);
+
+      $rules = [
+        'address' => 'required',
+        'lat' => 'required',
+        'lng' => 'required',
+        'pp' => ['required', new ValidPricePerPage]
+      ];
+      $customMessages = [
+        'address.required' => 'Geef een geldig adres.',
+        'pp.required' => 'Geef je prijs per pagina.',
+        'lat.required' => 'Geef een geldig adres.',
+        'lng.required' => 'Geef een geldig adres.',
+      ];
+      $this->validate($request, $rules, $customMessages);
+
 
       // Fill in address info
       $useraddressinfo = new UserAddressInfo();
@@ -97,7 +114,8 @@ class AccountCompleteController extends Controller
 
       $printer->save();
 
-      return redirect()->route('home')->with('status', "Profiel in orde");
+      smilify('success', 'Mensen kunnen je printer nu vinden op de kaart, bekijk binnenkomende printopdrachten bij "afdruktaken".');
+      return redirect()->route('home');
     }
 
 }

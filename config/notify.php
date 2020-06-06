@@ -40,7 +40,7 @@ return [
     'animate' => [
         'in_class'  => 'bounceInUp', // The class to use to animate the notice in.
         'out_class' => 'fadeOut', // The class to use to animate the notice out.
-        'timeout'   => 5000, // Number of seconds before the notice disappears
+        'timeout'   => 6000, // Number of seconds before the notice disappears
     ],
 
     /*

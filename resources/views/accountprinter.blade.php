@@ -15,7 +15,7 @@
     <a href="./setavailable">Ik wil weer printen</a>
   @endif
 
-  <form action="./account/update" method="POST">
+  <form action="{{ route('update.storeprinter') }}" method="POST">
     @csrf
     <label for="name">Naam</label>
     <input type="text" id="name" class="form-control" name="name" value="{{$name}}">
@@ -53,6 +53,15 @@
     <br>
     <input class="btn btn-primary" type="submit" value="Opslaan">
 
+  </form>
+
+  <a class="" href="{{ route('logout') }}"
+     onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+      {{ __('Logout') }}
+  </a>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
   </form>
 
 </div>
