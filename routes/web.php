@@ -40,7 +40,7 @@ Route::post('/editaccount/update/nonprinter', 'UserController@updateNonPrinterSt
 
 Route::get('/changetoprinter', 'UserController@changeToPrinter');
 Route::post('/changetoprinterstore', 'UserController@changeToPrinterStore')->name('changetoprinterstore');
-// Route::get('/profile/{id}', 'ProfileController@index');
+Route::get('/profile/{id}', 'ProfileController@index');
 
 
 // For error when getting to post method

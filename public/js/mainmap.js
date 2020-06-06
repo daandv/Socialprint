@@ -164,7 +164,7 @@ fetch("./printers").then(function (response) {
     //             '<br/><b>ICAO:</b> ' + markers[i].icao +
     //             '<br/><b>Altitude:</b> ' + Math.round( markers[i].alt * 0.3048 ) + ' m' +
     //             '<br/><b>Timezone:</b> ' + markers[i].tz;
-    var popup = printers[i].name + '<br>' + printers[i].lat + '<br>' + printers[i].lng + '<br><a class="btn btn-light" role="button" href="./print_at/' + printers[i].id + '">Print hier</a>';
+    var popup = '<a href="./profile/' + printers[i].id + '">Bekijk profiel van ' + printers[i].name + '</a><br><br>' + '<span>Prijs per pagina: €</span>' + printers[i].price + '<br><br>' + '<a class="btn btn-light" role="button" href="./print_at/' + printers[i].id + '">Print hier</a>';
     var m = L.marker([printers[i].lat, printers[i].lng], {
       title: printers[i].name,
       icon: greenIcon

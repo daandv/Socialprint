@@ -102,8 +102,7 @@ class UserController extends Controller
       }
 
       $printer->save();
-
-      smilify('success', 'U bent nu een printer, mensen kunnen je printer nu vinden op de kaart, bekijk binnenkomende printopdrachten bij "afdruktaken".');
+      notify()->success('Mensen kunnen je printer nu vinden op de kaart, bekijk binnenkomende printopdrachten bij "afdruktaken".', 'U bent nu een printer.');
       return redirect()->route('home');
     }
 
@@ -178,7 +177,7 @@ class UserController extends Controller
 
       // User has no printer
       if (!$printer) {
-          smilify('error', 'Dit is een foute route.');
+          notify()->error('Dit is een foute route.', 'Error!');
           return redirect()->route('home');
       }
 
@@ -194,7 +193,7 @@ class UserController extends Controller
 
       // User has no printer
       if (!$printer) {
-          smilify('error', 'Dit is een foute route.');
+          notify()->error('Dit is een foute route.', 'Error!');
           return redirect()->route('home');
       }
 
@@ -251,8 +250,7 @@ class UserController extends Controller
 
       $printer->save();
 
-      // return redirect()->route('home')->with('status', "Profiel geupdate");
-      smilify('success', 'Profiel geüpdatet.');
+      notify()->success('Profiel geüpdatet', 'Opgeslagen!');
       return redirect()->route('home');
     }
 
@@ -270,7 +268,7 @@ class UserController extends Controller
       $user->name = $request->name;
       $user->save();
 
-      smilify('success', 'Profiel geüpdatet.');
+      notify()->success('Profiel geüpdatet', 'Opgeslagen!');
       return redirect()->route('home');
     }
 

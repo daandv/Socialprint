@@ -40,9 +40,8 @@ class AccountCompleteController extends Controller
       $user->account_completed = 1;
       $user->save();
 
-      smilify('success', 'Je kan nu beschikbare printers zoeken en bij hen afdrukken.');
+      notify()->success('Je kan nu beschikbare printers zoeken en bij hen afdrukken.', 'Fantastisch!');
       return redirect()->route('home');
-
     }
 
     public function addPrinter()
@@ -114,7 +113,7 @@ class AccountCompleteController extends Controller
 
       $printer->save();
 
-      smilify('success', 'Mensen kunnen je printer nu vinden op de kaart, bekijk binnenkomende printopdrachten bij "afdruktaken".');
+      notify()->success('Mensen kunnen je printer nu vinden op de kaart, bekijk binnenkomende printopdrachten bij "afdruktaken".', 'Fantastisch!');
       return redirect()->route('home');
     }
 
