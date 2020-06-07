@@ -8,6 +8,10 @@
 @section('content')
 <div class="container">
 
+  <div class="centeredDiv">
+    <h1 class="biGTitle">Mijn account</h1>
+  </div>
+
 
   @if($available)
     <a href="./notavailable">Ik wil niet meer printen</a>

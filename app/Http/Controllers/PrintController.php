@@ -141,7 +141,7 @@ class PrintController extends Controller
           $printjob = new Printjob;
           $printjob->printer_id = Route::current()->parameter('id');
           $printjob->requester_id = $requesterId;
-          $printjob->status = "Verzonden";
+          $printjob->status = "Aangevraagd";
           $printjob->notification_printer = 1;
           $printjob->save();
 
@@ -163,7 +163,7 @@ class PrintController extends Controller
 
     public function getFile()
     {
-
+      // TO VALIDATE
       // Request $file
       try {
           return Storage::disk('s3')->response('documents/' . Route::current()->parameter('fileName'));

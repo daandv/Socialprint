@@ -8,6 +8,10 @@
 @section('content')
 <div class="container">
 
+  <div class="centeredDiv">
+    <h1 class="biGTitle">Mijn account</h1>
+  </div>
+
   <a href="./changetoprinter">Ik wil mijn printer beschikbaar stellen</a>
   <form action="{{ route('update.storenonprinter') }}" method="POST">
     @csrf
@@ -27,6 +31,6 @@
   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
       @csrf
   </form>
-  
+
 </div>
 @endsection

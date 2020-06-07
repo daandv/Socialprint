@@ -67,17 +67,6 @@ class PrintJobController extends Controller
               Session::forget('notification');
           }
 
-          // $fullPrintJobInfo = [
-          //   'id' => $printJob->id,
-          //   'userThatPrintsName' => $userThatPrintsName,
-          //   'userThatPrintsId' => $userThatPrintsId,
-          //   'requesterId' => $requesterId,
-          //   'requesterName' => $requesterName,
-          //   'date' => $printJob->created_at->toDateString(),
-          //   'printer' => $printer,
-          //   'price' => $printerPrice
-          // ];
-
           $fullPrintJobInfo_ = [
             'id' => $printJob->id,
             'userThatPrintsName' => $userThatPrintsName,
@@ -87,6 +76,7 @@ class PrintJobController extends Controller
             'date' => $printJob->created_at->toDateString(),
             'printer' => $printer,
             'price' => $printerPrice,
+            'status' => $printJob->status,
           ];
           array_push($fullPrintJobInfo, $fullPrintJobInfo_);
 
@@ -149,6 +139,7 @@ class PrintJobController extends Controller
             'date' => $printJob->created_at->toDateString(),
             'printer' => $printer,
             'price' => $printerPrice,
+            'status' => $printJob->status,
           ];
           array_push($fullPrintJobInfo, $fullPrintJobInfo_);
 
@@ -178,14 +169,73 @@ class PrintJobController extends Controller
       }
     }
 
-    // public function paginate($items, $perPage = 3, $page = null, $options = [])
-    // {
-    //     $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-    //     $items = $items instanceof Collection ? $items : Collection::make($items);
-    //     return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-    // }
 
     public function show() {
+      $printJobId = Route::current()->parameter('id');
+
+      if (!Printjob::find($printJobId)) {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+      $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // Check if user has rights to printjob
+      // If user has printer
+      if ($printer) {
+        $printerId = Printer::where('user_id', $user->id)->first()->id;
+        // User is user that prints
+        if (Printjob::find($printJobId)->printer_id==$printerId) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          $pricePp = Printer::find($printerId)->price;
+          $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
+          $totalPrice = $pricePp * $totalPages;
+          return view('printjobdetails', [
+            'isPrinter'=>1,
+            'fileNames'=>$files,
+            'printJobId'=>$printJobId,
+            'totalPages' => $totalPages,
+            'pricePp' => $pricePp,
+            'totalPrice' => $totalPrice,
+          ]);
+        }
+        // User is requester
+        if (Printjob::find($printJobId)->requester_id==$user->id) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          $pricePp = Printer::find($printerId)->price;
+          $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
+          $totalPrice = $pricePp * $totalPages;
+          return view('printjobdetails', [
+            'isPrinter'=>0,
+            'fileNames'=>$files,
+            'printJobId'=>$printJobId,
+            'totalPages' => $totalPages,
+            'pricePp' => $pricePp,
+            'totalPrice' => $totalPrice,
+          ]);
+        }
+      } else {
+        // User is requester;
+        if (Printjob::find($printJobId)->requester_id==$user->id) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          $printJob = Printjob::find($printJobId);
+          $printer = Printer::find($printJob->printer_id);
+          $pricePp = $printer->price;
+          $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
+          $totalPrice = $pricePp * $totalPages;
+          return view('printjobdetails', [
+            'isPrinter'=>0,
+            'fileNames'=>$files,
+            'printJobId'=>$printJobId,
+            'totalPages' => $totalPages,
+            'pricePp' => $pricePp,
+            'totalPrice' => $totalPrice,
+          ]);
+        }
+      }
+    }
+
+    public function reject() {
       $printJobId = Route::current()->parameter('id');
 
       if (!Printjob::find($printJobId)) {
@@ -202,30 +252,109 @@ class PrintJobController extends Controller
         // User is user that prints
         if (Printjob::find($printJobId)->printer_id==$userPrinter) {
           $files = SharedFile::where('printjob_id', $printJobId)->get();
-          return view('printjobdetails', [
-            'isPrinter'=>1,
-            'fileNames'=>$files,
-          ]);
+          $printjob = Printjob::find($printJobId);
+          $printjob->status = "Geweigerd";
+          $printjob->notification_requester=1;
+          $printjob->save();
+          notify()->info('De aanvrager ontvangt een melding dat je niet zal afprinten.', 'Jammer.');
+          return redirect()->route('home');
         }
         // User is requester
         if (Printjob::find($printJobId)->requester_id==$user->id) {
           $files = SharedFile::where('printjob_id', $printJobId)->get();
-          return view('printjobdetails', [
-            'isPrinter'=>0,
-            'fileNames'=>$files,
-          ]);
+          notify()->error('Er is een fout opgetreden.', 'Error!');
+          return redirect()->route('home');
         }
       } else {
         // User is requester;
         if (Printjob::find($printJobId)->requester_id==$user->id) {
           $files = SharedFile::where('printjob_id', $printJobId)->get();
-          return view('printjobdetails', [
-            'isPrinter'=>0,
-            'fileNames'=>$files,
-          ]);
+          notify()->error('Er is een fout opgetreden.', 'Error!');
+          return redirect()->route('home');
         }
       }
-
-
     }
+
+    public function accept() {
+      $printJobId = Route::current()->parameter('id');
+
+      if (!Printjob::find($printJobId)) {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+      $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // Check if user has rights to printjob
+      // If user has printer
+      if ($printer) {
+        $userPrinter = Printer::where('user_id', $user->id)->first()->id;
+        // User is user that prints
+        if (Printjob::find($printJobId)->printer_id==$userPrinter) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          $printjob = Printjob::find($printJobId);
+          $printjob->status = "Geaccepteerd";
+          $printjob->notification_requester=1;
+          $printjob->save();
+          notify()->success('De aanvrager ontvangt een melding dat je zal afprinten.', 'Leuk!');
+          return redirect()->route('home');
+        }
+        // User is requester
+        if (Printjob::find($printJobId)->requester_id==$user->id) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          notify()->error('Er is een fout opgetreden.', 'Error!');
+          return redirect()->route('home');
+        }
+      } else {
+        // User is requester;
+        if (Printjob::find($printJobId)->requester_id==$user->id) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          notify()->error('Er is een fout opgetreden.', 'Error!');
+          return redirect()->route('home');
+        }
+      }
+    }
+
+    public function markDone() {
+      $printJobId = Route::current()->parameter('id');
+
+      if (!Printjob::find($printJobId)) {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+      $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // Check if user has rights to printjob
+      // If user has printer
+      if ($printer) {
+        $userPrinter = Printer::where('user_id', $user->id)->first()->id;
+        // User is user that prints
+        if (Printjob::find($printJobId)->printer_id==$userPrinter) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          $printjob = Printjob::find($printJobId);
+          $printjob->status = "Klaar";
+          $printjob->notification_requester=1;
+          $printjob->save();
+          notify()->success('De aanvrager ontvangt een melding dat de print klaarligt.', 'Fantastisch!');
+          return redirect()->route('home');
+        }
+        // User is requester
+        if (Printjob::find($printJobId)->requester_id==$user->id) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          notify()->error('Er is een fout opgetreden.', 'Error!');
+          return redirect()->route('home');
+        }
+      } else {
+        // User is requester;
+        if (Printjob::find($printJobId)->requester_id==$user->id) {
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          notify()->error('Er is een fout opgetreden.', 'Error!');
+          return redirect()->route('home');
+        }
+      }
+    }
+
+
+
 }

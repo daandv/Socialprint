@@ -178,8 +178,35 @@
 }
 
 .printTasksContainer {
+  width: 60%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.centeredDiv {
   width: 100%;
   text-align: center;
+}
+
+.bigTitle {
+  font-style: italic;
+}
+
+.page-item {
+  display: inline-block;
+  padding: 5px;
+}
+
+.pagination {
+  text-align: center;
+}
+
+.statusGreen {
+  color: green;
+}
+
+.statusRed {
+  color: red;
 }
 
 #mymap {

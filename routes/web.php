@@ -47,16 +47,18 @@ Route::get('/profile/{id}', 'ProfileController@index');
 //   return "dit gaat niet";
 // });
 
-Route::get('/printjobs', 'PrintJobController@index')->name('printjobs');
-Route::get('/printjob/{id}', 'PrintJobController@show')->name('printjob.details');
+
 
 Route::get('/print_at/{id}', 'PrintController@index');
 Route::post('/upload_at/{id}', 'PrintController@uploadFiles')->name('upload');
 
 Route::get('/getfile/{fileName}', 'PrintController@getFile')->name('getfile');
 
-
-
+Route::get('/printjobs', 'PrintJobController@index')->name('printjobs');
+Route::get('/printjob/{id}', 'PrintJobController@show')->name('printjob.details');
+Route::get('/rejectprintjob/{id}', 'PrintJobController@reject')->name('printjob.reject');
+Route::get('/acceptprintjob/{id}', 'PrintJobController@accept')->name('printjob.accept');
+Route::get('/markdoneprintjob/{id}', 'PrintJobController@markDone')->name('printjob.done');
 
 
 

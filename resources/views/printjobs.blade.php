@@ -6,42 +6,48 @@
 
 @section('content')
 <div class="container">
+  <div class="centeredDiv">
+    <h1 class="biGTitle">Mijn drukkerij</h1>
+  </div>
 
     <table class="printTasksContainer">
       <tr>
-        <th>Details</th>
-        <th>Actions</th>
         <th>Datum</th>
+        <th>Status</th>
+        <th>Details</th>
         <th>Aangevraagd door</th>
         <th>Afgedrukt door</th>
-        <th>Prijs</th>
       </tr>
 
       @foreach ($fullPrintJobInfo as $printJob)
       <tr>
+        <td>{{$printJob['date']}}</td>
+        <td class="
+        @if($printJob['status']=="Klaar")
+          statusGreen
+        @endif
+
+        @if($printJob['status']=="Geweigerd")
+          statusRed
+        @endif
+        ">{{$printJob['status']}}</td>
         <td>
           <a href="{{ route('printjob.details', [$printJob['id']]) }}">details</a>
         </td>
-        <td>
-          <a href="#">geprint</a>
-          <a href="#">cancel</a>
-        </td>
-        <td>{{$printJob['date']}}</td>
-        <td>{{$printJob['requesterName']}}</td>
-        <td>{{$printJob['userThatPrintsName']}}</td>
-        <td>{{$printJob['price']}}</td>
-      </tr>
-        <!-- @if ($printJob['requesterId'] == $userId)
-        <tr>
-          <td>Jij aangevraagd: {{ $printJob['id'] }}</td>
-        </tr>
-        @endif -->
 
-        <!-- @if ($printJob['userThatPrintsId'] == $userId)
-        <tr>
-          <td>Binnengekomen: {{ $printJob['id'] }}</td>
-        </tr>
-        @endif -->
+        @if ($printJob['requesterId']==$userId)
+          <td>Mijzelf</td>
+        @else
+          <td>{{$printJob['requesterName']}}</td>
+        @endif
+
+        @if ($printJob['userThatPrintsId']==$userId)
+          <td>Mijzelf</td>
+        @else
+          <td>{{$printJob['userThatPrintsName']}}</td>
+        @endif
+
+      </tr>
       @endforeach
 
     </table>
