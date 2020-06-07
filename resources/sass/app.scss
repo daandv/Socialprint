@@ -4,7 +4,9 @@
 
 // Variables
 @import 'variables';
-
+@import '~tippy.js/dist/tippy.css';
+@import '~tippy.js/animations/scale.css';
+@import '~tippy.js/animations/scale-subtle.css';
 // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
@@ -60,7 +62,10 @@
   color: red;
 }
 
-
+//FILE UPLOAD
+.letsEncrypt {
+  height: 80px;
+}
 
 
 // HOME

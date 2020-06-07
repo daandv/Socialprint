@@ -25,5 +25,7 @@
     "browserslist": [
         "last 3 versions"
     ],
-    "dependencies": {}
+    "dependencies": {
+        "tippy.js": "^6.2.3"
+    }
 }

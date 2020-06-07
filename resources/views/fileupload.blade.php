@@ -32,6 +32,7 @@
   </form>
   <br><br>
   <p id="calculations"></p>
+  <img class="letsEncrypt" src="{{ asset('images/lets-encrypt.png') }}" alt="">
 
 
 </div>

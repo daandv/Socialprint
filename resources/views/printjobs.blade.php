@@ -22,15 +22,15 @@
       @foreach ($fullPrintJobInfo as $printJob)
       <tr>
         <td>{{$printJob['date']}}</td>
-        <td class="
         @if($printJob['status']=="Klaar")
-          statusGreen
+          <td class="statusGreen" data-tippy-content="{{$printJob['status']}}" data-tippy-arrow ="false" data-tippy-placement="bottom" data-tippy-animation="scale-subtle"> &#9989;</td>
+        @elseif($printJob['status']=="Geweigerd")
+          <td class="statusRed" data-tippy-content="{{$printJob['status']}}" data-tippy-arrow ="false" data-tippy-placement="bottom" data-tippy-animation="scale-subtle"> &#128532;</td>
+        @elseif($printJob['status']=="Geaccepteerd")
+          <td class="statusGreen" data-tippy-content="{{$printJob['status']}}" data-tippy-arrow ="false" data-tippy-placement="bottom" data-tippy-animation="scale-subtle"> &#128077;</td>
+        @else
+          <td class="" data-tippy-content="{{$printJob['status']}}" data-tippy-arrow ="false" data-tippy-placement="bottom" data-tippy-animation="scale-subtle"> &#128073;</td>
         @endif
-
-        @if($printJob['status']=="Geweigerd")
-          statusRed
-        @endif
-        ">{{$printJob['status']}}</td>
         <td>
           <a href="{{ route('printjob.details', [$printJob['id']]) }}">details</a>
         </td>

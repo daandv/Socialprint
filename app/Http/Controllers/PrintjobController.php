@@ -13,6 +13,7 @@ use App\User;
 use App\Printjob;
 use App\Printer;
 use App\SharedFile;
+use App\ UserAddressInfo;
 
 use Session;
 use Route;
@@ -187,6 +188,13 @@ class PrintJobController extends Controller
         // User is user that prints
         if (Printjob::find($printJobId)->printer_id==$printerId) {
           $files = SharedFile::where('printjob_id', $printJobId)->get();
+          $printJob = Printjob::find($printJobId);
+
+          $printer = Printer::find($printJob->printer_id);
+          $userThatPrints = User::find($printer->user_id);
+          $userThatPrintsName = $userThatPrints->name;
+          $userAddressDetails = UserAddressInfo::find($userThatPrints->address_id);
+
           $pricePp = Printer::find($printerId)->price;
           $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
           $totalPrice = $pricePp * $totalPages;
@@ -197,11 +205,20 @@ class PrintJobController extends Controller
             'totalPages' => $totalPages,
             'pricePp' => $pricePp,
             'totalPrice' => $totalPrice,
+            'userThatPrintsName' => $userThatPrintsName,
+            'userAddressDetails' => $userAddressDetails,
           ]);
         }
         // User is requester
         if (Printjob::find($printJobId)->requester_id==$user->id) {
           $files = SharedFile::where('printjob_id', $printJobId)->get();
+          $printJob = Printjob::find($printJobId);
+
+          $printer = Printer::find($printJob->printer_id);
+          $userThatPrints = User::find($printer->user_id);
+          $userThatPrintsName = $userThatPrints->name;
+          $userAddressDetails = UserAddressInfo::find($userThatPrints->address_id);
+
           $pricePp = Printer::find($printerId)->price;
           $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
           $totalPrice = $pricePp * $totalPages;
@@ -212,6 +229,8 @@ class PrintJobController extends Controller
             'totalPages' => $totalPages,
             'pricePp' => $pricePp,
             'totalPrice' => $totalPrice,
+            'userThatPrintsName' => $userThatPrintsName,
+            'userAddressDetails' => $userAddressDetails,
           ]);
         }
       } else {
@@ -219,7 +238,12 @@ class PrintJobController extends Controller
         if (Printjob::find($printJobId)->requester_id==$user->id) {
           $files = SharedFile::where('printjob_id', $printJobId)->get();
           $printJob = Printjob::find($printJobId);
+
           $printer = Printer::find($printJob->printer_id);
+          $userThatPrints = User::find($printer->user_id);
+          $userThatPrintsName = $userThatPrints->name;
+          $userAddressDetails = UserAddressInfo::find($userThatPrints->address_id);
+
           $pricePp = $printer->price;
           $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
           $totalPrice = $pricePp * $totalPages;
@@ -230,9 +254,18 @@ class PrintJobController extends Controller
             'totalPages' => $totalPages,
             'pricePp' => $pricePp,
             'totalPrice' => $totalPrice,
+            'userThatPrintsName' => $userThatPrintsName,
+            'userAddressDetails' => $userAddressDetails,
           ]);
         }
       }
+
+
+
+
+
+
+
     }
 
     public function reject() {
