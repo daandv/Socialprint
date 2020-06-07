@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 use App\User;
 use App\Printjob;
 use App\Printer;
@@ -12,6 +16,7 @@ use App\SharedFile;
 
 use Session;
 use Route;
+
 
 class PrintJobController extends Controller
 {
@@ -21,7 +26,7 @@ class PrintJobController extends Controller
         $this->middleware(['auth','verified', 'completed']);
     }
 
-    public function index() {
+    public function index(Request $request) {
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
@@ -35,6 +40,7 @@ class PrintJobController extends Controller
           ->orderBy('created_at','desc')->get();
 
         $fullPrintJobInfo = [];
+
         foreach ($printJobs as $printJob) {
           $printer = Printer::find($printJob->printer_id);
           $printerPrice = $printer->price;
@@ -45,7 +51,7 @@ class PrintJobController extends Controller
           $userThatPrintsName = User::find($printer->user_id)->name;
           $requesterName = User::find($printJob->requester_id)->name;
 
-          //Clear notifications
+          // Clear notifications
           // If user is requester en has notifications
           if ($printJob->requester_id==$user->id) {
               $printJob_ = Printjob::find($printJob->id);
@@ -61,7 +67,18 @@ class PrintJobController extends Controller
               Session::forget('notification');
           }
 
-          $fullPrintJobInfo[] = [
+          // $fullPrintJobInfo = [
+          //   'id' => $printJob->id,
+          //   'userThatPrintsName' => $userThatPrintsName,
+          //   'userThatPrintsId' => $userThatPrintsId,
+          //   'requesterId' => $requesterId,
+          //   'requesterName' => $requesterName,
+          //   'date' => $printJob->created_at->toDateString(),
+          //   'printer' => $printer,
+          //   'price' => $printerPrice
+          // ];
+
+          $fullPrintJobInfo_ = [
             'id' => $printJob->id,
             'userThatPrintsName' => $userThatPrintsName,
             'userThatPrintsId' => $userThatPrintsId,
@@ -69,14 +86,34 @@ class PrintJobController extends Controller
             'requesterName' => $requesterName,
             'date' => $printJob->created_at->toDateString(),
             'printer' => $printer,
-            'price' => $printerPrice
+            'price' => $printerPrice,
           ];
+          array_push($fullPrintJobInfo, $fullPrintJobInfo_);
+
         }
 
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        // Create a new Laravel collection from the array data
+        $itemCollection = collect($fullPrintJobInfo);
+
+        // Define how many items we want to be visible in each page
+        $perPage = 5;
+
+        // Slice the collection to get the items to display in current page
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+
+        // Create our paginator and pass it to the view
+        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+
+        // set url path for generated links
+        $paginatedItems->setPath($request->url());
+
         return view('printjobs', [
-          'fullPrintJobInfo'=>$fullPrintJobInfo,
+          'fullPrintJobInfo'=>$paginatedItems,
           'userId' => $user->id,
         ]);
+
       } else {
         // User has no printer
 
@@ -103,7 +140,7 @@ class PrintJobController extends Controller
               Session::forget('notification');
           }
 
-          $fullPrintJobInfo[] = [
+          $fullPrintJobInfo_ = [
             'id' => $printJob->id,
             'userThatPrintsName' => $userThatPrintsName,
             'userThatPrintsId' => $userThatPrintsId,
@@ -111,16 +148,42 @@ class PrintJobController extends Controller
             'requesterName' => $requesterName,
             'date' => $printJob->created_at->toDateString(),
             'printer' => $printer,
-            'price' => $printerPrice
+            'price' => $printerPrice,
           ];
+          array_push($fullPrintJobInfo, $fullPrintJobInfo_);
+
         }
 
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        // Create a new Laravel collection from the array data
+        $itemCollection = collect($fullPrintJobInfo);
+
+        // Define how many items we want to be visible in each page
+        $perPage = 5;
+
+        // Slice the collection to get the items to display in current page
+        $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+
+        // Create our paginator and pass it to the view
+        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+
+        // set url path for generated links
+        $paginatedItems->setPath($request->url());
+
         return view('printjobs', [
-          'fullPrintJobInfo'=>$fullPrintJobInfo,
+          'fullPrintJobInfo'=>$paginatedItems,
           'userId' => $user->id,
         ]);
       }
     }
+
+    // public function paginate($items, $perPage = 3, $page = null, $options = [])
+    // {
+    //     $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+    //     $items = $items instanceof Collection ? $items : Collection::make($items);
+    //     return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    // }
 
     public function show() {
       $printJobId = Route::current()->parameter('id');

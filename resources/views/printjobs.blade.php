@@ -16,6 +16,7 @@
         <th>Afgedrukt door</th>
         <th>Prijs</th>
       </tr>
+
       @foreach ($fullPrintJobInfo as $printJob)
       <tr>
         <td>
@@ -44,7 +45,7 @@
       @endforeach
 
     </table>
-
+    {{ $fullPrintJobInfo->links() }}
 <!--
     <div class="row">
       <div class="item">ONE</div>
