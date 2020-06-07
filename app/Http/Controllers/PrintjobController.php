@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Printjob;
 use App\Printer;
+use App\SharedFile;
 
 use Session;
 use Route;
@@ -124,6 +125,10 @@ class PrintJobController extends Controller
     public function show() {
       $printJobId = Route::current()->parameter('id');
 
+      if (!Printjob::find($printJobId)) {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
@@ -131,20 +136,30 @@ class PrintJobController extends Controller
       // If user has printer
       if ($printer) {
         $userPrinter = Printer::where('user_id', $user->id)->first()->id;
-
         // User is user that prints
         if (Printjob::find($printJobId)->printer_id==$userPrinter) {
-          return "Je bent bevoegd en bent printer.";
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          return view('printjobdetails', [
+            'isPrinter'=>1,
+            'fileNames'=>$files,
+          ]);
         }
-
         // User is requester
         if (Printjob::find($printJobId)->requester_id==$user->id) {
-          return "Je bent bevoegd en bent aanvrager.";
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          return view('printjobdetails', [
+            'isPrinter'=>0,
+            'fileNames'=>$files,
+          ]);
         }
       } else {
-        // User is user that requester
+        // User is requester;
         if (Printjob::find($printJobId)->requester_id==$user->id) {
-          return "Je bent bevoegd en bent aanvrager.";
+          $files = SharedFile::where('printjob_id', $printJobId)->get();
+          return view('printjobdetails', [
+            'isPrinter'=>0,
+            'fileNames'=>$files,
+          ]);
         }
       }
 

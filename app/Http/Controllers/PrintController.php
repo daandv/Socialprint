@@ -18,6 +18,7 @@ use Str;
 use App\User;
 use App\Printer;
 use App\Printjob;
+use App\SharedFile;
 
 class PrintController extends Controller
 {
@@ -67,7 +68,6 @@ class PrintController extends Controller
 
     public function uploadFiles(Request $request)
     {
-
       $rules = [
         'file' => 'required',
         'file.*' => 'mimes:pdf|max:40000'
@@ -78,8 +78,6 @@ class PrintController extends Controller
         'mimes' => 'Enkel PDF bestanden toegelaten'
       ];
       $this->validate($request, $rules, $customMessages);
-
-
 
       $printer = Printer::find(Route::current()->parameter('id'));
       $requesterId = Auth::user()->id;
@@ -115,7 +113,7 @@ class PrintController extends Controller
         foreach ($request->file as $file) {
           $key = Str::random(32);
           $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . "_". $key .".pdf";
-          $fileSize = $file->getSize();
+          // $fileSize = $file->getSize();
 
           $file->storeAs('documents', $fileName, 's3');
 
@@ -134,12 +132,6 @@ class PrintController extends Controller
             'fileName' => $fileName,
             'pageCount' => $num,
           ];
-          // Check if pages found
-          // if ($num==0) {
-          //   notify()->error('Er is een fout opgetreden met een van de files, deze zit niet bij in de printopdracht.', 'Error!');
-          //   return redirect()->route('home');
-          // }
-
         }
         if (in_array(0, $pageCounterList)) {
           notify()->error('Ongeldige file(s) aanwezig, kan printopdracht niet verwerken.', 'Error');
@@ -154,8 +146,11 @@ class PrintController extends Controller
           $printjob->save();
 
           foreach ($fileList as $file) {
-            // Add to files to db
-
+            $file_ = new SharedFile;
+            $file_->printjob_id = $printjob->id;
+            $file_->file_name = $file['fileName'];
+            $file_->page_count = $file['pageCount'];
+            $file_->save();
           }
           notify()->success('File(s) geupload naar s3 en DB.', 'Joepie!');
           return redirect()->route('home');

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Printjob extends Model
+class SharedFile extends Model
 {
-
+    public $timestamps = false;
 }
