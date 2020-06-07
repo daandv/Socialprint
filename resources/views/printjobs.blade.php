@@ -9,6 +9,7 @@
 
     <table class="printTasksContainer">
       <tr>
+        <th>Details</th>
         <th>Actions</th>
         <th>Datum</th>
         <th>Aangevraagd door</th>
@@ -18,6 +19,9 @@
       @foreach ($fullPrintJobInfo as $printJob)
       <tr>
         <td>
+          <a href="{{ route('printjob.details', [$printJob['id']]) }}">details</a>
+        </td>
+        <td>
           <a href="#">geprint</a>
           <a href="#">cancel</a>
         </td>
@@ -26,7 +30,6 @@
         <td>{{$printJob['userThatPrintsName']}}</td>
         <td>{{$printJob['price']}}</td>
       </tr>
-
         <!-- @if ($printJob['requesterId'] == $userId)
         <tr>
           <td>Jij aangevraagd: {{ $printJob['id'] }}</td>

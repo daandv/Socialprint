@@ -79,8 +79,39 @@ class PrintController extends Controller
       ];
       $this->validate($request, $rules, $customMessages);
 
+
+
+      $printer = Printer::find(Route::current()->parameter('id'));
+      $requesterId = Auth::user()->id;
+
+      // Check for valid url
+      if (!$printer) {
+        notify()->error('Deze printer is niet beschikbaar.', 'Error!');
+        return redirect()->route('home');
+      }
+
+      $userThatPrintsId = User::find($printer->user_id)->id;
+      // Check if not own id
+      if ($userThatPrintsId==$requesterId) {
+        notify()->error('Bij jezelf afdrukken gaat niet.', 'Error!');
+        return redirect()->route('home');
+      }
+
+      // Check if available
+      if (User::find($userThatPrintsId)->available==0) {
+        notify()->error('Deze printer is niet beschikbaar.', 'Error!');
+        return redirect()->route('home');
+      }
+
+      $userThatPrintsName = User::find($userThatPrintsId)->name;
+      $requesterName = User::find($requesterId)->name;
+
+
       if ($request->hasFile('file')) {
         $pageCounter=0;
+        $pageCounterList = [];
+        $fileList = [];
+
         foreach ($request->file as $file) {
           $key = Str::random(32);
           $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . "_". $key .".pdf";
@@ -96,54 +127,43 @@ class PrintController extends Controller
           $pdftext = file_get_contents($tempUrl);
           $num = preg_match_all("/\/Page\W/", $pdftext);
           $pageCounter += $num;
+
+          array_push($pageCounterList, $num);
+
+          $fileList[] = [
+            'fileName' => $fileName,
+            'pageCount' => $num,
+          ];
+          // Check if pages found
+          // if ($num==0) {
+          //   notify()->error('Er is een fout opgetreden met een van de files, deze zit niet bij in de printopdracht.', 'Error!');
+          //   return redirect()->route('home');
+          // }
+
         }
+        if (in_array(0, $pageCounterList)) {
+          notify()->error('Ongeldige file(s) aanwezig, kan printopdracht niet verwerken.', 'Error');
+          return redirect()->route('home');
+        } else {
+          // Add new printjob to db
+          $printjob = new Printjob;
+          $printjob->printer_id = Route::current()->parameter('id');
+          $printjob->requester_id = $requesterId;
+          $printjob->status = "Verzonden";
+          $printjob->notification_printer = 1;
+          $printjob->save();
 
+          foreach ($fileList as $file) {
+            // Add to files to db
 
-
-        $printer = Printer::find(Route::current()->parameter('id'));
-        $requesterId = Auth::user()->id;
-
-        // Check for valid url
-        if (!$printer) {
-          notify()->error('Deze printer is niet beschikbaar.', 'Error!');
+          }
+          notify()->success('File(s) geupload naar s3 en DB.', 'Joepie!');
           return redirect()->route('home');
         }
 
-        $userThatPrintsId = User::find($printer->user_id)->id;
-        // Check if not own id
-        if ($userThatPrintsId==$requesterId) {
-          notify()->error('Bij jezelf afdrukken gaat niet.', 'Error!');
-          return redirect()->route('home');
-        }
-
-        // Check if available
-        if (User::find($userThatPrintsId)->available==0) {
-          notify()->error('Deze printer is niet beschikbaar.', 'Error!');
-          return redirect()->route('home');
-        }
-
-        $userThatPrintsName = User::find($userThatPrintsId)->name;
-        $requesterName = User::find($requesterId)->name;
-
-
-
-        // Add new printjob to db here
-        $printjob = new Printjob;
-        $printjob->printer_id = Route::current()->parameter('id');
-        $printjob->requester_id = $requesterId;
-        $printjob->status = "Verzonden";
-        $printjob->notification_printer = 1;
-        $printjob->save();
-        // return $fileSize;
-
-        notify()->success('File geupload naar s3 en DB.', 'Joepie!');
-        return redirect()->route('home');
       }
-        notify()->error('Er is een fout opgetreden.', 'Error!');
-        return redirect()->route('home');
-
-      // return "test";
-      // return redirect()->route('home')->with('status', "Werkt");
+      notify()->error('Er is een fout opgetreden.', 'Error!');
+      return redirect()->route('home');
     }
 
     public function getFile()

@@ -48,7 +48,7 @@ Route::get('/profile/{id}', 'ProfileController@index');
 // });
 
 Route::get('/printjobs', 'PrintJobController@index')->name('printjobs');
-
+Route::get('/printjob/{id}', 'PrintJobController@show')->name('printjob.details');
 
 Route::get('/print_at/{id}', 'PrintController@index');
 Route::post('/upload_at/{id}', 'PrintController@uploadFiles')->name('upload');

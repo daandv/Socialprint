@@ -10,6 +10,7 @@ use App\Printjob;
 use App\Printer;
 
 use Session;
+use Route;
 
 class PrintJobController extends Controller
 {
@@ -43,6 +44,7 @@ class PrintJobController extends Controller
           $userThatPrintsName = User::find($printer->user_id)->name;
           $requesterName = User::find($printJob->requester_id)->name;
 
+          //Clear notifications
           // If user is requester en has notifications
           if ($printJob->requester_id==$user->id) {
               $printJob_ = Printjob::find($printJob->id);
@@ -92,6 +94,13 @@ class PrintJobController extends Controller
           $userThatPrintsName = User::find($printer->user_id)->name;
           $requesterName = User::find($printJob->requester_id)->name;
 
+          //Clear notifications
+          if ($printJob->requester_id==$user->id) {
+              $printJob_ = Printjob::find($printJob->id);
+              $printJob_->notification_requester = 0;
+              $printJob_->save();
+              Session::forget('notification');
+          }
 
           $fullPrintJobInfo[] = [
             'id' => $printJob->id,
@@ -109,6 +118,34 @@ class PrintJobController extends Controller
           'fullPrintJobInfo'=>$fullPrintJobInfo,
           'userId' => $user->id,
         ]);
+      }
+    }
+
+    public function show() {
+      $printJobId = Route::current()->parameter('id');
+
+      $user = User::find(Auth::user()->id);
+      $printer = Printer::where('user_id',$user->id)->first();
+
+      // Check if user has rights to printjob
+      // If user has printer
+      if ($printer) {
+        $userPrinter = Printer::where('user_id', $user->id)->first()->id;
+
+        // User is user that prints
+        if (Printjob::find($printJobId)->printer_id==$userPrinter) {
+          return "Je bent bevoegd en bent printer.";
+        }
+
+        // User is requester
+        if (Printjob::find($printJobId)->requester_id==$user->id) {
+          return "Je bent bevoegd en bent aanvrager.";
+        }
+      } else {
+        // User is user that requester
+        if (Printjob::find($printJobId)->requester_id==$user->id) {
+          return "Je bent bevoegd en bent aanvrager.";
+        }
       }
 
 

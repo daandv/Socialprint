@@ -41,6 +41,7 @@ class HomeController extends Controller
 
         $printer = Printer::where('user_id',$user->id)->first();
 
+        // Check for notifications
         // If user has printer
         if ($printer) {
           $userPrinter = Printer::where('user_id', $user->id)->first()->id;
@@ -68,14 +69,9 @@ class HomeController extends Controller
               }
             }
           }
-
-
           return view('home', [
             'user' => $user,
           ]);
-
-
-
         } else {
           // User has no printer
           $printJobs = Printjob::where('requester_id', $user->id)

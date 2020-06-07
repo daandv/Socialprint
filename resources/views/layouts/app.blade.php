@@ -8,7 +8,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon.jfif') }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>
+
+      @if(session('notification'))
+        Nieuwe melding.
+      @else
+            {{ config('app.name', 'Laravel') }}
+      @endif
+
+    </title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}">
@@ -73,7 +81,9 @@
     		<a class="logo" href="#">
           <img src="{{ asset('images/logo_white.png')}}">
         </a>
-
+        @if(session('notification'))
+          <p> U heeft meldingen </p>
+        @endif
           <ul class="main-nav">
               <li><a href="{{ route('home') }}">Kaart</a></li>
               <li><a href="{{ route('printjobs') }}">Afdruktaken</a></li>
@@ -83,10 +93,9 @@
     	</header>
 
 
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+      <main class="py-4">
+          @yield('content')
+      </main>
     </div>
 </body>
 </html>

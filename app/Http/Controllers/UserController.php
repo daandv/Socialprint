@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Printer;
 use App\UserAddressInfo;
+use App\Printjob;
 
 use App\Rules\ValidPricePerPage;
 
@@ -18,10 +19,6 @@ class UserController extends Controller
        // Protected controller
         $this->middleware(['auth','verified', 'completed']);
     }
-    // public function complete(Request $request)
-    // {
-    //
-    // }
 
     public function changeToPrinter() {
       $user = User::find(Auth::user()->id);
@@ -35,8 +32,8 @@ class UserController extends Controller
       return view('changetoprinter');
     }
 
-    public function changeToPrinterStore(Request $request)
-    {
+    public function changeToPrinterStore(Request $request) {
+
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
@@ -44,13 +41,6 @@ class UserController extends Controller
       if ($printer) {
         return redirect()->route('home')->with('status', "Foute route");
       }
-
-      // $validatedData = $request->validate([
-      //     'lat' => 'required',
-      //     'lng' => 'required',
-      //     'pp' => ['required', new ValidPricePerPage]
-      // ]);
-
 
       $rules = [
         'address' => 'required',
@@ -106,17 +96,70 @@ class UserController extends Controller
       return redirect()->route('home');
     }
 
-
     public function reRouteShow() {
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
-      // User has printer
+      // Check for notifications
+      // If user has printer
       if ($printer) {
+        $userPrinter = Printer::where('user_id', $user->id)->first()->id;
+
+        $printJobs = Printjob::where('requester_id', $user->id)
+                ->orWhere('printer_id', $userPrinter)
+                ->orderBy('created_at','desc')->get();
+
+
+        foreach ($printJobs as $printJob) {
+          $printer = Printer::find($printJob->printer_id);
+          $userThatPrintsId = User::find($printer->user_id)->id;
+
+          // If user is requester en has notifications
+          if ($printJob->requester_id==$user->id) {
+            if ($printJob->notification_requester) {
+              session(['notification' => 1]);
+            }
+          }
+
+          // If user is printer en has notifications
+          if ($userThatPrintsId==$user->id) {
+            if ($printJob->notification_printer) {
+              session(['notification' => 1]);
+            }
+          }
+        }
         return redirect()->route('showprinter');
       } else {
-        return redirect()->route('shownonprinter');
+        // User has no printer
+        $printJobs = Printjob::where('requester_id', $user->id)
+                // ->orWhere('printer_id', $userPrinter)
+                ->orderBy('created_at','desc')->get();
+
+        // If user is requester en has notifications
+        foreach ($printJobs as $printJob) {
+          if ($printJob->requester_id==$user->id) {
+            if ($printJob->notification_requester) {
+              session(['notification' => 1]);
+            }
+          }
+        }
       }
+
+      return redirect()->route('shownonprinter');
+
+
+
+
+
+
+
+
+      // User has printer
+      // if ($printer) {
+      //   return redirect()->route('showprinter');
+      // } else {
+      //   return redirect()->route('shownonprinter');
+      // }
     }
 
     public function showPrinter() {
@@ -201,7 +244,6 @@ class UserController extends Controller
       $user->save();
       return redirect()->route('editaccount');
     }
-
 
     public function updatePrinterStore(Request $request) {
       $rules = [
