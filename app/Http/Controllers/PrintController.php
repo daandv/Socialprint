@@ -25,7 +25,7 @@ class PrintController extends Controller
     public function __construct()
     {
        // Protected controller
-        $this->middleware(['auth','verified']);
+        $this->middleware(['auth','verified', 'completed']);
     }
 
     public function index() {

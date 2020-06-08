@@ -42330,9 +42330,16 @@ __webpack_require__(/*! ./leaflet.js */ "./resources/js/leaflet.js");
 
 __webpack_require__(/*! ./leaflet.markercluster.js */ "./resources/js/leaflet.markercluster.js");
 
- // Navbar
+ // Tippy
 
-Object(tippy_js__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-tippy-content]');
+Object(tippy_js__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-tippy-content]'); // Navbar
+
+$('.main-nav').click(function (e) {
+  $(this).find("a").addClass("lighter");
+});
+$('.main-nav').find("a").click(function (e) {
+  $(this).addClass("brighter");
+});
 
 /***/ }),
 

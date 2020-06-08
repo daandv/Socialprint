@@ -209,6 +209,13 @@
   color: red;
 }
 
+.chatMessages {
+  background-color: #d9d9d9;
+  height: 300px;
+  max-height: 300px;
+  width: 100%;
+}
+
 .letsEncrypt {
   height: 80px;
 }
@@ -363,6 +370,14 @@ a {
 
 .main-nav a:hover {
   color: #fffcff;
+}
+
+.lighter {
+  color: rgba(255, 252, 255, 0.7) !important;
+}
+
+.brighter {
+  color: #fffcff !important;
 }
 
 /* =================================

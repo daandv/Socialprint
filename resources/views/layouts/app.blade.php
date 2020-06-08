@@ -84,7 +84,7 @@
         @if(session('notification'))
           <p> U heeft meldingen </p>
         @endif
-          <ul class="main-nav">
+          <ul id="#main-nav" class="main-nav">
               <li><a href="{{ route('home') }}">Kaart</a></li>
               <li><a href="{{ route('printjobs') }}">Afdruktaken</a></li>
               <li><a href="#">Favorieten</a></li>

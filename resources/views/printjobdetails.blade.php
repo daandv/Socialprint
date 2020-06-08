@@ -15,20 +15,42 @@
   <br><br>
 
 @if ($isPrinter)
-<a href="{{ route('printjob.reject', [$printJobId]) }}">WEIGER</a>
+<div style="border:1px solid black">
+  <b>Actions:</b><br>
+  <a href="{{ route('printjob.reject', [$printJobId]) }}">WEIGER</a>
+  <br>
+  <a href="{{ route('printjob.accept', [$printJobId]) }}">ACCEPTEER</a>
+  <br>
+  <a href="{{ route('printjob.done', [$printJobId]) }}">GEPRINT</a>
+</div>
 <br>
-<a href="{{ route('printjob.accept', [$printJobId]) }}">ACCEPTEER</a>
-<br>
-<a href="{{ route('printjob.done', [$printJobId]) }}">GEPRINT</a>
 @endif
 
+<div style="border:1px solid black">
+  <b>Ophaal gegevens:</b><br>
+  <span>{{$userThatPrintsName}}</span><br>
+  <span>{{$userAddressDetails->street_and_number}}</span><br>
+</div>
 
-<b>Ophaal gegevens:</b>
-<p>{{$userThatPrintsName}}</p>
-<p>{{$userAddressDetails->street_and_number}}</p>
+<br>
 
-<p>{{$totalPages}} Pagina's</p>
-<p>x €{{$pricePp}} per pagina</p>
-<p>= €{{$totalPrice}}</p>
+<div style="border:1px solid black">
+<b>Opdracht details:</b><br>
+  <span>{{$totalPages}} Pagina's</span><br>
+  <span>x €{{$pricePp}} per pagina</span><br>
+  <span>= €{{$totalPrice}}</span>
+</div>
+
+<br>
+
+<div class="chatMessages">
+
+</div>
+<form class="" action="{{ route('chat.send', [$printJobId])}}" method="post">
+  @csrf
+<input type="text" name="message" value="">
+<input type="submit" name="" value="Verstuur">
+</form>
+
 </div>
 @endsection

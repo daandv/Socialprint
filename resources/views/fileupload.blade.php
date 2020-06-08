@@ -32,7 +32,8 @@
   </form>
   <br><br>
   <p id="calculations"></p>
-  <img class="letsEncrypt" src="{{ asset('images/lets-encrypt.png') }}" alt="">
+  <a href="https://letsencrypt.org/how-it-works/" target="_blank"><img class="letsEncrypt" src="{{ asset('images/lets-encrypt.png') }}" alt=""></a>
+
 
 
 </div>

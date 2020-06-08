@@ -60,7 +60,7 @@ Route::get('/rejectprintjob/{id}', 'PrintJobController@reject')->name('printjob.
 Route::get('/acceptprintjob/{id}', 'PrintJobController@accept')->name('printjob.accept');
 Route::get('/markdoneprintjob/{id}', 'PrintJobController@markDone')->name('printjob.done');
 
-
+Route::post('/sendchat/{printjobid}', 'ChatController@send')->name('chat.send');
 
 
 
