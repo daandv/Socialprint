@@ -13,7 +13,8 @@ use App\User;
 use App\Printjob;
 use App\Printer;
 use App\SharedFile;
-use App\ UserAddressInfo;
+use App\UserAddressInfo;
+use App\ChatMessage;
 
 use Session;
 use Route;
@@ -58,15 +59,22 @@ class PrintJobController extends Controller
               $printJob_ = Printjob::find($printJob->id);
               $printJob_->notification_requester = 0;
               $printJob_->save();
-              Session::forget('notification');
+              Session::forget('notificationPrintjob');
           }
           // If user is printer en has notifications
           if ($userThatPrintsId==$user->id) {
               $printJob_ = Printjob::find($printJob->id);
               $printJob_->notification_printer = 0;
               $printJob_->save();
-              Session::forget('notification');
+              Session::forget('notificationPrintjob');
           }
+
+          // Check for messages
+          $unreadMessages = ChatMessage::where('to_id', $user->id)
+                  ->where('read', '0')
+                  ->where('printjob_id', $printJob->id)
+                  ->count();
+
 
           $fullPrintJobInfo_ = [
             'id' => $printJob->id,
@@ -78,6 +86,7 @@ class PrintJobController extends Controller
             'printer' => $printer,
             'price' => $printerPrice,
             'status' => $printJob->status,
+            'unreadMessages' => $unreadMessages,
           ];
           array_push($fullPrintJobInfo, $fullPrintJobInfo_);
 
@@ -131,6 +140,12 @@ class PrintJobController extends Controller
               Session::forget('notification');
           }
 
+          // Check for messages
+          $unreadMessages = ChatMessage::where('to_id', $user->id)
+                  ->where('read', '0')
+                  ->where('printjob_id', $printJob->id)
+                  ->count();
+
           $fullPrintJobInfo_ = [
             'id' => $printJob->id,
             'userThatPrintsName' => $userThatPrintsName,
@@ -141,6 +156,7 @@ class PrintJobController extends Controller
             'printer' => $printer,
             'price' => $printerPrice,
             'status' => $printJob->status,
+            'unreadMessages' => $unreadMessages,
           ];
           array_push($fullPrintJobInfo, $fullPrintJobInfo_);
 
@@ -170,8 +186,7 @@ class PrintJobController extends Controller
       }
     }
 
-
-    public function show() {
+    public function showDetails() {
       $printJobId = Route::current()->parameter('id');
 
       if (!Printjob::find($printJobId)) {
@@ -180,6 +195,19 @@ class PrintJobController extends Controller
       }
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
+
+
+      //Mark messages read
+      $unreadMessages = ChatMessage::where('to_id', $user->id)
+              ->where('printjob_id', $printJobId)
+              ->where('read', '0')->get();
+      Session::forget('notificationMessage');
+
+      foreach ($unreadMessages as $message) {
+        $message_ = ChatMessage::find($message->id);
+        $message_->read = 1;
+        $message_->save();
+      }
 
       // Check if user has rights to printjob
       // If user has printer
@@ -195,9 +223,28 @@ class PrintJobController extends Controller
           $userThatPrintsName = $userThatPrints->name;
           $userAddressDetails = UserAddressInfo::find($userThatPrints->address_id);
 
+          $requester = User::find($printJob->requester_id);
+          $requesterName = $requester->name;
+
           $pricePp = Printer::find($printerId)->price;
           $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
           $totalPrice = $pricePp * $totalPages;
+
+          // Get messages
+          $fullMessagesInfo = [];
+
+          $messages = ChatMessage::where('printjob_id', $printJobId)->orderBy('created_at','desc')->limit(500)->get()->reverse();
+
+          foreach ($messages as $message) {
+            $fullMessagesInfo_ = [
+              'fromName' => User::find($message->from_id)->name,
+              'fromId' => User::find($message->from_id)->id,
+              'message' => $message->message,
+              'date' => $message->created_at,
+            ];
+            array_push($fullMessagesInfo, $fullMessagesInfo_);
+          }
+
           return view('printjobdetails', [
             'isPrinter'=>1,
             'fileNames'=>$files,
@@ -207,6 +254,9 @@ class PrintJobController extends Controller
             'totalPrice' => $totalPrice,
             'userThatPrintsName' => $userThatPrintsName,
             'userAddressDetails' => $userAddressDetails,
+            'requesterName' => $requesterName,
+            'messages' => $fullMessagesInfo,
+            'currentUserId' => $user->id,
           ]);
         }
         // User is requester
@@ -222,6 +272,23 @@ class PrintJobController extends Controller
           $pricePp = Printer::find($printerId)->price;
           $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
           $totalPrice = $pricePp * $totalPages;
+
+          // Get messages
+          $fullMessagesInfo = [];
+
+          $messages = ChatMessage::where('printjob_id', $printJobId)->orderBy('created_at','desc')->limit(500)->get()->reverse();
+
+          foreach ($messages as $message) {
+            $fullMessagesInfo_ = [
+              'fromName' => User::find($message->from_id)->name,
+              'fromId' => User::find($message->from_id)->id,
+              'message' => $message->message,
+              'date' => $message->created_at,
+            ];
+            array_push($fullMessagesInfo, $fullMessagesInfo_);
+          }
+
+
           return view('printjobdetails', [
             'isPrinter'=>0,
             'fileNames'=>$files,
@@ -231,6 +298,8 @@ class PrintJobController extends Controller
             'totalPrice' => $totalPrice,
             'userThatPrintsName' => $userThatPrintsName,
             'userAddressDetails' => $userAddressDetails,
+            'messages' => $fullMessagesInfo,
+            'currentUserId' => $user->id,
           ]);
         }
       } else {
@@ -247,6 +316,23 @@ class PrintJobController extends Controller
           $pricePp = $printer->price;
           $totalPages = SharedFile::where('printjob_id', $printJobId)->sum('page_count');
           $totalPrice = $pricePp * $totalPages;
+
+          // Get messages
+          $fullMessagesInfo = [];
+
+          $messages = ChatMessage::where('printjob_id', $printJobId)->orderBy('created_at','desc')->limit(500)->get()->reverse();
+
+          foreach ($messages as $message) {
+            $fullMessagesInfo_ = [
+              'fromName' => User::find($message->from_id)->name,
+              'fromId' => User::find($message->from_id)->id,
+              'message' => $message->message,
+              'date' => $message->created_at,
+            ];
+            array_push($fullMessagesInfo, $fullMessagesInfo_);
+          }
+
+
           return view('printjobdetails', [
             'isPrinter'=>0,
             'fileNames'=>$files,
@@ -256,16 +342,11 @@ class PrintJobController extends Controller
             'totalPrice' => $totalPrice,
             'userThatPrintsName' => $userThatPrintsName,
             'userAddressDetails' => $userAddressDetails,
+            'messages' => $fullMessagesInfo,
+            'currentUserId' => $user->id,
           ]);
         }
       }
-
-
-
-
-
-
-
     }
 
     public function reject() {

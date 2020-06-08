@@ -48,6 +48,7 @@ class ChatController extends Controller
           $chatMessage->to_id = $printjob->requester_id;
           $chatMessage->save();
         }
+        return redirect()->route('printjob.details', [$printjob->id]);
       } else {
         // Printjob not found
         notify()->error('Er is een fout opgetreden.', 'Error!');

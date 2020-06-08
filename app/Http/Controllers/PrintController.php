@@ -20,6 +20,7 @@ use App\Printer;
 use App\Printjob;
 use App\SharedFile;
 
+
 class PrintController extends Controller
 {
     public function __construct()
@@ -145,6 +146,7 @@ class PrintController extends Controller
           $printjob->notification_printer = 1;
           $printjob->save();
 
+
           foreach ($fileList as $file) {
             $file_ = new SharedFile;
             $file_->printjob_id = $printjob->id;
@@ -152,11 +154,12 @@ class PrintController extends Controller
             $file_->page_count = $file['pageCount'];
             $file_->save();
           }
+
+          }
           notify()->success('File(s) geupload naar s3 en DB.', 'Joepie!');
           return redirect()->route('home');
         }
 
-      }
       notify()->error('Er is een fout opgetreden.', 'Error!');
       return redirect()->route('home');
     }

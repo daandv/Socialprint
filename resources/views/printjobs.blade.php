@@ -12,6 +12,7 @@
 
     <table class="printTasksContainer">
       <tr>
+        <th></th>
         <th>Datum</th>
         <th>Status</th>
         <th>Details</th>
@@ -21,6 +22,13 @@
 
       @foreach ($fullPrintJobInfo as $printJob)
       <tr>
+        <td>
+          @if($printJob['unreadMessages'])
+            Nieuw!
+          @else
+            
+          @endif
+        </td>
         <td>{{$printJob['date']}}</td>
         @if($printJob['status']=="Klaar")
           <td class="statusGreen" data-tippy-content="{{$printJob['status']}}" data-tippy-arrow ="false" data-tippy-placement="bottom" data-tippy-animation="scale-subtle"> &#9989;</td>

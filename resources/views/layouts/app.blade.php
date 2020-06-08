@@ -81,8 +81,12 @@
     		<a class="logo" href="#">
           <img src="{{ asset('images/logo_white.png')}}">
         </a>
-        @if(session('notification'))
-          <p> U heeft meldingen </p>
+        @if(session('notificationPrintjob'))
+          <p> Printjob melding </p>
+        @endif
+
+        @if(session('notificationMessage'))
+          <p> Chat melding </p>
         @endif
           <ul id="#main-nav" class="main-nav">
               <li><a href="{{ route('home') }}">Kaart</a></li>

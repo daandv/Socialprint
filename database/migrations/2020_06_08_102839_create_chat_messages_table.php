@@ -19,7 +19,7 @@ class CreateChatMessagesTable extends Migration
             $table->foreignId('from_id');
             $table->foreignId('to_id');
             $table->text('message');
-            $table->boolean('system_message')->nullable();
+            $table->boolean('system_message')->default('0');
             $table->timestamps();
         });
     }

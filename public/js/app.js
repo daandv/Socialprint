@@ -42330,16 +42330,18 @@ __webpack_require__(/*! ./leaflet.js */ "./resources/js/leaflet.js");
 
 __webpack_require__(/*! ./leaflet.markercluster.js */ "./resources/js/leaflet.markercluster.js");
 
- // Tippy
+ // TIPPY
 
-Object(tippy_js__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-tippy-content]'); // Navbar
+Object(tippy_js__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-tippy-content]'); // NAVBAR
 
 $('.main-nav').click(function (e) {
   $(this).find("a").addClass("lighter");
 });
 $('.main-nav').find("a").click(function (e) {
   $(this).addClass("brighter");
-});
+}); // CHAT
+
+$(".chatMessages").scrollTop($(".chatMessages")[0].scrollHeight);
 
 /***/ }),
 

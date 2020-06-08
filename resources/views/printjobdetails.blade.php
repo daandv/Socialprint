@@ -42,10 +42,21 @@
 </div>
 
 <br>
-
+@if ($isPrinter)
+<h2>Chat met {{$requesterName}}</h2>
+@else
+<h2>Chat met {{$userThatPrintsName}}</h2>
+@endif
 <div class="chatMessages">
-
+  @foreach($messages as $message)
+    @if($message["fromId"]==$currentUserId)
+    <p>Jij:{{$message["message"]}} {{$message["date"]}}</p>
+    @else
+    <p>{{$message["fromName"]}}:{{$message["message"]}} {{$message["date"]}}</p>
+    @endif
+  @endforeach
 </div>
+<br>
 <form class="" action="{{ route('chat.send', [$printJobId])}}" method="post">
   @csrf
 <input type="text" name="message" value="">

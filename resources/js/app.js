@@ -3,13 +3,16 @@ require('./leaflet.js');
 require('./leaflet.markercluster.js');
 import tippy from 'tippy.js';
 
-// Tippy
+// TIPPY
 tippy('[data-tippy-content]');
 
-// Navbar
+// NAVBAR
 $('.main-nav').click(function(e) {
       $(this).find( "a" ).addClass("lighter");
 });
 $('.main-nav').find("a").click(function(e) {
     $(this).addClass("brighter");
 })
+
+// CHAT
+$(".chatMessages").scrollTop($(".chatMessages")[0].scrollHeight);
