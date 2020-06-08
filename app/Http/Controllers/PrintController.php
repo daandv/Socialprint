@@ -40,6 +40,7 @@ class PrintController extends Controller
       }
 
       $userThatPrintsId = User::find($printer->user_id)->id;
+
       // Check if not own id
       if ($userThatPrintsId==$requesterId) {
         notify()->error('Bij jezelf afdrukken gaat niet.', 'Error!');
@@ -70,11 +71,12 @@ class PrintController extends Controller
     public function uploadFiles(Request $request)
     {
       $rules = [
-        'file' => 'required',
+        'file' => 'required|max:2',
         'file.*' => 'mimes:pdf|max:40000'
       ];
       $customMessages = [
-        'max' => 'De maximum filegrootte is 40MB.',
+        'file.*.max' => 'De maximum filegrootte is 40MB.',
+        'file.max' => 'Maximum 10 files',
         'required' => 'Geen file gevonden.',
         'mimes' => 'Enkel PDF bestanden toegelaten'
       ];

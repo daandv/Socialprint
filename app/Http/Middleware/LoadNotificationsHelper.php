@@ -72,8 +72,4 @@ class LoadNotificationsHelper
       }
       return $next($request);
     }
-
-
-
-
 }

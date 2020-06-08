@@ -56,8 +56,6 @@ class UserController extends Controller
       ];
       $this->validate($request, $rules, $customMessages);
 
-
-
       // Fill in address info
       $useraddressinfo = new UserAddressInfo();
       $useraddressinfo->street_and_number = $request->address;

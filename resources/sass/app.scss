@@ -222,6 +222,7 @@ a {
 .main-nav a {
   color: rgb(255,252,255);
   transition: 0.1s;
+  position: relative;
 }
 .main-nav:hover {
   a {
@@ -236,6 +237,16 @@ a {
 }
 .brighter {
   color: rgb(255,252,255)!important;
+}
+.chatBadge {
+  font-size: 10px;
+  position: absolute;
+  top: 1px;
+  right: -2px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 2px;
+  color: #FF0066;
 }
 
 
@@ -271,5 +282,11 @@ a {
 
   .leaflet-popup-content-wrapper {
     width: 400px;
+  }
+
+  .chatBadge {
+    top: 2px;
+    right: 9px;
+    background-color: rgba(255, 255, 255, 0.6);
   }
 }

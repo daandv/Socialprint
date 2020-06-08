@@ -81,16 +81,13 @@
     		<a class="logo" href="#">
           <img src="{{ asset('images/logo_white.png')}}">
         </a>
-        @if(session('notificationPrintjob'))
-          <p> Printjob melding </p>
-        @endif
-
-        @if(session('notificationMessage'))
-          <p> Chat melding </p>
-        @endif
           <ul id="#main-nav" class="main-nav">
               <li><a href="{{ route('home') }}">Kaart</a></li>
-              <li><a href="{{ route('printjobs') }}">Afdruktaken</a></li>
+              <li><a href="{{ route('printjobs') }}">Afdruktaken
+                @if(session('notificationPrintjob')||session('notificationMessage'))
+                <span class="chatBadge">&#128226;</span>
+                @endif
+              </a></li>
               <li><a href="#">Favorieten</a></li>
               <li><a href="{{ route('editaccount') }}">Profiel</a></li>
           </ul>
