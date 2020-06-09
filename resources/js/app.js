@@ -6,6 +6,8 @@ import tippy from 'tippy.js';
 // TIPPY
 tippy('[data-tippy-content]');
 
+document.getElementById('nojs').parentElement.removeChild(document.getElementById('nojs'));
+
 // NAVBAR
 $('.main-nav').click(function(e) {
       $(this).find( "a" ).addClass("lighter");

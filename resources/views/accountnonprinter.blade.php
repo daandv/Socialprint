@@ -17,6 +17,14 @@
     @csrf
     <label for="name">Naam</label>
     <input type="text" id="name" class="form-control" name="name" value="{{$name}}">
+
+    <input type="checkbox" name="mailNotif" value="1"
+    @if($emailNotif)
+      checked
+    @endif
+    >
+    <label for="mailNotif">Ontvang e-mail updates</label><br>
+
     <br>
     <br>
     <input class="btn btn-primary" type="submit" value="Opslaan">

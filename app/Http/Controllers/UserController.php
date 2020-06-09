@@ -182,6 +182,7 @@ class UserController extends Controller
       $pp = $printer->price;
       $zip = $address->zip;
       $availability = $user->available;
+      $emailNotif = $user->email_notifications;
 
       return view('accountprinter', [
         'name' => $name,
@@ -192,7 +193,8 @@ class UserController extends Controller
         'lat' => $lat,
         'lng' => $lng,
         'zip' => $zip,
-        'available' => $availability
+        'available' => $availability,
+        'emailNotif' => $emailNotif,
       ]);
     }
 
@@ -206,9 +208,11 @@ class UserController extends Controller
       }
 
       $name = $user->name;
+      $emailNotif = $user->email_notifications;
 
       return view('accountnonprinter', [
         'name' => $name,
+        'emailNotif' => $emailNotif,
       ]);
     }
 
@@ -258,9 +262,15 @@ class UserController extends Controller
       ];
       $this->validate($request, $rules, $customMessages);
 
-
       $user = User::find(Auth::user()->id);
       $user->name = $request->name;
+
+      if ($request->mailNotif==1) {
+        $user->email_notifications=1;
+      } else {
+        $user->email_notifications=0;
+      }
+
       $user->save();
 
       $useraddressinfo = UserAddressInfo::find($user->address_id);
@@ -306,6 +316,14 @@ class UserController extends Controller
 
       $user = User::find(Auth::user()->id);
       $user->name = $request->name;
+
+      if ($request->mailNotif==1) {
+        $user->email_notifications=1;
+      } else {
+        $user->email_notifications=0;
+      }
+
+
       $user->save();
 
       notify()->success('Profiel geüpdatet', 'Opgeslagen!');

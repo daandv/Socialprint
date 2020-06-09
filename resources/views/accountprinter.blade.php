@@ -55,6 +55,14 @@
     <input id="zip" type="hidden" name="zip" value="{{$zip}}">
 
     <br>
+    <input type="checkbox" name="mailNotif" value="1"
+    @if($emailNotif)
+      checked
+    @endif
+    >
+    <label for="mailNotif">Ontvang e-mail updates</label><br>
+
+    <br>
     <input class="btn btn-primary" type="submit" value="Opslaan">
 
   </form>

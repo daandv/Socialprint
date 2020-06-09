@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewPrintjob;
 use Carbon\Carbon;
 
 use setasign\Fpdi\Fpdi;
@@ -104,7 +106,8 @@ class PrintController extends Controller
         return redirect()->route('home');
       }
 
-      $userThatPrintsName = User::find($userThatPrintsId)->name;
+      $userThatPrints = User::find($userThatPrintsId);
+      $userThatPrintsName = $userThatPrints->name;
       $requesterName = User::find($requesterId)->name;
 
 
@@ -140,24 +143,31 @@ class PrintController extends Controller
           notify()->error('Ongeldige file(s) aanwezig, kan printopdracht niet verwerken.', 'Error');
           return redirect()->route('home');
         } else {
-          // Add new printjob to db
-          $printjob = new Printjob;
-          $printjob->printer_id = Route::current()->parameter('id');
-          $printjob->requester_id = $requesterId;
-          $printjob->status = "Aangevraagd";
-          $printjob->notification_printer = 1;
-          $printjob->save();
+            // Add new printjob to db
+            $printjob = new Printjob;
+            $printjob->printer_id = Route::current()->parameter('id');
+            $printjob->requester_id = $requesterId;
+            $printjob->status = "Aangevraagd";
+            $printjob->notification_printer = 1;
+            $printjob->save();
 
 
-          foreach ($fileList as $file) {
-            $file_ = new SharedFile;
-            $file_->printjob_id = $printjob->id;
-            $file_->file_name = $file['fileName'];
-            $file_->page_count = $file['pageCount'];
-            $file_->save();
+            foreach ($fileList as $file) {
+              $file_ = new SharedFile;
+              $file_->printjob_id = $printjob->id;
+              $file_->file_name = $file['fileName'];
+              $file_->page_count = $file['pageCount'];
+              $file_->save();
+            }
+
+            // Mail to user that prints
+            // Maybe queue
+            if ($userThatPrints->email_notifications) {
+                Mail::to($userThatPrints->email)->send(new NewPrintjob(route('printjobs'), "test"));
+            }
+
           }
 
-          }
           notify()->success('File(s) geupload naar s3 en DB.', 'Joepie!');
           return redirect()->route('home');
         }

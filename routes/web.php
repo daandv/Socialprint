@@ -40,13 +40,15 @@ Route::post('/editaccount/update/nonprinter', 'UserController@updateNonPrinterSt
 
 Route::get('/changetoprinter', 'UserController@changeToPrinter');
 Route::post('/changetoprinterstore', 'UserController@changeToPrinterStore')->name('changetoprinterstore');
+
 Route::get('/profile/{id}', 'ProfileController@index');
+Route::get('/star/{userid}', 'ProfileController@star')->name('user.star');
+Route::get('/unstar/{userid}', 'ProfileController@unstar')->name('user.unstar');
 
 // For error when getting to post method
 // Route::get('/adduserprinter', function () {
 //   return "dit gaat niet";
 // });
-
 
 
 Route::get('/print_at/{id}', 'PrintController@index');
@@ -61,9 +63,6 @@ Route::get('/acceptprintjob/{id}', 'PrintJobController@accept')->name('printjob.
 Route::get('/markdoneprintjob/{id}', 'PrintJobController@markDone')->name('printjob.done');
 
 Route::post('/sendchat/{printjobid}', 'ChatController@send')->name('chat.send');
-
-
-
 
 //SMALL API
 Route::get('/printers', 'Api\PrinterController@index');

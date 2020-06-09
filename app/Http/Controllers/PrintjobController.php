@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PrintJobAccepted;
+use App\Mail\PrintJobReady;
+use App\Mail\PrintJobRejected;
+
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -74,7 +79,6 @@ class PrintJobController extends Controller
                   ->where('read', '0')
                   ->where('printjob_id', $printJob->id)
                   ->count();
-
 
           $fullPrintJobInfo_ = [
             'id' => $printJob->id,
@@ -201,13 +205,20 @@ class PrintJobController extends Controller
       $unreadMessages = ChatMessage::where('to_id', $user->id)
               ->where('printjob_id', $printJobId)
               ->where('read', '0')->get();
-      Session::forget('notificationMessage');
 
       foreach ($unreadMessages as $message) {
         $message_ = ChatMessage::find($message->id);
         $message_->read = 1;
         $message_->save();
       }
+
+      $allUnreadMessages = ChatMessage::where('to_id', $user->id)
+                            ->where('read', '0')->count();
+      if ($allUnreadMessages==0) {
+          Session::forget('notificationMessage');
+      }
+
+
 
       // Check if user has rights to printjob
       // If user has printer
@@ -355,10 +366,27 @@ class PrintJobController extends Controller
     public function reject() {
       $printJobId = Route::current()->parameter('id');
 
+      // Check for valid url
       if (!Printjob::find($printJobId)) {
         notify()->error('Er is een fout opgetreden.', 'Error!');
         return redirect()->route('home');
       }
+
+      // Check for status
+      if (Printjob::find($printJobId)->status=="Geweigerd") {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+      if (Printjob::find($printJobId)->status=="Klaar") {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+      if (Printjob::find($printJobId)->status=="Geaccepteerd") {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+
+
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
@@ -373,6 +401,13 @@ class PrintJobController extends Controller
           $printjob->status = "Geweigerd";
           $printjob->notification_requester=1;
           $printjob->save();
+
+          // Mail to requester
+          $requester = User::find(Printjob::find($printJobId)->requester_id);
+          if ($requester->email_notifications) {
+              Mail::to($requester->email)->send(new PrintJobRejected(route('printjobs')));
+          }
+
           notify()->info('De aanvrager ontvangt een melding dat je niet zal afprinten.', 'Jammer.');
           return redirect()->route('home');
         }
@@ -395,10 +430,27 @@ class PrintJobController extends Controller
     public function accept() {
       $printJobId = Route::current()->parameter('id');
 
+      // Check for valid url
       if (!Printjob::find($printJobId)) {
         notify()->error('Er is een fout opgetreden.', 'Error!');
         return redirect()->route('home');
       }
+
+      // Check for status
+      if (Printjob::find($printJobId)->status=="Geweigerd") {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+      if (Printjob::find($printJobId)->status=="Klaar") {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+      if (Printjob::find($printJobId)->status=="Geaccepteerd") {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+
+
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
@@ -413,6 +465,13 @@ class PrintJobController extends Controller
           $printjob->status = "Geaccepteerd";
           $printjob->notification_requester=1;
           $printjob->save();
+
+          // Mail to requester
+          $requester = User::find(Printjob::find($printJobId)->requester_id);
+          if ($requester->email_notifications) {
+              Mail::to($requester->email)->send(new PrintJobAccepted(route('printjobs')));
+          }
+
           notify()->success('De aanvrager ontvangt een melding dat je zal afprinten.', 'Leuk!');
           return redirect()->route('home');
         }
@@ -435,10 +494,23 @@ class PrintJobController extends Controller
     public function markDone() {
       $printJobId = Route::current()->parameter('id');
 
+      // Check for valid url
       if (!Printjob::find($printJobId)) {
         notify()->error('Er is een fout opgetreden.', 'Error!');
         return redirect()->route('home');
       }
+
+      // Check for status
+      if (Printjob::find($printJobId)->status=="Geweigerd") {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+      if (Printjob::find($printJobId)->status=="Verzonden") {
+        notify()->error('Er is een fout opgetreden.', 'Error!');
+        return redirect()->route('home');
+      }
+
+
       $user = User::find(Auth::user()->id);
       $printer = Printer::where('user_id',$user->id)->first();
 
@@ -453,6 +525,13 @@ class PrintJobController extends Controller
           $printjob->status = "Klaar";
           $printjob->notification_requester=1;
           $printjob->save();
+
+          // Mail to requester
+          $requester = User::find(Printjob::find($printJobId)->requester_id);
+          if ($requester->email_notifications) {
+                Mail::to($requester->email)->send(new PrintJobReady(route('printjobs')));
+          }
+
           notify()->success('De aanvrager ontvangt een melding dat de print klaarligt.', 'Fantastisch!');
           return redirect()->route('home');
         }

@@ -36,7 +36,7 @@ class HomeController extends Controller
         header("Pragma: no-cache");
 
         if (session('verified')) {
-          return view('verified');
+          return view('completedanimation');
         }
 
         // Check if account is completed (not middleware because of mail animation)

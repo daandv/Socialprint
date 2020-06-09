@@ -8,15 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon.jfif') }}">
 
-    <title>
-
-      @if(session('notification'))
-        Nieuwe melding.
-      @else
-            {{ config('app.name', 'Laravel') }}
-      @endif
-
-    </title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/leaflet.css') }}">
@@ -77,6 +69,11 @@
           </li>
       @endguest -->
 
+      <div id="nojs" style="z-index:1000;width:100%;height:100%;position:fixed;background-color:white;text-align:center;">
+         <h1 style="">Voor ons platform heeft u JavaScript nodig.</h1>
+         <img style="width:250px;" src="{{ asset('images/logo_color.png')}}" alt="Logo Socialprint">
+      </div>
+
       <header class="header">
     		<a class="logo" href="#">
           <img src="{{ asset('images/logo_white.png')}}">
@@ -95,6 +92,8 @@
 
 
       <main class="py-4">
+
+
           @yield('content')
       </main>
     </div>

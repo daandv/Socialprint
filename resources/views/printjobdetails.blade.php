@@ -34,6 +34,7 @@
   <b>Ophaal gegevens:</b><br>
   <span>{{$userThatPrintsName}}</span><br>
   <span>{{$userAddressDetails->street_and_number}}</span><br>
+  <a href="https://www.google.com/maps/dir/?api=1&destination={{$userAddressDetails->lat}},{{$userAddressDetails->lng}}">Google Maps Route</a>
 </div>
 
 <br>

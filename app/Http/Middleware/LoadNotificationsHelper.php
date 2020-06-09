@@ -10,6 +10,8 @@ use App\Printjob;
 use App\ChatMessage;
 use App\User;
 
+use Session;
+
 class LoadNotificationsHelper
 {
     /**
@@ -68,7 +70,7 @@ class LoadNotificationsHelper
                 ->count();
         if ($unreadMessages>0) {
           session(['notificationMessage' => 1]);
-        }
+        } 
       }
       return $next($request);
     }
