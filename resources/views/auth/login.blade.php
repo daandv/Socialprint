@@ -2,12 +2,45 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+  test
 
-                <div class="card-body">
+  @if($errors->any())
+      @foreach ($errors->all() as $error)
+         <p>{{ $error }}</p>
+      @endforeach
+  @endif
+<div class="login-page">
+    <div class="form-lr">
+      <p>Login</p>
+      <form class="login-form" method="POST" action="{{ route('login') }}">
+          @csrf
+        <input id="email" type="email" placeholder="E-mail" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
+
+        <input id="password" type="password" placeholder="Wachtwoord" class="@error('password') is-invalid @enderror" name="password" autocomplete="current-password">
+        <button type="submit" class="btn btn-primary">
+            login
+        </button>
+
+        <div class="remember">
+          <input class="checkbox" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+          <label class="label" for="remember">
+              Onthoud mij
+          </label>
+        </div>
+
+        <p class="message">Nog geen account? <a href="#">Registreer</a></p>
+
+
+
+
+
+
+      </form>
+    </div>
+  </div>
+
+
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -66,13 +99,7 @@
                         </div>
                     </form>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
+
+
 </div>
 @endsection
