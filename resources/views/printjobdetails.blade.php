@@ -7,21 +7,25 @@
 @section('content')
 <div class="container">
 
-<p>Files:</p>
+<p>Files: (Worden verwijderd na 30 dagen)</p>
 @foreach ($fileNames as $filename)
   <a href="{{ route('getfile', [$filename->file_name]) }}" download>{{$filename->file_name}}</a>
   <br>
 @endforeach
   <br><br>
 
-@if ($isPrinter)
+@if($isPrinter)
 <div style="border:1px solid black">
   <b>Actions:</b><br>
+  @if($printJobStatus=="Aangevraagd")
   <a href="{{ route('printjob.reject', [$printJobId]) }}">WEIGER</a>
   <br>
   <a href="{{ route('printjob.accept', [$printJobId]) }}">ACCEPTEER</a>
-  <br>
+  @endif
+
+  @if($printJobStatus=="Geaccepteerd")
   <a href="{{ route('printjob.done', [$printJobId]) }}">GEPRINT</a>
+  @endif
 </div>
 <br>
 @endif
@@ -48,13 +52,25 @@
 <h2>Chat met {{$userThatPrintsName}}</h2>
 @endif
 <div class="chatMessages">
+
+<div class="chatWrapper">
+<ul>
   @foreach($messages as $message)
     @if($message["fromId"]==$currentUserId)
-    <p>Jij:{{$message["message"]}} {{$message["date"]}}</p>
+    <li class="me"><span class="chatDate">{{ str_replace(['uur', 'minuten'], ['u', 'min'], \Carbon\Carbon::parse($message["date"])->diffForhumans(null,true)) }}</span> <br> {{$message["message"]}}</li>
     @else
-    <p>{{$message["fromName"]}}:{{$message["message"]}} {{$message["date"]}}</p>
+    <li class="other"><span class="chatDate">{{ str_replace(['uur', 'minuten'], ['u', 'min'], \Carbon\Carbon::parse($message["date"])->diffForhumans(null,true)) }}</span> <br> {{$message["message"]}}</li>
     @endif
   @endforeach
+
+    <div class="sysMessageWrapper">
+      <li class="sysMessage">Systeembericht: nieuwe printopdracht!</li>
+    </div>
+</ul>
+</div>
+
+
+
 </div>
 <br>
 <form class="" action="{{ route('chat.send', [$printJobId])}}" method="post">

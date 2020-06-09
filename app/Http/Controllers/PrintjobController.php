@@ -257,6 +257,7 @@ class PrintJobController extends Controller
             'requesterName' => $requesterName,
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
+            'printJobStatus' => $printJob->status,
           ]);
         }
         // User is requester
@@ -300,6 +301,7 @@ class PrintJobController extends Controller
             'userAddressDetails' => $userAddressDetails,
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
+            'printJobStatus' => $printJob->status,
           ]);
         }
       } else {
@@ -344,6 +346,7 @@ class PrintJobController extends Controller
             'userAddressDetails' => $userAddressDetails,
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
+            'printJobStatus' => $printJob->status,
           ]);
         }
       }
