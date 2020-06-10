@@ -11,4 +11,6 @@
     <a href="{{ route('notaprinter') }}" class="btn btn-primary">Bij iemand afprinten</a>
     <a href="{{ route('addprinter') }}"class="btn btn-primary">Mijn printer beschikbaar stellen</a>
 </div>
+@include('layouts.footer')
+
 @endsection

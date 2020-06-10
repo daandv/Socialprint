@@ -62,8 +62,7 @@
   <a href="https://letsencrypt.org/how-it-works/" target="_blank"><img class="letsEncrypt" src="{{ asset('images/lets-encrypt.png') }}" alt=""></a>
   </div>
 
-
-
-
 </div>
+
+@include('layouts.footer')
 @endsection

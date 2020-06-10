@@ -32,7 +32,6 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 
 
@@ -69,13 +68,20 @@
           </li>
       @endguest -->
 
+
       <div id="nojs" style="z-index:1000;width:100%;height:100%;position:fixed;background-color:white;text-align:center;">
          <h1 style="">Voor ons platform heeft u JavaScript nodig.</h1>
          <img style="width:250px;" src="{{ asset('images/logo_color.png')}}" alt="Logo Socialprint">
       </div>
 
       <header class="header">
-    		<a class="logo" href="#">
+    		<a class="logo" href="
+        @guest
+          {{route('welcome')}}
+        @else
+          {{route('home')}}
+        @endguest
+        ">
           <img src="{{ asset('images/logo_white.png')}}">
         </a>
           <ul id="#main-nav" class="main-nav">
@@ -92,10 +98,10 @@
 
 
       <main class="py-4">
-
-
           @yield('content')
       </main>
+
+
     </div>
 </body>
 </html>

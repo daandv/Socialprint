@@ -81,4 +81,6 @@
 </form>
 
 </div>
+
+  @include('layouts.footer')
 @endsection

@@ -19,4 +19,5 @@
   <p>{{$userThatPrintsAddressInfo}}</p>
 
 </div>
+  @include('layouts.footer')
 @endsection

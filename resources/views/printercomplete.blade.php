@@ -53,6 +53,7 @@
   </form>
 
 </div>
+@include('layouts.footer')
 @include('notify::messages')
 
 @notifyJs

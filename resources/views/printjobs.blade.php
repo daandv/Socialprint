@@ -26,7 +26,7 @@
           @if($printJob['unreadMessages'])
             Nieuw!
           @else
-            
+
           @endif
         </td>
         <td>{{$printJob['date']}}</td>
@@ -65,8 +65,6 @@
       <div class="item">ONE</div>
       <div class="item">TWO</div>
     </div> -->
-
-
-
 </div>
+  @include('layouts.footer')
 @endsection

@@ -27,4 +27,6 @@ $(document).ready(function () {
 
 </div>
 
+@include('layouts.footer')
+
 @endsection

@@ -1,11 +1,17 @@
 // Fonts
-@import 'verifiedLoader';
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arapey:ital@0;1&display=swap');
 
 // Variables
 @import 'variables';
 @import '~tippy.js/dist/tippy.css';
 @import '~tippy.js/animations/scale.css';
 @import '~tippy.js/animations/scale-subtle.css';
+
+// Etc
+@import 'verifiedLoader';
+
 // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
@@ -29,10 +35,10 @@ a {
 
 .container {
   margin: 0 auto;
-  max-width: 1100px;
-  padding: 45px;
-  margin-top: 20px;
+  max-width: 1400px;
+  padding: 80px;
   background-color: rgb(249, 249, 249);
+  min-height: calc(100vh - 98px);
 }
 .row {
   display: grid;
@@ -61,6 +67,105 @@ a {
   margin-bottom: 40px;
   color: rgb(56, 56, 56);
 }
+.vhFirstPage {
+  height: calc(100vh - 98px);
+}
+.button-primary {
+    display: inline-block;
+    padding: 16px 40px;
+    border-radius: 58px;
+    background-color: #2b44ff;
+    color: #fff;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    transition: 0.2s;
+    &:hover {
+      opacity:0.9;
+    }
+}
+
+// FRONTPAGE
+.graphicContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgb(244, 241, 241);
+  img{
+    height: 600px;
+    z-index: 5;
+  }
+  img:first-of-type {
+    margin-left: -90px;
+  }
+  img:last-of-type {
+    margin-right: -120px;
+
+  }
+  .frontPageInfoBlock {
+    margin-top: -40px;
+  }
+  .frontPageTitle {
+    font-size: 85px;
+    display: block;
+    margin: 10px;
+    font-family: 'Merriweather', serif;
+  }
+  .frontPageSubtitle {
+    font-size: 30px;
+    font-family: 'Arapey', serif;
+    display: block;
+    padding-bottom: 40px;
+    .underline {
+      font-family: 'Arapey', serif;
+      text-decoration: none;
+        border-bottom: 1px solid #5C63AB;
+        border-bottom-style:dotted;
+    }
+  }
+  .frontPageInfoBlock {
+    text-align: center;
+  }
+}
+
+.particle-container {
+  border: 1px solid black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+  height: 100%;
+
+}
+.particle {
+	position: absolute;
+ 	border-radius: 50%;
+}
+// PARTICLES
+@for $i from 1 through 30 {
+	@keyframes particle-animation-#{$i} {
+		100% {
+			transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
+		}
+	}
+
+	.particle:nth-child(#{$i}){
+		animation: particle-animation-#{$i} 80s infinite;
+		$size: random(10) + 7 + px;
+		opacity: random(100)/100;
+		height: $size;
+		width: $size;
+		animation-delay: -$i * .2s;
+		transform: translate3d((random(90) * 1vw), (random(90) * 1vh), (random(100) * 1px));
+		background: hsl(random(360), 70%, 50%);
+	}
+}
+
 
 // PRINTJOB PAGE
 .page-item {
@@ -78,7 +183,6 @@ a {
 }
 
 // LOGIN
-
 .lr-page {
   padding: 8% 0 0;
   margin: auto;
@@ -159,7 +263,7 @@ a {
 
 // PRINTJOB DETAILS & CHAT
 .chatMessages {
-  background-color: rgb(247, 247, 247);
+  background-color: white;
   height: 500px;
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
@@ -236,8 +340,6 @@ a {
 }
 
 
-
-
 //FILE UPLOAD
 .letsEncrypt {
   height: 80px;
@@ -283,7 +385,7 @@ a {
 
 // HOME
 #mymap {
-  height: calc(100vh - 117px);
+  height: calc(100vh - 127px);
   z-index: 1;
 }
 
@@ -342,8 +444,6 @@ a {
   margin: 0px !important;
   padding: 40px;
 }
-
-
 
 
 // Navbar
@@ -419,11 +519,29 @@ a {
 }
 
 
+// FOOTER
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: rgb(52, 52, 52);
+  a {
+    color: white;
+    padding: 10px;
+  }
+  .footerLogo {
+    height: 25px;
+    opacity: 0.8;
+  }
+}
+
 /* =================================
   Media Queries
 ==================================== */
 
-
+//LARGE SCREEN
 @media (min-width: 1025px) {
   #mymap{
     height: calc(100vh - 98px);
@@ -477,7 +595,7 @@ a {
   }
 }
 
-
+//SMALL SCREEN
 @media (max-width: 1025px) {
   .algoliabox {
     width: calc(100% - 40px);
@@ -490,6 +608,7 @@ a {
   }
   .container {
     padding: 15px;
+    min-height: calc(100vh - 127px);
   }
   .rowFilesAndPrinter {
     display: block;
@@ -498,8 +617,21 @@ a {
 
       .block {
               width: 100%;
-
       }
+    }
+  }
+  .vhFirstPage {
+    height: calc(100vh - 127px);
+  }
+  .graphicContainer {
+    img {
+      display: none;
+    }
+  }
+  .frontPageInfoBlock {
+    width: 100%;
+    .frontPageTitle {
+      font-size: 40px;
     }
   }
 }

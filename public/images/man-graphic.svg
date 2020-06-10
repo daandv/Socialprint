@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="380"
+   height="480"
+   viewBox="0 0 380 480"
+   version="1.1"
+   id="svg29"
+   sodipodi:docname="humaaans-standing-24 – 2.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata33">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview31"
+     showgrid="false"
+     showguides="false"
+     inkscape:zoom="1.3906433"
+     inkscape:cx="218.81118"
+     inkscape:cy="190.41401"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="humaaans_standing-24_2" />
+  <defs
+     id="defs5">
+    <clipPath
+       id="clip-humaaans_standing-24_2">
+      <rect
+         width="380"
+         height="480"
+         id="rect2" />
+    </clipPath>
+  </defs>
+  <g
+     id="humaaans_standing-24_2"
+     data-name="humaaans/standing-24 – 2"
+     clip-path="url(#clip-humaaans_standing-24_2)">
+    <g
+       id="humaaan-11"
+       transform="matrix(-1,0,0,1,327.11714,10)">
+      <g
+         id="Head_Front_Short_1"
+         data-name="Head/Front/Short 1"
+         transform="matrix(0.966,-0.259,0.259,0.966,45.684,35.398)">
+        <g
+           id="Head"
+           transform="translate(54,31)">
+          <path
+             id="Head-2"
+             data-name="Head"
+             d="M 0,73 8.262,34.49 C 3.655,29.081 0.536,22.452 1.057,15.026 c 1.5,-21.4 31.292,-16.692 37.086,-5.891 5.794,10.801 5.107,38.2 -2.382,40.129 -2.987,0.77 -9.349,-1.116 -15.825,-5.019 L 24,73 Z"
+             inkscape:connector-curvature="0"
+             style="fill:#b28b67" />
+        </g>
+        <path
+           id="Hair"
+           d="M 8.191,40.047 C 4.212,37.66 1.182,32.83 0.283,27.445 a 20.834,20.834 0 0 1 0.468,-8.973 23.034,23.034 0 0 1 2.191,-5.28 C 6.618,-1.938 21.828,-0.579 33.209,0.78 c 5.542,0.662 10.177,1.325 12.129,0.083 1.3,8.165 -2.9,14.749 -17.675,13.473 -3.213,1.8 -5.531,5.177 -8.358,9.714 a 6,6 0 0 0 -6.386,9.878 C 11.378,36.1 9.833,38.1 8.193,40.046 v 0 z"
+           transform="translate(53.889,27.364)"
+           inkscape:connector-curvature="0"
+           style="fill:#191847" />
+      </g>
+      <g
+         id="Bottom_Standing_Sprint"
+         data-name="Bottom/Standing/Sprint"
+         transform="translate(25,182.899)">
+        <path
+           id="Leg"
+           d="M 104.05,0 C 84.926,15.593 92.2,152.3 90.925,154.024 90.074,155.171 0,173.551 0,173.551 l 2.592,10.581 c 0,0 105.363,-5.229 111.5,-13.05 8.792,-11.2 21.733,-125.242 21.733,-125.242 z"
+           transform="matrix(0.574,-0.819,0.819,0.574,31.963,113.02)"
+           inkscape:connector-curvature="0"
+           style="fill:#b28b67" />
+        <path
+           id="Pant"
+           d="m 0,169.4 4.565,17.041 c 52.36,6.012 86.878,-1.43 99.027,-12.987 12.149,-11.557 21.789,-124.9 21.789,-124.9 L 91.386,0 C 45.861,34.346 73,146.78 71.834,149.353 70.668,151.926 43.057,153.96 0,169.4 Z"
+           transform="matrix(0.574,-0.819,0.819,0.574,38.038,102.707)"
+           inkscape:connector-curvature="0"
+           style="fill:#2f3676" />
+        <g
+           id="Right_Show"
+           data-name="Right Show"
+           transform="rotate(20,-438.69634,593.5926)">
+          <path
+             id="shoe"
+             d="M 4.474,5.033 A 2,2 0 0 0 1.908,6.381 L 0,13.106 A 64.242,64.242 0 0 0 0.9,21 h 56.4 c 0,0 2.2,-7.268 -2.538,-7.848 -4.738,-0.58 -7.87,-1.047 -7.87,-1.047 L 20.68,0.419 a 1,1 0 0 0 -1.332,0.532 l -1.685,4.088 c 0,0 -4.385,2.046 -7.127,2.046 z"
+             transform="translate(1,19)"
+             inkscape:connector-curvature="0"
+             style="fill:#653f1e" />
+        </g>
+        <path
+           id="Leg-2"
+           data-name="Leg"
+           d="M 102.6,0 50.858,124.227 0,229.25 H 12 L 143.278,0 Z"
+           transform="translate(2.396,27.787)"
+           inkscape:connector-curvature="0"
+           style="fill:#997659" />
+        <g
+           id="Left_Shot"
+           data-name="Left Shot"
+           transform="translate(0,246.119)">
+          <path
+             id="shoe-2"
+             data-name="shoe"
+             d="M 4.474,5.033 A 2,2 0 0 0 1.908,6.381 L 0,13.106 A 64.242,64.242 0 0 0 0.9,21 h 56.4 c 0,0 2.2,-7.268 -2.538,-7.848 -4.738,-0.58 -7.87,-1.047 -7.87,-1.047 L 20.68,0.419 a 1,1 0 0 0 -1.332,0.532 l -1.685,4.088 c 0,0 -4.385,2.046 -7.127,2.046 z"
+             transform="translate(0,-0.332)"
+             inkscape:connector-curvature="0"
+             style="fill:#653f1e" />
+        </g>
+        <path
+           id="Pant-2"
+           data-name="Pant"
+           d="m 0,207.433 26.662,5 C 47.277,182.125 133.552,57.852 143.011,0 H 83.656 C 52.066,41.821 19.65,176.624 0,207.433 Z"
+           transform="translate(6.989,27.787)"
+           inkscape:connector-curvature="0"
+           style="fill:#5c63ab" />
+      </g>
+      <g
+         id="Body_Lab_Coat"
+         data-name="Body/Lab Coat"
+         transform="matrix(0.985,-0.174,0.174,0.985,6.973,124.99)">
+        <path
+           id="Skin"
+           d="m 32.044,84.424 c -1.486,-2.226 -3.151,-4.451 -7.8,-3.033 -8.29,2.526 -15.126,8.25 -23.331,1.443 C -0.1,82 -0.946,79.261 2.26,77.667 10.248,73.695 21.977,66.426 23.8,63.748 27.53,58.269 49.1,0 49.1,0 l 17.715,2.572 c 0,0 -28.515,61.874 -30.577,65.446 -3.09,5.357 0.544,14.687 1.964,19.626 a 6,6 0 0 1 -1.661,0.26 C 34.256,87.9 33.2,86.164 32.044,84.424 Z m 176.1,-41.184 -30.6,-15.269 8.25,-16.9 30.186,25.592 a 85.865,85.865 0 0 1 21.024,10.2 c 1.281,1.343 2.757,3.983 -2.885,3.149 -5.642,-0.834 -11.614,-1.455 -12.532,0.425 -0.918,1.88 2.353,4.434 0.588,6.935 a 0.74,0.74 0 0 1 -0.64,0.326 q -2.726,0.008 -13.393,-14.457 z"
+           transform="translate(4.564,77.536)"
+           inkscape:connector-curvature="0"
+           style="fill:#b28b67" />
+        <path
+           id="Coat_Back"
+           data-name="Coat Back"
+           d="M 0,4.572 10.617,0 c 18.072,35.751 43.327,69.663 82.931,96.708 l -7.759,16.566 C 51.637,96.983 19.591,84.811 4.6,57.194 -0.426,47.925 0.666,16.123 0,4.572 Z"
+           transform="matrix(0.996,0.087,-0.087,0.996,128.093,0.777)"
+           inkscape:connector-curvature="0"
+           style="fill:#c5cfd6" />
+        <path
+           id="Shirt"
+           d="m 0,108.3 c 0,0 47.157,5 74.236,0 2.237,-0.413 2.589,-4.158 1.552,-6.7 C 59.636,62.022 48.56,27.489 48.56,0 44.115,2.241 33,0.672 33,0.672 13.086,29 3.933,61.5 0,108.3 Z"
+           transform="translate(90,1.703)"
+           inkscape:connector-curvature="0"
+           style="fill:#323337" />
+        <path
+           id="Coat_Front"
+           data-name="Coat Front"
+           d="M 22.593,216.124 C 24.741,171.24 41.293,117.566 58.432,71.99 45.782,84.575 31.01,105.671 19.07,140.79 L 0,135.9 C 19.433,52.158 76.368,8.971 87.417,1.263 L 87.739,0.519 H 88.5 c 0.514,-0.346 0.785,-0.518 0.785,-0.518 l -0.029,0.518 h 8.3 c 1.932,11.365 8.027,165.262 26.842,215.606 z"
+           transform="translate(28.793,-0.519)"
+           inkscape:connector-curvature="0"
+           style="fill:#dde3e9" />
+      </g>
+    </g>
+  </g>
+</svg>
