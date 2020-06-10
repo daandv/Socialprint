@@ -3,21 +3,18 @@
 @section('content')
 <div class="container">
   <div class="centered">
-    <h1 class="bigTitle">Wachtwoord resetten</h1>
+    @if (session('status'))
+        <div class="success" role="alert">
+            {{ session('status') }}
+        </div>
+    @endif
 
-      @if (session('status'))
-          <div class="status" role="alert">
-              {{ session('status') }}
-          </div>
-      @endif
-
-      <div class="errors">
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
-      </div>
-
-
+    <div class="errors">
+      @foreach ($errors->all() as $error)
+          <p>{{ $error }}</p>
+      @endforeach
+    </div>
+    <h1 class="bigTitle">Wachtwoord herstellen</h1>
       <form method="POST" action="{{ route('password.email') }}" novalidate>
           @csrf
 

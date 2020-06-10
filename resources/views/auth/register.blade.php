@@ -28,8 +28,8 @@
 
           <input id="password" type="password" placeholder="Wachtwoord" class="@error('password') is-invalid @enderror" name="password">
           <input id="password-confirm" type="password" placeholder="Bevestig wachtwoord" class="form-control" name="password_confirmation" required autocomplete="new-password">
-          <button type="submit">
-              login
+          <button type="submit" class="button-primary">
+              Registreer
           </button>
 
 

@@ -268,8 +268,8 @@ class PrintJobController extends Controller
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
             'printJobStatus' => $printJob->status,
-            'printerColorId' => $printerColorId,
-            'printerFormatId' => $printerFormatId,
+            'printerColorId' => $printJob->color_id,
+            'printerFormatId' => $printJob->format_id,
           ]);
         }
         // User is requester
@@ -315,8 +315,8 @@ class PrintJobController extends Controller
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
             'printJobStatus' => $printJob->status,
-            'printerColorId' => $printerColorId,
-            'printerFormatId' => $printerFormatId,
+            'printerColorId' => $printJob->color_id,
+            'printerFormatId' => $printJob->format_id,
           ]);
         }
       } else {
@@ -363,8 +363,8 @@ class PrintJobController extends Controller
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
             'printJobStatus' => $printJob->status,
-            'printerColorId' => $printerColorId,
-            'printerFormatId' => $printerFormatId,
+            'printerColorId' => $printJob->color_id,
+            'printerFormatId' => $printJob->format_id,
           ]);
         }
       }

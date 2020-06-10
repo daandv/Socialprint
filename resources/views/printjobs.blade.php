@@ -61,7 +61,8 @@
     {{ $fullPrintJobInfo->links() }}
 
     @else
-    <p class="InfoText">Het is nog leeg hier...</p>
+    <p class="InfoText">Het is nog leeg hier...</p><br>
+    <a class="button-primary" href="{{route('home')}}">Bekijk kaart</a>
     @endif
 <!--
     <div class="row">

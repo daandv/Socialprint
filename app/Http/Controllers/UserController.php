@@ -251,12 +251,16 @@ class UserController extends Controller
 
     public function updatePrinterStore(Request $request) {
       $rules = [
+        'name' => 'required|max:25|min:3',
         'address' => 'required',
         'lat' => 'required',
         'lng' => 'required',
         'pp' => ['required', new ValidPricePerPage]
       ];
       $customMessages = [
+        'name.required' => 'Geef een geldige naam.',
+        'name.max' => 'Naam te lang.',
+        'name.min' => 'Naam te kort.',
         'address.required' => 'Geef een geldig adres.',
         'pp.required' => 'Geef je prijs per pagina.',
         'lat.required' => 'Geef een geldig adres.',
@@ -302,17 +306,18 @@ class UserController extends Controller
 
       $printer->save();
 
-      notify()->success('Profiel geüpdatet', 'Opgeslagen!');
+      notify()->success('Profiel geüpdatet {{<a href="#">hallo</a>}}', 'Opgeslagen!');
       return redirect()->route('home');
     }
 
     public function updateNonPrinterStore(Request $request) {
       $rules = [
-        'name' => 'required|max:50',
+        'name' => 'required|max:25|min:3',
       ];
       $customMessages = [
         'required' => 'Deze naam is niet geldig.',
-        'max' => 'Naam maximum 50 tekens.'
+        'name.max' => 'Naam te lang.',
+        'name.min' => 'Naam te kort.',
       ];
       $this->validate($request, $rules, $customMessages);
 

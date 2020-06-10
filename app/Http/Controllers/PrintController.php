@@ -147,7 +147,9 @@ class PrintController extends Controller
             $printjob->printer_id = Route::current()->parameter('id');
             $printjob->requester_id = $requesterId;
             $printjob->status = "Aangevraagd";
-            $printjob->price = $pageCounter * Printer::where('user_id', $userThatPrints->id)->first()->price;
+            $printjob->price = $pageCounter * $printer->price;
+            $printjob->format_id = $printer->format_id;
+            $printjob->color_id = $printer->color_id;
             $printjob->notification_printer = 1;
             $printjob->save();
 

@@ -10,16 +10,15 @@
 <div class="container">
 
   @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->unique() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
+      <div class="errors">
+          @foreach ($errors->unique() as $error)
+              <p>{{ $error }}</p>
+          @endforeach
       </div>
   @endif
 
   <h3>Nog enkele vraagjes</h3>
+
   <form action="adduserprinter" method="POST">
     @csrf
 

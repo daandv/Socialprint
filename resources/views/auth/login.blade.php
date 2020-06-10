@@ -21,9 +21,10 @@
         <input id="email" type="email" placeholder="E-mail" name="email" value="{{ old('email') }}" autofocus>
 
         <input id="password" type="password" placeholder="Wachtwoord" name="password">
-        <button type="submit">
+        <button type="submit" class="button-primary">
             login
         </button>
+
 
         <div class="remember">
           <input class="checkbox" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>

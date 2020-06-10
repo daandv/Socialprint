@@ -16,10 +16,9 @@ class NewPrintJob extends Mailable
      *
      * @return void
      */
-    public function __construct($url, $name)
+    public function __construct($url)
     {
         $this->url = $url;
-        $this->name = $name;
     }
 
     /**
@@ -31,9 +30,6 @@ class NewPrintJob extends Mailable
     {
         return $this->markdown('emails.printjob')
                       ->subject('Nieuwe printopdracht')
-                      ->with([
-                        'url' => $this->url,
-                        'name' => $this->name,
-                      ]);
+                      ->with('url', $this->url);
     }
 }

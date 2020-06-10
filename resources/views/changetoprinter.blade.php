@@ -8,12 +8,10 @@
 <div class="container">
   <div class="centered">
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        <div class="errors">
+            @foreach ($errors->unique() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
         </div>
     @endif
 
@@ -21,7 +19,8 @@
     <form action="changetoprinterstore" method="POST">
       @csrf
       <span class="accountSubtitle">Adres:</span><br>
-      <div class="algoliaboxProfile">    <label for="address">Straat + nr:</label><br><br>
+      <label for="address">Straat + nr:</label><br><br>
+      <div class="algoliaboxProfile">
           <input class="algoliabox" type="text" id="address" name="address">
       </div><br>
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="centered">
-    <h1 class="bigTitle">Wachtwoord resetten</h1>
+    <h1 class="bigTitle">Wachtwoord herstellen</h1>
 
     @if (session('status'))
         <div class="status" role="alert">

@@ -1,5 +1,5 @@
 @component('mail::message')
-# Hoi {{$name}} Nieuwe printopdracht
+# Nieuwe printopdracht
 
 Iemand wil iets bij je afprinten!
 

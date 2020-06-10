@@ -16,9 +16,14 @@
       @csrf
   </form>
   <div class="centered">
+    @if ($errors->any())
+        <div class="errors">
+            @foreach ($errors->unique() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
     <h1 class="bigTitle">Mijn account</h1>
-
-
   <br><br>
   <form action="{{ route('update.storeprinter') }}" method="POST">
     @csrf
@@ -27,7 +32,8 @@
     <input type="text" id="name" class="accountInputStyled" name="name" value="{{$name}}"><br><br>
 
     <span class="accountSubtitle">Adres:</span><br>
-    <div class="algoliaboxProfile">    <label for="address">Straat + nr:</label><br><br>
+    <label for="address">Straat + nr:</label><br><br>
+    <div class="algoliaboxProfile">
         <input class="algoliabox" type="text" id="address" name="address" value="{{$address}}">
     </div>
     <br>

@@ -46,10 +46,8 @@
           @else
               <a class="button-primary" href="{{route('home')}}">Bekijk kaart</a>
           @endguest
-
-
-
-
+              <a class="infoMini" href="#">Info testers - jury</a>
+              
       </div>
       <img src="{{asset('images/man-graphic.svg')}}" alt="">
     </div>

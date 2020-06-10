@@ -18,6 +18,13 @@
   </form>
 
   <div class="centered">
+    @if ($errors->any())
+        <div class="errors">
+            @foreach ($errors->unique() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
     <h1 class="bigTitle">Mijn account</h1>
 
   <form action="{{ route('update.storenonprinter') }}" method="POST">

@@ -23,6 +23,14 @@
   </div>
 
   <div class="printJobDetailsRow">
+
+    @if($printJobStatus=="Klaar")
+    <div class="printjobDone">
+      <img src="{{ asset('images/checkmark.svg') }}" alt=""><br>
+      Bestanden afgedrukt!<br>
+      Overleg de verdere <br> afhandeling met elkaar.
+    </div>
+    @endif
     <div class="detailsForPrinter">
       <p class="accountSubtitle">Opdracht details:</p>
       <div class="printerTags">
@@ -30,7 +38,7 @@
         <span>kleur</span>
         @endif
         @if($printerColorId==2)
-        <span>zw</span>
+        <span>z/w</span>
         @endif
 
         @if($printerFormatId==1)
@@ -81,6 +89,13 @@
     >[{{$printJobStatus}}]</h1>
   </div>
   <div class="printJobDetailsRow">
+    @if($printJobStatus=="Klaar")
+      <div class="printjobDone">
+        <img src="{{ asset('images/checkmark.svg') }}" alt=""><br>
+        Bestanden afgedrukt!<br>
+        Overleg de verdere <br> afhandeling met elkaar.
+      </div>
+    @endif
     <div class="detailsForPrinter">
       <p class="accountSubtitle">Opdracht details:</p>
 
@@ -153,8 +168,11 @@
   <br>
   <form class="" action="{{ route('chat.send', [$printJobId])}}" method="post">
     @csrf
-  <input type="text" name="message" value="">
-  <input type="submit" name="" value="Verstuur">
+    <div class="centered">
+      <input class="sendInput" type="text" name="message" placeholder="Typ je bericht hier">
+      <input class="button-primary" type="submit" value="Verstuur">
+    </div>
+
   </form>
 
 </div>
