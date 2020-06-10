@@ -7,33 +7,39 @@
 
 @section('content')
 <div class="container">
+  <a class="logoutBtn" href="{{ route('logout') }}"
+     onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+      Log uit
+  </a>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+      @csrf
+  </form>
+  <div class="centered">
+    <h1 class="bigTitle">Mijn account</h1>
 
-  <div class="centeredDiv">
-    <h1 class="biGTitle">Mijn account</h1>
-  </div>
 
-
-  @if($available)
-    <a href="./notavailable">Ik wil niet meer printen</a>
-  @else
-    <a href="./setavailable">Ik wil weer printen</a>
-  @endif
-
+  <br><br>
   <form action="{{ route('update.storeprinter') }}" method="POST">
     @csrf
-    <label for="name">Naam</label>
-    <input type="text" id="name" class="form-control" name="name" value="{{$name}}">
+    <span class="accountSubtitle">Profiel:</span><br>
+    <label for="name">Naam:</label><br><br>
+    <input type="text" id="name" class="accountInputStyled" name="name" value="{{$name}}"><br><br>
 
-    <label for="address">Straat + nr</label>
-    <input class="algoliabox" type="text" id="address" class="form-control" name="address" value="{{$address}}">
-
-    <label for="city">Gemeente</label>
-    <input type="text" id="city" class="form-control" name="city" value="{{$city}}" readonly>
-
-    <br>
-    <div id="minimap"></div>
+    <span class="accountSubtitle">Adres:</span><br>
+    <div class="algoliaboxProfile">    <label for="address">Straat + nr:</label><br><br>
+        <input class="algoliabox" type="text" id="address" name="address" value="{{$address}}">
+    </div>
     <br>
 
+    <label for="city">Gemeente:</label><br><br>
+    <input type="text" id="city" class="accountInputStyled" name="city" value="{{$city}}" readonly><br>
+
+    <br>
+    <label for="">Exacte locatie op de kaart:</label><br><br>
+    <div id="minimap" class="accountmap"></div>
+    <br>
+    <span class="accountSubtitle">Mijn printer:</span><br>
     <label><input type="radio" name="printColor" id="color" value="color"
       @if($colorId===1)
       checked
@@ -45,37 +51,37 @@
       @endif
       >Zwart-wit</label>
 
-    <br>
+    <br><br>
 
-    <label for="pp">Prijs per pagina</label>
-    <input id="pp" class="form-control" type="text" name="pp" value="{{$pp}}">
+    <label for="pp">Prijs per pagina</label><br><br>
+    <input id="pp" class="accountInputStyled accountInputPp" type="text" name="pp" value="{{$pp}}">
 
     <input id="lat" type="hidden" name="lat" value="{{$lat}}">
     <input id="lng" type="hidden" name="lng" value="{{$lng}}">
     <input id="zip" type="hidden" name="zip" value="{{$zip}}">
 
-    <br>
+    <br><br>
+    <span class="accountSubtitle">Privacy:</span><br>
     <input type="checkbox" name="mailNotif" value="1"
     @if($emailNotif)
       checked
     @endif
     >
     <label for="mailNotif">Ontvang e-mail updates</label><br>
-
     <br>
-    <input class="btn btn-primary" type="submit" value="Opslaan">
+    @if($available)
+      <a class="availableBtn" href="./notavailable">Ik wil niet meer printen</a>
+    @else
+      <a class="availableBtn" href="./setavailable">Ik wil weer printen</a>
+    @endif
+    <br><br><br>
+    <input class="button-primary" type="submit" value="Opslaan">
 
   </form>
 
-  <a class="" href="{{ route('logout') }}"
-     onclick="event.preventDefault();
-                   document.getElementById('logout-form').submit();">
-      {{ __('Logout') }}
-  </a>
-  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-      @csrf
-  </form>
 
+
+  </div>
 </div>
 
 @include('layouts.footer')

@@ -229,7 +229,8 @@ class UserController extends Controller
 
       $user->available=0;
       $user->save();
-      return redirect()->route('editaccount');
+      notify()->success('Je bent nu niet meer zichtbaar op de kaart. Je kan dit terug aanzetten in uw profiel.', 'In orde!');
+      return redirect()->route('home');
     }
 
     public function addAvailability() {
@@ -244,7 +245,8 @@ class UserController extends Controller
 
       $user->available=1;
       $user->save();
-      return redirect()->route('editaccount');
+      notify()->success('Je bent weer zichtbaar op de kaart en beschikbaar om te printen.', 'Fantastisch!');
+      return redirect()->route('home');
     }
 
     public function updatePrinterStore(Request $request) {

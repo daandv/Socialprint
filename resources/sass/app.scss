@@ -34,9 +34,10 @@ a {
 }
 
 .container {
+  position: relative;
   margin: 0 auto;
   max-width: 1400px;
-  padding: 80px;
+  padding: 70px;
   background-color: rgb(249, 249, 249);
   min-height: calc(100vh - 98px);
 }
@@ -61,10 +62,9 @@ a {
   text-align: center;
 }
 .bigTitle {
-  font-size: 35px;
+  font-size: 55px;
   font-weight: 500;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   color: rgb(56, 56, 56);
 }
 .vhFirstPage {
@@ -81,9 +81,15 @@ a {
     font-weight: 700;
     letter-spacing: 0.8px;
     transition: 0.2s;
+    cursor: pointer;
+    outline: none;
+    border: none;
     &:hover {
       opacity:0.9;
     }
+}
+.marginafterMedium {
+  margin-bottom: 20px !important;
 }
 
 // FRONTPAGE
@@ -518,6 +524,45 @@ a {
   color: #FF0066;
 }
 
+// ACCOUNT
+.algoliaboxProfile {
+  width: 300px;
+  margin: 0 auto;
+}
+.accountInputStyled {
+  border: 1px solid #CCC;
+  border-radius: 3px;
+  height: 40px;
+  padding-left: 16px;
+  font-size: 16px;
+  width: 300px;
+  outline: none;
+}
+.accountSubtitle {
+  color: #FF0066;
+  display: block;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.accountmap {
+  width: 600px;
+  margin: 0 auto;
+}
+.logoutBtn {
+  position: absolute;
+  right: 60px;
+  color: grey;
+  text-decoration: underline;
+}
+.accountInputPp {
+  width: 50px;
+  padding: 0px;
+  text-align: center;
+}
+.availableBtn {
+  color: grey;
+  text-decoration: underline;
+}
 
 // FOOTER
 footer {
@@ -597,13 +642,13 @@ footer {
 
 //SMALL SCREEN
 @media (max-width: 1025px) {
-  .algoliabox {
+  .algoliaboxmap {
     width: calc(100% - 40px);
     right: 20px;
   }
   .bigTitle {
-    margin-top: 10px;
-    margin-bottom: 15px;
+    margin-top: 40px;
+    margin-bottom: 20px;
     font-size: 25px;
   }
   .container {
@@ -616,7 +661,7 @@ footer {
       margin-top: 30px;
 
       .block {
-              width: 100%;
+          width: 100%;
       }
     }
   }
@@ -633,5 +678,11 @@ footer {
     .frontPageTitle {
       font-size: 40px;
     }
+  }
+  .accountmap {
+    width: 100%;
+  }
+  .logoutBtn {
+    right: 20px;
   }
 }
