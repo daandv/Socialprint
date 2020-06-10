@@ -42332,8 +42332,7 @@ __webpack_require__(/*! ./leaflet.markercluster.js */ "./resources/js/leaflet.ma
 
  // TIPPY
 
-Object(tippy_js__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-tippy-content]');
-document.getElementById('nojs').parentElement.removeChild(document.getElementById('nojs')); // NAVBAR
+Object(tippy_js__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-tippy-content]'); // NAVBAR
 
 $('.main-nav').click(function (e) {
   $(this).find("a").addClass("lighter");

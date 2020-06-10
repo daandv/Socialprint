@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Meta / SEO -->
+    <meta name="description" content="Socialprint is een printer deelplatform voor studenten. Andere printers kunnen worden gevonden en de eigen printer kan beschikbaar worden gesteld.">
+    <meta name="keywords" content="printer delen, printshop, drukkerij, thesis afdrukken, online printen, online documenten printen, eindwerk afdrukken, printer delen met studenten"/>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon.jfif') }}">
@@ -67,12 +70,6 @@
               </div>
           </li>
       @endguest -->
-
-
-      <div id="nojs" style="z-index:1000;width:100%;height:100%;position:fixed;background-color:white;text-align:center;">
-         <h1 style="">Voor ons platform heeft u JavaScript nodig.</h1>
-         <img style="width:250px;" src="{{ asset('images/logo_color.png')}}" alt="Logo Socialprint">
-      </div>
 
       <header class="header">
     		<a class="logo" href="

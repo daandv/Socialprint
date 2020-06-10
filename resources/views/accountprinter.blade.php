@@ -24,7 +24,7 @@
         </div>
     @endif
     <h1 class="bigTitle">Mijn account</h1>
-  <br><br>
+
   <form action="{{ route('update.storeprinter') }}" method="POST">
     @csrf
     <span class="accountSubtitle">Profiel:</span><br>

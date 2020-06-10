@@ -230,7 +230,7 @@ a {
   padding-top: 20px;
   text-align: center;
   border-radius: 40px;
-  box-shadow: 4px 2px 10px rgba(68, 68, 68, 0.1);
+  box-shadow: 2px 2px 10px rgba(68, 68, 68, 0.1);
   .errors {
     font-size: 14px;
     color:#FF0066;
@@ -301,7 +301,7 @@ a {
 // PRINTJOB DETAILS & CHAT
 .chatMessages {
   background-color: white;
-  box-shadow: 4px 2px 10px rgba(68, 68, 68, 0.1);
+  box-shadow: 2px 2px 10px rgba(68, 68, 68, 0.1);
   height: 500px;
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
@@ -404,7 +404,7 @@ a {
   padding: 40px;
   background-color: white;
   border-radius: 30px;
-  box-shadow: 4px 2px 10px rgba(68, 68, 68, 0.1);
+  box-shadow: 2px 2px 10px rgba(68, 68, 68, 0.1);
 
 
   a {
@@ -417,13 +417,13 @@ a {
 }
 .detailsForPrinter {
   padding: 40px;
-  box-shadow: 4px 2px 10px rgba(68, 68, 68, 0.1);
+  box-shadow: 2px 2px 10px rgba(68, 68, 68, 0.1);
   border-radius: 30px;
     background-color: white;
 }
 .actionsForPrinter {
   padding: 40px;
-  box-shadow: 4px 2px 10px rgba(68, 68, 68, 0.1);
+  box-shadow: 2px 2px 10px rgba(68, 68, 68, 0.1);
   border-radius: 30px;
   background-color: white;
   a {
@@ -437,7 +437,7 @@ a {
 }
 .printjobDone {
   padding: 40px;
-  box-shadow: 4px 2px 10px rgba(68, 68, 68, 0.1);
+  box-shadow: 2px 2px 10px rgba(68, 68, 68, 0.1);
   border-radius: 30px;
   background-color: white;
   text-align: center;
@@ -456,7 +456,7 @@ a {
 
 //FILE UPLOAD
 .letsEncrypt {
-  height: 80px;
+  height: 60px;
 }
 .rowFilesAndPrinter {
   display: flex;
@@ -466,6 +466,7 @@ a {
     text-align: center;
     .block {
       background: white;
+      box-shadow: 2px 2px 10px rgba(68, 68, 68, 0.1);
       border-radius: 40px;
       padding: 20px;
       height: 150px;
@@ -493,6 +494,14 @@ a {
     border: 0px solid transparent;
     text-shadow: 0px 0px 0px transparent;
   }
+}
+.fileUploadPrice {
+  font-size: 35px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+.fileUploadCalculations {
+  font-size: 25px;
 }
 
 
@@ -551,6 +560,7 @@ a {
     height: 0px;
   }
 .leaflet-popup-content-wrapper {
+  text-align: center;
   width: 250px;
   border-radius: 50px;
   box-shadow: 0 0 20px rgba(0,0,0,0.2) !important;

@@ -40,6 +40,17 @@
     </div>
   </div>
 
+
+  <div class="centered">
+    <p id="calculations" class="fileUploadCalculations"></p>
+    <p id="priceTotal" class="fileUploadPrice gold"></p>
+
+     <button id="verzendbtn" type="submit" class="button-primary">Verstuur printopdracht</button><br><br>
+     <a href="https://letsencrypt.org/how-it-works/" target="_blank"><img class="letsEncrypt" src="{{ asset('images/lets-encrypt.png') }}" alt=""></a>
+  </div>
+
+
+
   <span>Ik ga de opdracht verwerken: </span>{{$userThatPrintsName}}
   <br>
   <span>Ik ben de aanvrager: </span>{{$requesterName}}
@@ -48,18 +59,15 @@
 
 
 
-     <input id="pp" type="hidden" name="pp" value="{{$pp}}">
-     <button id="verzendbtn" type="submit" class="btn btn-primary" disabled="disabled">Verstuur printopdracht</button>
+   <input id="pp" type="hidden" name="pp" value="{{$pp}}">
+
   </form>
   <br><br>
-  <div class="centered">
-    <p id="calculations"></p>
-    <p id="priceTotal"></p>
-  </div>
+
 
   <div class="centered">
 
-  <a href="https://letsencrypt.org/how-it-works/" target="_blank"><img class="letsEncrypt" src="{{ asset('images/lets-encrypt.png') }}" alt=""></a>
+
   </div>
 
 </div>
