@@ -88,7 +88,6 @@ class PrintJobController extends Controller
             'requesterName' => $requesterName,
             'date' => $printJob->created_at->toDateString(),
             'printer' => $printer,
-            'price' => $printerPrice,
             'status' => $printJob->status,
             'unreadMessages' => $unreadMessages,
           ];
@@ -158,7 +157,6 @@ class PrintJobController extends Controller
             'requesterName' => $requesterName,
             'date' => $printJob->created_at->toDateString(),
             'printer' => $printer,
-            'price' => $printerPrice,
             'status' => $printJob->status,
             'unreadMessages' => $unreadMessages,
           ];
@@ -230,6 +228,8 @@ class PrintJobController extends Controller
           $printJob = Printjob::find($printJobId);
 
           $printer = Printer::find($printJob->printer_id);
+          $printerFormatId = $printer->format_id;
+          $printerColorId = $printer->color_id;
           $userThatPrints = User::find($printer->user_id);
           $userThatPrintsName = $userThatPrints->name;
           $userAddressDetails = UserAddressInfo::find($userThatPrints->address_id);
@@ -261,14 +261,15 @@ class PrintJobController extends Controller
             'fileNames'=>$files,
             'printJobId'=>$printJobId,
             'totalPages' => $totalPages,
-            'pricePp' => $pricePp,
-            'totalPrice' => $totalPrice,
+            'price' => $printJob->price,
             'userThatPrintsName' => $userThatPrintsName,
             'userAddressDetails' => $userAddressDetails,
             'requesterName' => $requesterName,
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
             'printJobStatus' => $printJob->status,
+            'printerColorId' => $printerColorId,
+            'printerFormatId' => $printerFormatId,
           ]);
         }
         // User is requester
@@ -277,6 +278,8 @@ class PrintJobController extends Controller
           $printJob = Printjob::find($printJobId);
 
           $printer = Printer::find($printJob->printer_id);
+          $printerFormatId = $printer->format_id;
+          $printerColorId = $printer->color_id;
           $userThatPrints = User::find($printer->user_id);
           $userThatPrintsName = $userThatPrints->name;
           $userAddressDetails = UserAddressInfo::find($userThatPrints->address_id);
@@ -306,13 +309,14 @@ class PrintJobController extends Controller
             'fileNames'=>$files,
             'printJobId'=>$printJobId,
             'totalPages' => $totalPages,
-            'pricePp' => $pricePp,
-            'totalPrice' => $totalPrice,
+            'price' => $printJob->price,
             'userThatPrintsName' => $userThatPrintsName,
             'userAddressDetails' => $userAddressDetails,
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
             'printJobStatus' => $printJob->status,
+            'printerColorId' => $printerColorId,
+            'printerFormatId' => $printerFormatId,
           ]);
         }
       } else {
@@ -322,6 +326,8 @@ class PrintJobController extends Controller
           $printJob = Printjob::find($printJobId);
 
           $printer = Printer::find($printJob->printer_id);
+          $printerFormatId = $printer->format_id;
+          $printerColorId = $printer->color_id;
           $userThatPrints = User::find($printer->user_id);
           $userThatPrintsName = $userThatPrints->name;
           $userAddressDetails = UserAddressInfo::find($userThatPrints->address_id);
@@ -351,13 +357,14 @@ class PrintJobController extends Controller
             'fileNames'=>$files,
             'printJobId'=>$printJobId,
             'totalPages' => $totalPages,
-            'pricePp' => $pricePp,
-            'totalPrice' => $totalPrice,
+            'price' => $printJob->price,
             'userThatPrintsName' => $userThatPrintsName,
             'userAddressDetails' => $userAddressDetails,
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
             'printJobStatus' => $printJob->status,
+            'printerColorId' => $printerColorId,
+            'printerFormatId' => $printerFormatId,
           ]);
         }
       }

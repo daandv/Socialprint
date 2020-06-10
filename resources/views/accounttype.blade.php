@@ -6,10 +6,24 @@
 
 @section('content')
 <div class="container">
+  <div class="centered">
+    <h1 class="bigTitle">Wat wil je doen?</h1>
 
-  <h3>Wat wil je doen?</h3>
-    <a href="{{ route('notaprinter') }}" class="btn btn-primary">Bij iemand afprinten</a>
-    <a href="{{ route('addprinter') }}"class="btn btn-primary">Mijn printer beschikbaar stellen</a>
+        <div class="row accountTypeWrapper">
+          <div class="item accountTypeItem">
+              <a class="bigTitle accountTypeOption" href="{{ route('notaprinter') }}">Enkel bij andere afdrukken</a>
+          </div>
+          <div class="item accountTypeItem">
+              <a class="bigTitle accountTypeOption" href="{{ route('addprinter') }}">Mijn eigen printer beschikbaar stellen</a>
+              <p></p>
+          </div>
+        </div>
+
+
+
+
+  </div>
+
 </div>
 @include('layouts.footer')
 

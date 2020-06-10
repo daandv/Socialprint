@@ -18,10 +18,10 @@
       <p>Login</p>
       <form class="login-form" method="POST" action="{{ route('login') }}" novalidate>
           @csrf
-        <input id="email" type="email" placeholder="E-mail" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autofocus>
+        <input id="email" type="email" placeholder="E-mail" name="email" value="{{ old('email') }}" autofocus>
 
-        <input id="password" type="password" placeholder="Wachtwoord" class="@error('password') is-invalid @enderror" name="password">
-        <button type="submit" class="btn btn-primary">
+        <input id="password" type="password" placeholder="Wachtwoord" name="password">
+        <button type="submit">
             login
         </button>
 
@@ -32,11 +32,12 @@
           </label>
         </div>
 
+        <p class="message">Wachtwoord vergeten? <a href="{{route('password.request')}}">Reset</a></p>
         <p class="message">Nog geen account? <a href="{{route('register')}}">Registreer</a></p>
-
       </form>
     </div>
   </div>
 
 </div>
+@include('layouts.footer')
 @endsection

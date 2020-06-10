@@ -16,8 +16,8 @@
       </div>
   @endif
 
-  <div class="centered bigTitle">
-    <span>Nieuwe printopdracht</span>
+  <div class="centered">
+      <h1 class="bigTitle">Nieuwe printopdracht</h1>
   </div>
   <form class="" action="{{ route('upload', [$printerId]) }}" method="post" enctype="multipart/form-data">
   @csrf

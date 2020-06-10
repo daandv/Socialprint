@@ -6,10 +6,10 @@
 
 @section('content')
 <div class="container">
-  <div class="centeredDiv">
-    <h1 class="biGTitle">Mijn drukkerij</h1>
-  </div>
+  <div class="centered">
+    <h1 class="bigTitle">Mijn drukkerij</h1>
 
+    @if($fullPrintJobInfo->count()>0)
     <table class="printTasksContainer">
       <tr>
         <th></th>
@@ -19,7 +19,6 @@
         <th>Aangevraagd door</th>
         <th>Afgedrukt door</th>
       </tr>
-
       @foreach ($fullPrintJobInfo as $printJob)
       <tr>
         <td>
@@ -60,11 +59,16 @@
 
     </table>
     {{ $fullPrintJobInfo->links() }}
+
+    @else
+    <p class="InfoText">Het is nog leeg hier...</p>
+    @endif
 <!--
     <div class="row">
       <div class="item">ONE</div>
       <div class="item">TWO</div>
     </div> -->
+      </div>
 </div>
   @include('layouts.footer')
 @endsection

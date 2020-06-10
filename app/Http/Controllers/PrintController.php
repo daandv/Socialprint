@@ -119,7 +119,6 @@ class PrintController extends Controller
         foreach ($request->file as $file) {
           $key = Str::random(32);
           $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . "_". $key .".pdf";
-          // $fileSize = $file->getSize();
 
           $file->storeAs('documents', $fileName, 's3');
 
@@ -148,6 +147,7 @@ class PrintController extends Controller
             $printjob->printer_id = Route::current()->parameter('id');
             $printjob->requester_id = $requesterId;
             $printjob->status = "Aangevraagd";
+            $printjob->price = $pageCounter * Printer::where('user_id', $userThatPrints->id)->first()->price;
             $printjob->notification_printer = 1;
             $printjob->save();
 

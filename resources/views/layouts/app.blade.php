@@ -85,6 +85,10 @@
           <img src="{{ asset('images/logo_white.png')}}">
         </a>
           <ul id="#main-nav" class="main-nav">
+              @guest
+                <li><a href="{{ route('login') }}">Login</a></li>
+                <li><a href="{{ route('register') }}">Registreer</a></li>
+              @else
               <li><a href="{{ route('home') }}">Kaart</a></li>
               <li><a href="{{ route('printjobs') }}">Afdruktaken
                 @if(session('notificationPrintjob')||session('notificationMessage'))
@@ -93,6 +97,7 @@
               </a></li>
               <li><a href="#">Favorieten</a></li>
               <li><a href="{{ route('editaccount') }}">Profiel</a></li>
+              @endguest
           </ul>
     	</header>
 

@@ -10,7 +10,7 @@
   <a class="logoutBtn" href="{{ route('logout') }}"
      onclick="event.preventDefault();
                    document.getElementById('logout-form').submit();">
-      Log uit
+      Uitloggen
   </a>
   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
       @csrf
@@ -70,9 +70,9 @@
     <label for="mailNotif">Ontvang e-mail updates</label><br>
     <br>
     @if($available)
-      <a class="availableBtn" href="./notavailable">Ik wil niet meer printen</a>
+      <a class="greyLink" href="./notavailable">Ik wil niet meer printen</a>
     @else
-      <a class="availableBtn" href="./setavailable">Ik wil weer printen</a>
+      <a class="greyLink" href="./setavailable">Ik wil weer printen</a>
     @endif
     <br><br><br>
     <input class="button-primary" type="submit" value="Opslaan">

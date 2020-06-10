@@ -38,7 +38,7 @@ Route::get('/editaccount', 'UserController@reRouteShow')->name('editaccount');
 Route::post('/editaccount/update/printer', 'UserController@updatePrinterStore')->name('update.storeprinter'); // For form
 Route::post('/editaccount/update/nonprinter', 'UserController@updateNonPrinterStore')->name('update.storenonprinter'); // For form
 
-Route::get('/changetoprinter', 'UserController@changeToPrinter');
+Route::get('/changetoprinter', 'UserController@changeToPrinter')->name('changetoprinter');
 Route::post('/changetoprinterstore', 'UserController@changeToPrinterStore')->name('changetoprinterstore');
 
 Route::get('/profile/{userid}', 'ProfileController@index')->name('profile');
@@ -71,5 +71,5 @@ Route::get('/printers', 'Api\PrinterController@index');
 
 
 Route::get('/test', function () {
-  return view("verified");
+  return view("auth.passwords.reset");
 });
