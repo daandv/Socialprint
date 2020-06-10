@@ -114,7 +114,11 @@ a {
     color: rgb(149, 149, 149)
   }
 }
-
+.infoIcon {
+  height: 16px;
+  vertical-align:middle;
+  opacity: 0.5;
+}
 // FRONTPAGE
 .graphicContainer {
   display: flex;
@@ -451,6 +455,16 @@ a {
       margin-bottom: 10px;
       border-radius: 15px;
       display: inline-block;
+  }
+}
+.printJobDate {
+  position: absolute;
+  right: 60px;
+  color: rgb(129, 129, 129);
+  text-align: right;
+  span {
+    margin-top: 20px;
+    color: rgb(189, 189, 189);
   }
 }
 
@@ -838,5 +852,9 @@ footer {
   .sendInput {
     margin-right: 0px;
     margin-bottom: 10px;
+  }
+  .printJobDate {
+    right: 20px;
+    font-size: 12px;
   }
 }

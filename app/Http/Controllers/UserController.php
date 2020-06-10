@@ -306,7 +306,7 @@ class UserController extends Controller
 
       $printer->save();
 
-      notify()->success('Profiel geüpdatet {{<a href="#">hallo</a>}}', 'Opgeslagen!');
+      notify()->success('Profiel geüpdatet.', 'Opgeslagen!');
       return redirect()->route('home');
     }
 

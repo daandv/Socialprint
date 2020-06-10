@@ -8,6 +8,11 @@
 
 
 <div class="container">
+  <div class="printJobDate">
+    {{ Carbon\Carbon::parse($printJobDate)->format('d/m/Y') }}
+    <br>
+    <span>{{ Carbon\Carbon::parse($printJobDate)->format('H:i') }}</span>
+  </div>
   @if($isPrinter)
   <div class="centered">
 

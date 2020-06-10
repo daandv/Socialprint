@@ -270,6 +270,7 @@ class PrintJobController extends Controller
             'printJobStatus' => $printJob->status,
             'printerColorId' => $printJob->color_id,
             'printerFormatId' => $printJob->format_id,
+            'printJobDate' => $printJob->created_at,
           ]);
         }
         // User is requester
@@ -317,6 +318,7 @@ class PrintJobController extends Controller
             'printJobStatus' => $printJob->status,
             'printerColorId' => $printJob->color_id,
             'printerFormatId' => $printJob->format_id,
+            'printJobDate' => $printJob->created_at,
           ]);
         }
       } else {
@@ -365,6 +367,7 @@ class PrintJobController extends Controller
             'printJobStatus' => $printJob->status,
             'printerColorId' => $printJob->color_id,
             'printerFormatId' => $printJob->format_id,
+            'printJobDate' => $printJob->created_at,
           ]);
         }
       }

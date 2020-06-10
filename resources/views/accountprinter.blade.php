@@ -42,7 +42,7 @@
     <input type="text" id="city" class="accountInputStyled" name="city" value="{{$city}}" readonly><br>
 
     <br>
-    <label for="">Exacte locatie op de kaart:</label><br><br>
+    <label for="">Exacte locatie op de kaart: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Klikken om exacte locatie aan te passen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
     <div id="minimap" class="accountmap"></div>
     <br>
     <span class="accountSubtitle">Mijn printer:</span><br>
@@ -59,8 +59,8 @@
 
     <br><br>
 
-    <label for="pp">Prijs per pagina</label><br><br>
-    <input id="pp" class="accountInputStyled accountInputPp" type="text" name="pp" value="{{$pp}}">
+    <label for="pp">Prijs per pagina: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Gemiddeld 10-50 cent per pagina." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
+    <span>€ </span><input id="pp" class="accountInputStyled accountInputPp" type="text" name="pp" value="{{$pp}}">
 
     <input id="lat" type="hidden" name="lat" value="{{$lat}}">
     <input id="lng" type="hidden" name="lng" value="{{$lng}}">

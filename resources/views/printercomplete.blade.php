@@ -9,48 +9,52 @@
 @section('content')
 <div class="container">
 
-  @if ($errors->any())
-      <div class="errors">
-          @foreach ($errors->unique() as $error)
-              <p>{{ $error }}</p>
-          @endforeach
-      </div>
-  @endif
+  <div class="centered">
+    @if ($errors->any())
+        <div class="errors">
+            @foreach ($errors->unique() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
 
-  <h3>Nog enkele vraagjes</h3>
+    <h1 class="bigTitle">Nog enkele vraagjes</h1>
 
-  <form action="adduserprinter" method="POST">
-    @csrf
+    <form action="adduserprinter" method="POST">
+      @csrf
+      <span class="accountSubtitle">Adres:</span><br>
+      <label for="address">Straat + nr:</label><br><br>
+      <div class="algoliaboxProfile">
+          <input placeholder="Straat & huisnummer" class="algoliabox" type="text" id="address" name="address" value="">
+      </div><br>
 
-    <label for="address">Straat + nr</label>
-    <input class="algoliabox" type="search" id="address" class="form-control" name="address">
+      <label for="city">Gemeente:</label><br><br>
+      <input placeholder="Gemeente" type="text" id="city" class="accountInputStyled" name="city" readonly>
 
-    <label for="city">Gemeente</label>
-    <input type="text" id="city" class="form-control" name="city" readonly>
+      <br><br>
+      <label>Exacte locatie op de kaart: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Klikken om exacte locatie aan te passen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
+      <div id="minimap" class="accountmap"></div>
+      <br>
 
-    <br>
+      <br>
+      <span class="accountSubtitle">Mijn printer:</span><br>
+      <label><input type="radio" name="printColor" id="color" value="color" checked>Kleur</label>
+      <label><input type="radio" name="printColor" id="bw" value="bw">Zwart-wit</label>
 
-    <div id="minimap"></div>
+      <br><br>
 
-    <br>
+      <label for="pp">Prijs per pagina: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Gemiddeld 10-50 cent per pagina." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
+      <span>€ </span><input placeholder="0.1" id="pp" class="accountInputStyled accountInputPp" type="text" name="pp" value="">
 
-    <label><input type="radio" name="printColor" id="color" value="color" checked>Kleur</label>
-    <label><input type="radio" name="printColor" id="bw" value="bw">Zwart-wit</label>
+      <input id="lat" type="hidden" name="lat" value="">
+      <input id="lng" type="hidden" name="lng" value="">
+      <input id="zip" type="hidden" name="zip" value="">
 
-    <br>
+      <br><br><br>
+      <input class="button-primary" type="submit" value="Opslaan">
 
-    <label for="pp">Prijs per pagina</label>
-    <input id="pp" class="form-control" type="text" name="pp">
-
-    <input id="lat" type="hidden" name="lat" value="">
-    <input id="lng" type="hidden" name="lng" value="">
-    <input id="zip" type="hidden" name="zip" value="">
-
-    <br>
-    <input class="btn btn-primary" type="submit">
-
-  </form>
-
+    </form>
+  </div>
 </div>
 @include('layouts.footer')
 @include('notify::messages')

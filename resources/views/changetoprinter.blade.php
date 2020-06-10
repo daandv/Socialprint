@@ -29,7 +29,7 @@
 
       <br><br>
 
-      <label for="">Exacte locatie op de kaart:</label><br><br>
+      <label for="">Exacte locatie op de kaart: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Klikken om exacte locatie aan te passen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
       <div id="minimap" class="accountmap"></div>
 
       <br>
@@ -39,7 +39,7 @@
 
       <br><br>
 
-      <label for="pp">Prijs per pagina:</label><br><br>
+      <span>€ </span><label for="pp">Prijs per pagina: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Gemiddeld 10-50 cent per pagina." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
       <input id="pp" placeholder="0.09" class="accountInputStyled accountInputPp" type="text" name="pp">
 
       <input id="lat" type="hidden" name="lat" value="">
