@@ -10,8 +10,13 @@
     Niet beschikbaar
   @endif
   <p>{{$userThatPrints->name}}</p>
-  <a href="{{ route('user.star', [$userThatPrints->id]) }}">star</a>
-  <a href="{{ route('user.star', [$userThatPrints->id]) }}">unstar</a>
+  @if($favourited)
+      <a href="{{ route('user.unstar', [$userThatPrints->id]) }}">unstar</a>
+  @else
+      <a href="{{ route('user.star', [$userThatPrints->id]) }}">star</a>
+  @endif
+
   <p>{{$userThatPrintsAddressInfo}}</p>
+
 </div>
 @endsection

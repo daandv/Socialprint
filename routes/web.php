@@ -41,7 +41,7 @@ Route::post('/editaccount/update/nonprinter', 'UserController@updateNonPrinterSt
 Route::get('/changetoprinter', 'UserController@changeToPrinter');
 Route::post('/changetoprinterstore', 'UserController@changeToPrinterStore')->name('changetoprinterstore');
 
-Route::get('/profile/{id}', 'ProfileController@index');
+Route::get('/profile/{userid}', 'ProfileController@index')->name('profile');
 Route::get('/star/{userid}', 'ProfileController@star')->name('user.star');
 Route::get('/unstar/{userid}', 'ProfileController@unstar')->name('user.unstar');
 

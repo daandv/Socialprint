@@ -73,7 +73,7 @@ fetch("./printers")
       //             '<br/><b>Timezone:</b> ' + markers[i].tz;
 
       var popup =
-      '<a href="./profile/' + printers[i].printer_id  + '">Bekijk profiel van ' + printers[i].name + '</a><br><br>' +
+      '<a href="./profile/' + printers[i].id  + '">Bekijk profiel van ' + printers[i].name + '</a><br><br>' +
       '<span>Prijs per pagina: €</span>' + printers[i].price + '<br><br>' +
        '<a class="btn btn-light" role="button" href="./print_at/' + printers[i].printer_id + '">Print hier</a>';
 
