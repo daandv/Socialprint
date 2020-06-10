@@ -16,23 +16,52 @@
       </div>
   @endif
 
+  <div class="centered bigTitle">
+    <span>Nieuwe printopdracht</span>
+  </div>
+  <form class="" action="{{ route('upload', [$printerId]) }}" method="post" enctype="multipart/form-data">
+  @csrf
+
+  <div class="rowFilesAndPrinter">
+    <div class="wrapper">
+      <span>Verstuur printopdracht naar:</span>
+      <div class="block">
+
+      </div>
+    </div>
+    <div class="wrapper">
+      <span>Upload bestanden:</span>
+      <div class="block">
+          <input id="fileBtnHidden" type="file" name="file[]" multiple style="display: none;">
+          <input type="button" class="fileUpload" value="" onclick="document.getElementById('fileBtnHidden').click();" />
+
+          <span class="selectedFiles"></span>
+      </div>
+    </div>
+  </div>
+
   <span>Ik ga de opdracht verwerken: </span>{{$userThatPrintsName}}
   <br>
   <span>Ik ben de aanvrager: </span>{{$requesterName}}
   <br><br>
-  <form class="" action="{{ route('upload', [$printerId]) }}" method="post" enctype="multipart/form-data">
-    @csrf
-     <div class="form-group">
-       <label for="f">Example file input</label>
-       <input id="f" type="file" name="file[]" class="form-control-file" multiple data-show-upload="true" data-show-caption="true">
-     </div>
+
+
+
 
      <input id="pp" type="hidden" name="pp" value="{{$pp}}">
      <button id="verzendbtn" type="submit" class="btn btn-primary" disabled="disabled">Verstuur printopdracht</button>
   </form>
   <br><br>
-  <p id="calculations"></p>
+  <div class="centered">
+    <p id="calculations"></p>
+    <p id="priceTotal"></p>
+  </div>
+
+  <div class="centered">
+
   <a href="https://letsencrypt.org/how-it-works/" target="_blank"><img class="letsEncrypt" src="{{ asset('images/lets-encrypt.png') }}" alt=""></a>
+  </div>
+
 
 
 

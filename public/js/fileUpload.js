@@ -859,16 +859,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 // Front end validation and pagecount for price etc before uploading (real calculations are done serverside)
 $(document).ready(function () {
-  var pagesFound = true; // Empty input when user presses "back".
+  var pagesFound = true;
+  $('#fileBtnHidden').change(function () {
+    var files = $(this)[0].files;
 
-  $("#f").replaceWith($("#f").val('').clone(true));
-  document.getElementById('f').oninput = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-    var userPP, totalPages, totalPrice, maxFileSize, validFileType, validFileSize, i, pdf, details;
+    if (files.length == 1) {
+      $('.fileUpload').val(files.length + " bestand geselecteerd").css('background-image', 'none');
+    } else if (files.length == 0) {
+      $('.fileUpload').val("").css('background-image', 'url(https://image.flaticon.com/icons/svg/54/54565.svg)');
+    } else {
+      $('.fileUpload').val(files.length + " bestanden geselecteerd").css('background-image', 'none');
+    }
+  }); // Empty input when user presses "back".
+
+  $("#fileBtnHidden").replaceWith($("#fileBtnHidden").val('').clone(true));
+  document.getElementById('fileBtnHidden').oninput = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+    var userPP, userPPRounded, totalPages, totalPrice, maxFileSize, validFileType, validFileSize, i, pdf, details;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             userPP = $("#pp").val();
+            userPPRounded = parseFloat(userPP).toFixed(2);
             totalPages = 0;
             totalPrice = 0;
             maxFileSize = 40;
@@ -877,49 +889,49 @@ $(document).ready(function () {
             pagesFound = true;
             i = 0;
 
-          case 8:
+          case 9:
             if (!(i < this.files.length)) {
-              _context.next = 25;
+              _context.next = 26;
               break;
             }
 
             if (!(this.files[i].type != "application/pdf")) {
-              _context.next = 13;
+              _context.next = 14;
               break;
             }
 
             validFileType = false;
-            _context.next = 22;
+            _context.next = 23;
             break;
 
-          case 13:
+          case 14:
             if (!(this.files[i].size * 0.000001 > maxFileSize)) {
-              _context.next = 17;
+              _context.next = 18;
               break;
             }
 
             validFileSize = false;
-            _context.next = 22;
+            _context.next = 23;
             break;
 
-          case 17:
+          case 18:
             pdf = this.files[i];
-            _context.next = 20;
+            _context.next = 21;
             return pdfDetails(pdf);
 
-          case 20:
+          case 21:
             details = _context.sent;
 
             if (pagesFound) {
               totalPages += details[0].Pages;
             }
 
-          case 22:
+          case 23:
             i++;
-            _context.next = 8;
+            _context.next = 9;
             break;
 
-          case 25:
+          case 26:
             if (this.files.length >= 1) {
               if (!pagesFound) {
                 console.log("Er kan helaas geen automatische kostenschatting worden gemaakt");
@@ -927,7 +939,8 @@ $(document).ready(function () {
               } else if (validFileType && validFileSize) {
                 console.log(totalPages);
                 console.log("€", userPP * totalPages);
-                $("#calculations").html(totalPages + "paginas X " + userPP + " per pagina = €" + userPP * totalPages);
+                $("#calculations").html(totalPages + " pagina's x " + userPPRounded + " per pagina");
+                $("#priceTotal").html("€" + (userPP * totalPages).toFixed(2));
                 $("#verzendbtn").prop("disabled", false);
               } else {
                 console.log("Ongeldige file(s)");
@@ -940,7 +953,7 @@ $(document).ready(function () {
               $("#calculations").html(" ");
             }
 
-          case 26:
+          case 27:
           case "end":
             return _context.stop();
         }

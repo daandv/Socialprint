@@ -2,11 +2,24 @@
 $(document).ready(function(){
   var pagesFound=true;
 
-  // Empty input when user presses "back".
-  $("#f").replaceWith($("#f").val('').clone(true));
+  $('#fileBtnHidden').change(function(){
+      var files = $(this)[0].files;
+      if (files.length==1) {
+        $('.fileUpload').val(files.length + " bestand geselecteerd").css('background-image', 'none');
+      } else if (files.length==0){
+        $('.fileUpload').val("").css('background-image', 'url(https://image.flaticon.com/icons/svg/54/54565.svg)');
+      } else {
+        $('.fileUpload').val(files.length + " bestanden geselecteerd").css('background-image', 'none');
+      }
 
-  document.getElementById('f').oninput = async function() {
-    var userPP=$("#pp").val()
+  });
+
+  // Empty input when user presses "back".
+  $("#fileBtnHidden").replaceWith($("#fileBtnHidden").val('').clone(true));
+
+  document.getElementById('fileBtnHidden').oninput = async function() {
+    var userPP=$("#pp").val();
+    var userPPRounded=parseFloat(userPP).toFixed(2)
     var totalPages=0;
     var totalPrice=0;
     var maxFileSize=40;
@@ -36,7 +49,8 @@ $(document).ready(function(){
       } else if (validFileType && validFileSize) {
         console.log(totalPages);
         console.log("€", userPP*totalPages);
-        $("#calculations").html(totalPages + "paginas X " + userPP + " per pagina = €" + userPP*totalPages);
+        $("#calculations").html(totalPages + " pagina's x " + userPPRounded + " per pagina");
+        $("#priceTotal").html("€" + (userPP*totalPages).toFixed(2));
         $( "#verzendbtn" ).prop( "disabled", false );
       } else {
         console.log("Ongeldige file(s)");
