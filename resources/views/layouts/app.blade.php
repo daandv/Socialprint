@@ -63,7 +63,7 @@
                 <span class="chatBadge">&#128226;</span>
                 @endif
               </a></li>
-              <li><a href="#">Favorieten</a></li>
+              <li><a href="{{ route('favorites') }}">Favorieten</a></li>
               <li><a href="{{ route('editaccount') }}">Profiel</a></li>
               @endguest
           </ul>

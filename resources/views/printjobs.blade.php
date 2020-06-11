@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
   <div class="centered">
-    <h1 class="bigTitle">Mijn drukkerij</h1>
+    <h1 class="bigTitle">&#127981; Mijn drukkerij</h1>
 
     @if($fullPrintJobInfo->count()>0)
     <table class="printTasksContainer">

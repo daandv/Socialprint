@@ -25,7 +25,7 @@
             @endforeach
         </div>
     @endif
-    <h1 class="bigTitle">Mijn account</h1>
+    <h1 class="bigTitle">&#128125; Mijn account</h1>
 
   <form action="{{ route('update.storenonprinter') }}" enctype="multipart/form-data" method="POST">
     @csrf

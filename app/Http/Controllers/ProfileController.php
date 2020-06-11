@@ -87,11 +87,9 @@ class ProfileController extends Controller
         $favourite->unfavourite = 0;
         $favourite->save();
       }
-      return redirect()->route('profile', [$userThatPrintsId]);
+      return redirect()->route('favorites');
 
     }
-
-
 
     public function unstar() {
       $userThatPrintsId = Route::current()->parameter('userid');
@@ -126,11 +124,36 @@ class ProfileController extends Controller
         $favourite = Favourite::where('user_id', $user->id)->where('printer_user_id', $userThatPrintsId)->first();
         $favourite->unfavourite = 1;
         $favourite->save();
-        return redirect()->route('profile', [$userThatPrintsId]);
+        return redirect()->route('favorites');
       }
+      
       notify()->error('Er is een fout opgetreden.', 'Error!');
       return redirect()->route('home');
 
 
     }
+
+    public function showFavorites() {
+      $user = User::find(Auth::user()->id);
+      $favorites = Favourite::where('user_id', $user->id)
+                            ->where('unfavourite', '0')
+                            ->get();
+
+      $fullFavoriteInfo = [];
+      foreach ($favorites as $favorite) {
+        $printer = User::find($favorite->printer_user_id);
+        $fullAddress = UserAddressInfo::find($printer->address_id);
+
+        $fullFavoriteInfo_ = [
+          'fullUserInfo' => User::find($favorite->printer_user_id),
+          'fullAddress' => $fullAddress,
+          'fullPrinter' => Printer::where('user_id', $favorite->printer_user_id)->first(),
+        ];
+        array_push($fullFavoriteInfo, $fullFavoriteInfo_);
+      }
+
+      return view('favorites', ['favorites' => $fullFavoriteInfo]);
+    }
+
+
 }

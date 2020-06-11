@@ -146,19 +146,6 @@ class UserController extends Controller
 
       return redirect()->route('shownonprinter');
 
-
-
-
-
-
-
-
-      // User has printer
-      // if ($printer) {
-      //   return redirect()->route('showprinter');
-      // } else {
-      //   return redirect()->route('shownonprinter');
-      // }
     }
 
     public function showPrinter() {
