@@ -1,6 +1,7 @@
 {
+    "/js/accountEditNonPrinter.js": "/js/accountEditNonPrinter.js",
+    "/js/accountEditPrinter.js": "/js/accountEditPrinter.js",
     "/js/accountcomplete.js": "/js/accountcomplete.js",
-    "/js/accountedit.js": "/js/accountedit.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/fileUpload.js": "/js/fileUpload.js",

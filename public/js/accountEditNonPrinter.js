@@ -81,30 +81,45 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/accountedit.js":
-/*!*************************************!*\
-  !*** ./resources/js/accountedit.js ***!
-  \*************************************/
+/***/ "./resources/js/accountEditNonPrinter.js":
+/*!***********************************************!*\
+  !*** ./resources/js/accountEditNonPrinter.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\Daan\\Documents\\XamppHosting\\Socialprint\\resources\\js\\accountedit.js'");
+// PROFILE PICTURE
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      $('#profilePicture').attr('src', e.target.result);
+    };
+
+    reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
+
+$("#fileBtnHidden").change(function () {
+  readURL(this);
+});
 
 /***/ }),
 
-/***/ 3:
-/*!*******************************************!*\
-  !*** multi ./resources/js/accountedit.js ***!
-  \*******************************************/
+/***/ 4:
+/*!*****************************************************!*\
+  !*** multi ./resources/js/accountEditNonPrinter.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Daan\Documents\XamppHosting\Socialprint\resources\js\accountedit.js */"./resources/js/accountedit.js");
+module.exports = __webpack_require__(/*! C:\Users\Daan\Documents\XamppHosting\Socialprint\resources\js\accountEditNonPrinter.js */"./resources/js/accountEditNonPrinter.js");
 
 
 /***/ })

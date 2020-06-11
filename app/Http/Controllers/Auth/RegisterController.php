@@ -50,7 +50,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:25', 'min:3'],
+            'name' => ['required', 'string', 'max:25', 'min:3', 'regex:/^[a-zA-Z]+$/u'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -68,6 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'profile_picture_url' => 'https://eu.ui-avatars.com/api/?name=' . $data['name'] . '&length=1&background=ff3b89&color=ffffff'
         ]);
     }
 }

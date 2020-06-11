@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\User;
 use App\Printer;
@@ -169,7 +170,6 @@ class UserController extends Controller
           return redirect()->route('shownonprinter');
       }
 
-
       $address = UserAddressInfo::where('id',$user->address_id)->first();
       $printer = Printer::where('user_id',$user->id)->first();
 
@@ -183,6 +183,7 @@ class UserController extends Controller
       $zip = $address->zip;
       $availability = $user->available;
       $emailNotif = $user->email_notifications;
+      $profilePictureUrl = $user->profile_picture_url;
 
       return view('accountprinter', [
         'name' => $name,
@@ -195,6 +196,7 @@ class UserController extends Controller
         'zip' => $zip,
         'available' => $availability,
         'emailNotif' => $emailNotif,
+        'profilePictureUrl' => $profilePictureUrl,
       ]);
     }
 
@@ -209,10 +211,12 @@ class UserController extends Controller
 
       $name = $user->name;
       $emailNotif = $user->email_notifications;
+      $profilePictureUrl = $user->profile_picture_url;
 
       return view('accountnonprinter', [
         'name' => $name,
         'emailNotif' => $emailNotif,
+        'profilePictureUrl' => $profilePictureUrl,
       ]);
     }
 
@@ -251,11 +255,12 @@ class UserController extends Controller
 
     public function updatePrinterStore(Request $request) {
       $rules = [
-        'name' => 'required|max:25|min:3',
+        'name' => 'required|max:25|min:3|regex:/^[a-zA-Z]+$/u',
         'address' => 'required',
         'lat' => 'required',
         'lng' => 'required',
-        'pp' => ['required', new ValidPricePerPage]
+        'pp' => ['required', new ValidPricePerPage],
+        'profielfoto' => 'max:5000|mimes:jpeg,bmp,png'
       ];
       $customMessages = [
         'name.required' => 'Geef een geldige naam.',
@@ -275,6 +280,20 @@ class UserController extends Controller
         $user->email_notifications=1;
       } else {
         $user->email_notifications=0;
+      }
+
+      // Upload profile image to S3
+      if ($request->file('profielfoto')) {
+
+        // Delete old profile image
+        if(Storage::disk('s3')->exists("profilepictures/" . basename($user->profile_picture_url))) {
+            Storage::disk('s3')->delete("profilepictures/" . basename($user->profile_picture_url));
+        }
+
+        $path = $request->file('profielfoto')->store('profilepictures', 's3');
+        Storage::disk('s3')->setVisibility($path, 'public');
+
+        $user->profile_picture_url = Storage::disk('s3')->url($path);
       }
 
       $user->save();
@@ -304,6 +323,7 @@ class UserController extends Controller
           break;
       }
 
+
       $printer->save();
 
       notify()->success('Profiel geüpdatet.', 'Opgeslagen!');
@@ -312,10 +332,11 @@ class UserController extends Controller
 
     public function updateNonPrinterStore(Request $request) {
       $rules = [
-        'name' => 'required|max:25|min:3',
+        'name' => 'required|max:25|min:3|regex:/^[a-zA-Z]+$/u',
+        'profielfoto' => 'max:5000|mimes:jpeg,bmp,png'
       ];
       $customMessages = [
-        'required' => 'Deze naam is niet geldig.',
+        'name.required' => 'Geef een geldige naam.',
         'name.max' => 'Naam te lang.',
         'name.min' => 'Naam te kort.',
       ];
@@ -330,10 +351,22 @@ class UserController extends Controller
         $user->email_notifications=0;
       }
 
+      // Upload profile image to S3
 
+      // Delete old profile image
+      if(Storage::disk('s3')->exists("profilepictures/" . basename($user->profile_picture_url))) {
+          Storage::disk('s3')->delete("profilepictures/" . basename($user->profile_picture_url));
+      }
+
+      if ($request->file('profielfoto')) {
+        $path = $request->file('profielfoto')->store('profilepictures', 's3');
+        Storage::disk('s3')->setVisibility($path, 'public');
+
+        $user->profile_picture_url = Storage::disk('s3')->url($path);
+      }
       $user->save();
 
-      notify()->success('Profiel geüpdatet', 'Opgeslagen!');
+      notify()->success('Profiel geüpdatet.', 'Opgeslagen!');
       return redirect()->route('home');
     }
 

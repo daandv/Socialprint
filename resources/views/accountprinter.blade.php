@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('script')
-<script src="{{ asset('js/accountedit.js') }}" defer></script>
+<script src="{{ asset('js/accountEditPrinter.js') }}" defer></script>
 @endpush
 
 
@@ -17,7 +17,7 @@
   </form>
   <div class="centered">
     @if ($errors->any())
-        <div class="errors">
+        <div class="errors marginTop">
             @foreach ($errors->unique() as $error)
                 <p>{{ $error }}</p>
             @endforeach
@@ -25,9 +25,16 @@
     @endif
     <h1 class="bigTitle">Mijn account</h1>
 
-  <form action="{{ route('update.storeprinter') }}" method="POST">
+  <form action="{{ route('update.storeprinter') }}" enctype="multipart/form-data" method="POST">
     @csrf
     <span class="accountSubtitle">Profiel:</span><br>
+    <label for="name">Profielfoto:</label><br><br>
+    <img onclick="document.getElementById('fileBtnHidden').click();" class="profileImageUpload" id="profilePicture" src="{{$profilePictureUrl}}" alt="Profielfoto" data-tippy-content="Klik om te wijzigen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle">
+    <input type="file" id="fileBtnHidden" name="profielfoto" accept="image/*" style="display: none;">
+
+
+    <br><br>
+
     <label for="name">Naam:</label><br><br>
     <input type="text" id="name" class="accountInputStyled" name="name" value="{{$name}}"><br><br>
 

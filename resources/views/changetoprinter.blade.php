@@ -21,11 +21,11 @@
       <span class="accountSubtitle">Adres:</span><br>
       <label for="address">Straat + nr:</label><br><br>
       <div class="algoliaboxProfile">
-          <input class="algoliabox" type="text" id="address" name="address">
+          <input placeholder="Straat & huisnummer" class="algoliabox" type="text" id="address" name="address">
       </div><br>
 
       <label for="city">Gemeente:</label><br><br>
-      <input type="text" id="city" class="accountInputStyled" name="city" readonly>
+      <input placeholder="Gemeente" type="text" id="city" class="accountInputStyled" name="city" readonly>
 
       <br><br>
 
@@ -39,8 +39,8 @@
 
       <br><br>
 
-      <span>€ </span><label for="pp">Prijs per pagina: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Gemiddeld 10-50 cent per pagina." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
-      <input id="pp" placeholder="0.09" class="accountInputStyled accountInputPp" type="text" name="pp">
+      <label for="pp">Prijs per pagina: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Gemiddeld 10-50 cent per pagina." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
+      <span>€ </span><input id="pp" placeholder="0.09" class="accountInputStyled accountInputPp" type="text" name="pp">
 
       <input id="lat" type="hidden" name="lat" value="">
       <input id="lng" type="hidden" name="lng" value="">

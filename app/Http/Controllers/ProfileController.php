@@ -20,28 +20,6 @@ class ProfileController extends Controller
         $this->middleware(['auth','verified', 'completed']);
     }
     public function index() {
-      // $printerId = Route::current()->parameter('id');
-      // $user = User::find(Auth::user()->id);
-      //
-      // // Check for route
-      // if (!Printer::find($printerId)) {
-      //   notify()->error('Profiel niet gevonden.', 'Error!');
-      //   return redirect()->route('home');
-      // }
-      //
-      // $userThatPrints = User::find(Printer::find($printerId)->user_id);
-      // $userThatPrintsAddressInfo = UserAddressInfo::find($userThatPrints->address_id);
-      //
-      // $favourited = Favourite::where('user_id', $user->id)->where('printer_user_id', $userThatPrints->id)->where('unfavourite', 0)->count();
-      //
-      // return view('profile', [
-      //   'userThatPrints' => $userThatPrints,
-      //   'userThatPrintsAddressInfo' => $userThatPrintsAddressInfo,
-      //   'favourited' => $favourited,
-      // ]);
-
-
-
       $userThatPrintsId = Route::current()->parameter('userid');
       $user = User::find(Auth::user()->id);
 
@@ -67,12 +45,6 @@ class ProfileController extends Controller
         'userThatPrintsAddressInfo' => $userThatPrintsAddressInfo,
         'favourited' => $favourited,
       ]);
-
-
-
-
-
-
     }
 
     public function star() {

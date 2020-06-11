@@ -95,6 +95,9 @@ a {
   font-size: 14px;
   color:#FF0066;
 }
+.marginTop {
+  margin-top: 40px;
+}
 .success {
   font-size: 14px;
   color:#138a2d;
@@ -716,7 +719,13 @@ a {
     color: #FF0066;
   }
 }
-
+.profileImageUpload {
+  border-radius: 1000px;
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  cursor: pointer;
+}
 
 // FOOTER
 footer {
