@@ -23,10 +23,14 @@
     <form action="adduserprinter" method="POST">
       @csrf
       <span class="accountSubtitle">Adres:</span><br>
-      <label for="address">Straat + nr:</label><br><br>
+      <label for="address">Straat + huisnummer:</label><br><br>
       <div class="algoliaboxProfile">
           <input placeholder="Straat & huisnummer" class="algoliabox" type="text" id="address" name="address" value="">
       </div><br>
+
+      <label for="city">Busnummer (optioneel):</label><br><br>
+      <input placeholder="/" type="text" id="city" class="accountInputStyled busNr" name="busNumber" value="{{$busNumber ?? ''}}"><br>
+
 
       <label for="city">Gemeente:</label><br><br>
       <input placeholder="Gemeente" type="text" id="city" class="accountInputStyled" name="city" readonly>
@@ -44,7 +48,7 @@
       <br><br>
 
       <label for="pp">Prijs per pagina: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Gemiddeld 10-50 cent per pagina." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
-      <span>€ </span><input placeholder="0.1" id="pp" class="accountInputStyled accountInputPp" type="text" name="pp" value="">
+      <span>€ </span><input id="pp" class="accountInputStyled accountInputPp" type="text" name="pp" value="0.1">
 
       <input id="lat" type="hidden" name="lat" value="">
       <input id="lng" type="hidden" name="lng" value="">

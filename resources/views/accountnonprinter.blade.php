@@ -38,6 +38,9 @@
     <label for="name">Naam:</label><br><br>
     <input type="text" id="name" class="accountInputStyled" name="name" value="{{$name}}"><br><br>
 
+    <label for="name">E-mail: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Deze kan je niet wijzigen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
+    <input type="text" id="name" class="accountInputStyled" name="name" value="{{$email}}" disabled><br><br>
+
     <span class="accountSubtitle">Privacy:</span><br>
     <input type="checkbox" name="mailNotif" value="1"
     @if($emailNotif)

@@ -18,7 +18,15 @@
       {{ __('If you did not receive the email') }}<br><br><br>
       <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
           @csrf
-          <button type="submit" class="button-primary">{{ __('click here to request another') }}</button>
+          <button type="submit" class="button-primary">{{ __('click here to request another') }}</button><br><br>
+      </form>
+      <a class="greyLink" href="{{ route('logout') }}"
+         onclick="event.preventDefault();
+                       document.getElementById('logout-form').submit();">
+          Uitloggen
+      </a>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
       </form>
 
   </div>

@@ -56,20 +56,16 @@ class AccountCompleteController extends Controller
     }
 
     public function addPrinterStore(Request $request) {
-      // $validatedData = $request->validate([
-      //     'lat' => 'required',
-      //     'lng' => 'required',
-      //     'pp' => ['required', new ValidPricePerPage]
-      // ]);
-
       $rules = [
         'address' => 'required',
+        'busNumber' => 'numeric',
         'lat' => 'required',
         'lng' => 'required',
         'pp' => ['required', new ValidPricePerPage]
       ];
       $customMessages = [
         'address.required' => 'Geef een geldig adres.',
+        'busNumber.numeric' => 'Geef een geldig busnummer.',
         'pp.required' => 'Geef je prijs per pagina.',
         'lat.required' => 'Geef een geldig adres.',
         'lng.required' => 'Geef een geldig adres.',
@@ -81,6 +77,7 @@ class AccountCompleteController extends Controller
       $useraddressinfo = new UserAddressInfo();
       $useraddressinfo->street_and_number = $request->address;
       $useraddressinfo->city = $request->city;
+      $useraddressinfo->bus_number = $request->busNumber;
       $useraddressinfo->zip = $request->zip;
       $useraddressinfo->lat = $request->lat;
       $useraddressinfo->lng = $request->lng;

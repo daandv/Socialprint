@@ -38,13 +38,19 @@
     <label for="name">Naam:</label><br><br>
     <input type="text" id="name" class="accountInputStyled" name="name" value="{{$name}}"><br><br>
 
+    <label for="name">E-mail: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Deze kan je niet wijzigen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
+    <input type="text" id="name" class="accountInputStyled" name="name" value="{{$email}}" disabled><br><br>
+
     <span class="accountSubtitle">Adres:</span><br>
-    <label for="address">Straat + nr:</label><br><br>
+    <label for="address">Straat + huisnummer:</label><br><br>
     <div class="algoliaboxProfile">
         <input class="algoliabox" type="text" id="address" name="address" value="{{$address}}">
     </div>
     <br>
+    <label for="city">Busnummer (optioneel):</label><br><br>
+    <input placeholder="/" type="text" id="city" class="accountInputStyled busNr" name="busNumber" value="{{$busNumber ?? ''}}"><br>
 
+    <br>
     <label for="city">Gemeente:</label><br><br>
     <input type="text" id="city" class="accountInputStyled" name="city" value="{{$city}}" readonly><br>
 

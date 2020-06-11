@@ -72,7 +72,7 @@
     @endif
 
     <div class="printJobDetailsFiles">
-      <p class="accountSubtitle">Bestanden:</p>
+      <p class="accountSubtitle">Bestanden: ({{count($fileNames)}})</p>
       @foreach ($fileNames as $filename)
         <a href="{{ route('getfile', [$filename->file_name]) }}" download>{{$filename->file_name}}</a>
         <br>
@@ -125,7 +125,7 @@
     </div>
 
     <div class="printJobDetailsFiles">
-      <p class="accountSubtitle">Bestanden:</p>
+      <p class="accountSubtitle">Bestanden: ({{count($fileNames)}})</p>
       @foreach ($fileNames as $filename)
         <a href="{{ route('getfile', [$filename->file_name]) }}" download>{{$filename->file_name}}</a>
         <br>

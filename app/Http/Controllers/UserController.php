@@ -178,6 +178,7 @@ class UserController extends Controller
       $lat = $address->lat;
       $lng = $address->lng;
       $city = $address->city;
+      $busNumber = $address->bus_number;
       $colorId = $printer->color_id;
       $pp = $printer->price;
       $zip = $address->zip;
@@ -189,6 +190,7 @@ class UserController extends Controller
         'name' => $name,
         'address' => $fullAddress,
         'city' => $city,
+        'busNumber' => $busNumber,
         'colorId' => $colorId,
         'pp' => $pp,
         'lat' => $lat,
@@ -197,6 +199,7 @@ class UserController extends Controller
         'available' => $availability,
         'emailNotif' => $emailNotif,
         'profilePictureUrl' => $profilePictureUrl,
+        'email' => $user->email,
       ]);
     }
 
@@ -217,6 +220,7 @@ class UserController extends Controller
         'name' => $name,
         'emailNotif' => $emailNotif,
         'profilePictureUrl' => $profilePictureUrl,
+        'email' => $user->email,
       ]);
     }
 
@@ -255,8 +259,9 @@ class UserController extends Controller
 
     public function updatePrinterStore(Request $request) {
       $rules = [
-        'name' => 'required|max:25|min:3|regex:/^[a-zA-Z]+$/u',
+        'name' => 'required|max:25|min:3|regex:/^[\pL\s\-]+$/u',
         'address' => 'required',
+        'busNumber' => 'numeric',
         'lat' => 'required',
         'lng' => 'required',
         'pp' => ['required', new ValidPricePerPage],
@@ -267,6 +272,7 @@ class UserController extends Controller
         'name.max' => 'Naam te lang.',
         'name.min' => 'Naam te kort.',
         'address.required' => 'Geef een geldig adres.',
+        'busNumber.numeric' => 'Geef een geldig busnummer.',
         'pp.required' => 'Geef je prijs per pagina.',
         'lat.required' => 'Geef een geldig adres.',
         'lng.required' => 'Geef een geldig adres.',
@@ -301,6 +307,7 @@ class UserController extends Controller
       $useraddressinfo = UserAddressInfo::find($user->address_id);
       $useraddressinfo->street_and_number = $request->address;
       $useraddressinfo->city = $request->city;
+      $useraddressinfo->bus_number = $request->busNumber;
       $useraddressinfo->zip = $request->zip;
       $useraddressinfo->lat = $request->lat;
       $useraddressinfo->lng = $request->lng;
@@ -332,7 +339,7 @@ class UserController extends Controller
 
     public function updateNonPrinterStore(Request $request) {
       $rules = [
-        'name' => 'required|max:25|min:3|regex:/^[a-zA-Z]+$/u',
+        'name' => 'required|max:25|min:3|regex:/^[\pL\s\-]+$/u',
         'profielfoto' => 'max:5000|mimes:jpeg,bmp,png'
       ];
       $customMessages = [
