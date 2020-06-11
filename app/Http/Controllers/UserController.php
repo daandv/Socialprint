@@ -46,6 +46,7 @@ class UserController extends Controller
       $rules = [
         'address' => 'required',
         'lat' => 'required',
+        'busNumber' => 'nullable|numeric',
         'lng' => 'required',
         'pp' => ['required', new ValidPricePerPage]
       ];
@@ -61,6 +62,7 @@ class UserController extends Controller
       $useraddressinfo = new UserAddressInfo();
       $useraddressinfo->street_and_number = $request->address;
       $useraddressinfo->city = $request->city;
+      $useraddressinfo->bus_number = $request->busNumber;
       $useraddressinfo->zip = $request->zip;
       $useraddressinfo->lat = $request->lat;
       $useraddressinfo->lng = $request->lng;
@@ -248,7 +250,7 @@ class UserController extends Controller
       $rules = [
         'name' => 'required|max:25|min:3|regex:/^[\pL\s\-]+$/u',
         'address' => 'required',
-        'busNumber' => 'numeric',
+        'busNumber' => 'nullable|numeric',
         'lat' => 'required',
         'lng' => 'required',
         'pp' => ['required', new ValidPricePerPage],

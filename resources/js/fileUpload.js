@@ -44,23 +44,19 @@ $(document).ready(function(){
 
     if (this.files.length >= 1) {
       if (!pagesFound) {
-        console.log("Er kan helaas geen automatische kostenschatting worden gemaakt");
-        $("#calculations").html("Wij kunnen helaas geen automatische kostenschatting maken");
+        $("#calculations").html("We kunnen helaas geen automatische kostenschatting maken");
+        $("#priceTotal").html(" ");
       } else if (validFileType && validFileSize) {
-        console.log(totalPages);
-        console.log("€", userPP*totalPages);
         $("#calculations").html(totalPages + " pagina's x " + userPPRounded + " per pagina");
         $("#priceTotal").html("€" + (userPP*totalPages).toFixed(2));
-        $( "#verzendbtn" ).prop( "disabled", false );
       } else {
         console.log("Ongeldige file(s)");
         $("#calculations").html("Ongeldige file, te groot (max 40mb) of verkeerd formaat (alleen pdf).");
-        $( "#verzendbtn" ).prop( "disabled", true );
+        $("#priceTotal").html(" ");
       }
     } else {
-      console.log("selecteer een document");
-      $( "#verzendbtn" ).prop( "disabled", true );
       $("#calculations").html(" ");
+      $("#priceTotal").html(" ");
     }
 
   };

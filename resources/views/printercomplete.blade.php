@@ -28,8 +28,8 @@
           <input placeholder="Straat & huisnummer" class="algoliabox" type="text" id="address" name="address" value="">
       </div><br>
 
-      <label for="city">Busnummer (optioneel):</label><br><br>
-      <input placeholder="/" type="text" id="city" class="accountInputStyled busNr" name="busNumber" value="{{$busNumber ?? ''}}"><br>
+      <label for="busnummer">Busnummer (optioneel):</label><br><br>
+      <input placeholder="/" type="text" id="busnummer" class="accountInputStyled busNr" name="busNumber" value="{{$busNumber ?? ''}}"><br>
 
 
       <label for="city">Gemeente:</label><br><br>

@@ -56,7 +56,7 @@
       <span>{{$totalPages}} Pagina's</span><br>
       <span class="totalPricePrintjob">= €{{$price}}</span>
     </div>
-    @if($printJobStatus!=="Klaar")
+    @if($printJobStatus!=="Klaar" && $printJobStatus!=="Geweigerd")
     <div class="actionsForPrinter">
       <p class="accountSubtitle">Acties:</p>
       @if($printJobStatus=="Aangevraagd")
@@ -80,6 +80,8 @@
       <p class="smallGrey">Bestanden worden verwijderd na 30 dagen.</p>
     </div>
   </div>
+
+
   @else
 
 

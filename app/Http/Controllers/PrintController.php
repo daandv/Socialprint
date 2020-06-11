@@ -56,17 +56,23 @@ class PrintController extends Controller
       }
 
       $userThatPrintsName = User::find($userThatPrintsId)->name;
+      $userThatPrintsProfilePicture = User::find($userThatPrintsId)->profile_picture_url;
       $requesterName = User::find($requesterId)->name;
-      // $printer = Printer::where('user_id', $userThatPrintsId)->first();
+      $requesterProfilePicture = User::find($requesterId)->profile_picture_url;
+
       $pp = $printer->price;
 
       return view('fileupload', [
         'userThatPrintsId' => $userThatPrintsId,
         'userThatPrintsName' => $userThatPrintsName,
         'printerId' => $printer->id,
+        'printerColorId' => $printer->color_id,
+        'printerFormatId' => $printer->format_id,
         'requesterId' => $requesterId,
         'requesterName' => $requesterName,
         'pp' => $pp,
+        'userThatPrintsProfilePicture' => $userThatPrintsProfilePicture,
+        'requesterProfilePicture' => $requesterProfilePicture,
       ]);
     }
 
@@ -180,15 +186,12 @@ class PrintController extends Controller
 
     public function getFile()
     {
-      // TO VALIDATE
-      // Request $file
       try {
           return Storage::disk('s3')->response('documents/' . Route::current()->parameter('fileName'));
       } catch (\Exception $e) {
-          return redirect()->route('home')->with('status', "Bestand niet gevonden");
+          notify()->error('Bestand niet gevonden.', 'Error!');
+          return redirect()->route('home');
       }
-
-
     }
 
 

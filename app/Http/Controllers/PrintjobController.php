@@ -53,10 +53,12 @@ class PrintJobController extends Controller
           $printerPrice = $printer->price;
 
           $userThatPrintsId = User::find($printer->user_id)->id;
-          $requesterId = $printJob->requester_id;
-
+          $userThatPrintsProfilePicture = User::find($userThatPrintsId)->profile_picture_url;
           $userThatPrintsName = User::find($printer->user_id)->name;
+
+          $requesterId = $printJob->requester_id;
           $requesterName = User::find($printJob->requester_id)->name;
+          $requesterProfilePicture = User::find($requesterId)->profile_picture_url;
 
           // Clear notifications
           // If user is requester en has notifications
@@ -83,6 +85,8 @@ class PrintJobController extends Controller
           $fullPrintJobInfo_ = [
             'id' => $printJob->id,
             'userThatPrintsName' => $userThatPrintsName,
+            'userThatPrintsProfilePicture' => $userThatPrintsProfilePicture,
+            'requesterProfilePicture' => $requesterProfilePicture,
             'userThatPrintsId' => $userThatPrintsId,
             'requesterId' => $requesterId,
             'requesterName' => $requesterName,
@@ -130,10 +134,12 @@ class PrintJobController extends Controller
           $printerPrice = $printer->price;
 
           $userThatPrintsId = User::find($printer->user_id)->id;
-          $requesterId = $printJob->requester_id;
-
+          $userThatPrintsProfilePicture = User::find($userThatPrintsId)->profile_picture_url;
           $userThatPrintsName = User::find($printer->user_id)->name;
+
+          $requesterId = $printJob->requester_id;
           $requesterName = User::find($printJob->requester_id)->name;
+          $requesterProfilePicture = User::find($requesterId)->profile_picture_url;
 
           //Clear notifications
           if ($printJob->requester_id==$user->id) {
@@ -153,6 +159,8 @@ class PrintJobController extends Controller
             'id' => $printJob->id,
             'userThatPrintsName' => $userThatPrintsName,
             'userThatPrintsId' => $userThatPrintsId,
+            'userThatPrintsProfilePicture' => $userThatPrintsProfilePicture,
+            'requesterProfilePicture' => $requesterProfilePicture,
             'requesterId' => $requesterId,
             'requesterName' => $requesterName,
             'date' => $printJob->created_at->toDateString(),

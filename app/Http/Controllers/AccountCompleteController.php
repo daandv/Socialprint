@@ -58,7 +58,7 @@ class AccountCompleteController extends Controller
     public function addPrinterStore(Request $request) {
       $rules = [
         'address' => 'required',
-        'busNumber' => 'numeric',
+        'busNumber' => 'nullable|numeric',
         'lat' => 'required',
         'lng' => 'required',
         'pp' => ['required', new ValidPricePerPage]
