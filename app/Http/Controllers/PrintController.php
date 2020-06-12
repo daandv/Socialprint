@@ -79,12 +79,12 @@ class PrintController extends Controller
     public function uploadFiles(Request $request)
     {
       $rules = [
-        'file' => 'required|max:2',
+        'file' => 'required|max:5',
         'file.*' => 'mimes:pdf|max:40000'
       ];
       $customMessages = [
         'file.*.max' => 'De maximum filegrootte is 40MB.',
-        'file.max' => 'Maximum 10 files',
+        'file.max' => 'Maximum 5 files',
         'required' => 'Geen file gevonden.',
         'mimes' => 'Enkel PDF bestanden toegelaten'
       ];
