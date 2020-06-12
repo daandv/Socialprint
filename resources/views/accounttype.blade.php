@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
   <div class="centered">
-    <h1 class="bigTitle">Wat wil je doen?</h1>
+    <h1 class="bigTitle">Wat wil je doen? <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Dit kan later nog worden aangepast." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></h1>
 
         <div class="row accountTypeWrapper">
           <div class="item accountTypeItem">
@@ -20,7 +20,6 @@
         </div>
 
   </div>
-
 </div>
 @include('layouts.footer')
 
