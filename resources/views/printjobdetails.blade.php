@@ -84,10 +84,8 @@
 
   @else
 
-
-
   <div class="centered">
-    <h1 class="bigTitle">Printaanvraag bij {{$userThatPrintsName}}</h1>
+    <h1 class="bigTitle">Printaanvraag bij <a href="{{route('profile', [$userThatPrintsId])}}" class="darkLink">{{$userThatPrintsName}}</a></h1>
     <h1 class="bigTitle printJobStatus
     @if($printJobStatus=='Geaccepteerd') green @endif
     @if($printJobStatus=='Geweigerd') red @endif
@@ -142,11 +140,11 @@
   <br>
   @if ($isPrinter)
   <div class="centered">
-    <h1 class="chatTitle">Chat met {{$requesterName}}</h1>
+    <h1 class="chatTitle">Chat met {{$requesterName}} <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Deze chat is gekoppeld aan de printopdracht." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></h1>
   </div>
   @else
   <div class="centered">
-    <h1 class="chatTitle">Chat met {{$userThatPrintsName}}</h1>
+    <h1 class="chatTitle">Chat met {{$userThatPrintsName}} <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Deze chat is gekoppeld aan de printopdracht." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></h1>
   </div>
   @endif
   <div class="chatMessages">

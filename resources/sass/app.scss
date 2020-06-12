@@ -1036,7 +1036,73 @@ a {
   display: block;
 }
 
+// PROFILE
+.profileProfilePicture {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 1000px;
+}
+.biography {
+  word-wrap: break-word;
+  p {
+    font-style: italic;
+    font-size: 25px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+.profilePrinterDetails {
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+  margin-top: 40px;
+  .profileBubble {
+    width: 400px;
+    word-wrap: break-word;
+    background-color: white;
+    box-shadow: 2px 2px 10px rgba(68, 68, 68, 0.1);
+    padding: 35px;
+    border-radius: 40px;
+    margin-bottom: 35px;
+  }
+}
+.button-red {
+  background-color: rgb(255, 47, 47);
+  margin-left: 15px;
+}
+.profileAddress {
+    font-size: 25px;
+    line-height: 45px;
+}
+.profilePrinter {
+  p {
+    font-size: 30px;
+    font-weight: 600;
+    color: #FF0066;
+  }
 
+}
+.darkLink {
+  color: #383838;
+  text-decoration: underline;
+}
+.profilePrinterTags {
+  span {
+      font-size: 20px;
+      background-color: rgb(184, 184, 184);
+      color: white;
+      padding: 5px 10px 5px 10px;
+      margin-bottom: 10px;
+      border-radius: 25px;
+      display: inline-block;
+  }
+}
+.routeLink {
+  text-decoration-color: #FF0066;
+}
 
 
 // FOOTER
@@ -1195,5 +1261,14 @@ footer {
   }
   .a-container {
       width: 100%;
+  }
+  .profilePrinterDetails {
+    div {
+      width: 100%;
+    }
+  }
+  .button-red {
+    margin-left: 0px;
+    margin-top: 15px;
   }
 }

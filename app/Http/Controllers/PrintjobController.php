@@ -225,7 +225,6 @@ class PrintJobController extends Controller
       }
 
 
-
       // Check if user has rights to printjob
       // If user has printer
       if ($printer) {
@@ -320,6 +319,7 @@ class PrintJobController extends Controller
             'totalPages' => $totalPages,
             'price' => $printJob->price,
             'userThatPrintsName' => $userThatPrintsName,
+            'userThatPrintsId' => $userThatPrints->id,
             'userAddressDetails' => $userAddressDetails,
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,
@@ -369,6 +369,7 @@ class PrintJobController extends Controller
             'totalPages' => $totalPages,
             'price' => $printJob->price,
             'userThatPrintsName' => $userThatPrintsName,
+            'userThatPrintsId' => $userThatPrints->id,
             'userAddressDetails' => $userAddressDetails,
             'messages' => $fullMessagesInfo,
             'currentUserId' => $user->id,

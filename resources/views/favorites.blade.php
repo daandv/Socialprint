@@ -12,7 +12,7 @@
   @if(count($favorites)>0)
   <div class="favoritesWrapper">
       @foreach($favorites as $favorite)
-        <div class="favoriteItem" onclick="location.href='{{route('user.star', [$favorite['fullUserInfo']['id']])}}';">
+        <div class="favoriteItem" onclick="location.href='{{route('profile', [$favorite['fullUserInfo']['id']])}}';">
               <div class="userHeader">
                 <div class="">
                   <img class="profilePicture" src="{{$favorite['fullUserInfo']['profile_picture_url']}}" alt="Profielfoto {{$favorite['fullUserInfo']['name']}}">

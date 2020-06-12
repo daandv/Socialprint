@@ -9,6 +9,7 @@ use App\User;
 use App\Printer;
 use App\UserAddressInfo;
 use App\Favourite;
+use App\Printjob;
 
 use Route;
 
@@ -35,15 +36,42 @@ class ProfileController extends Controller
         return redirect()->route('home');
       }
 
+
+
+
       $userThatPrints = User::find($userThatPrintsId);
       $userThatPrintsAddressInfo = UserAddressInfo::find($userThatPrints->address_id);
-
+      $printer = Printer::where('user_id', $userThatPrints->id)->first();
       $favourited = Favourite::where('user_id', $user->id)->where('printer_user_id', $userThatPrints->id)->where('unfavourite', 0)->count();
+
+      // Printer reputation
+      $reputation = 0;
+      $profileMadeDate = strtotime($userThatPrints->created_at);
+      $today = strtotime(date('Y-m-d H:i:s'));
+      $daysActive = abs($today - $profileMadeDate);
+      $years = floor($daysActive / (365*60*60*24));
+      $months = floor(($daysActive - $years * 365*60*60*24)
+                                     / (30*60*60*24));
+      $daysActiveDays = floor(($daysActive - $years * 365*60*60*24 -
+                   $months*30*60*60*24)/ (60*60*24));
+
+
+      $printJobs = Printjob::where('printer_id', $printer->id)->get();
+      $doneJobs = Printjob::where('printer_id', $printer->id)->where('status', "Klaar")->count();
+      $notDoneJobs = Printjob::where('printer_id', $printer->id)->where('status', '!=', "Klaar")->count();
+
+      if ($daysActiveDays<14) {
+        $reputation = 1;
+      } elseif ($printJobs->count()>50 && $doneJobs>$notDoneJobs) {
+        $reputation = 2;
+      }
 
       return view('profile', [
         'userThatPrints' => $userThatPrints,
         'userThatPrintsAddressInfo' => $userThatPrintsAddressInfo,
         'favourited' => $favourited,
+        'reputation' => $reputation,
+        'printer' => $printer,
       ]);
     }
 
@@ -126,7 +154,7 @@ class ProfileController extends Controller
         $favourite->save();
         return redirect()->route('favorites');
       }
-      
+
       notify()->error('Er is een fout opgetreden.', 'Error!');
       return redirect()->route('home');
 
