@@ -76,6 +76,14 @@
           </div>
         </li>
 
+        <li class="a-items">
+          <input type="radio" name="ac" id="a8" />
+          <label for="a8">Hoe kan ik mijn account verwijderen?</label>
+          <div class="a-content">
+            <p>Gelieve ons te contacteren als u uw account wil verwijderen. Dit kan op info@socialprint.site.</p>
+          </div>
+        </li>
+
       </ul>
     </div>
     <br><br>
