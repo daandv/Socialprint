@@ -11,7 +11,7 @@
 
         <div class="row accountTypeWrapper">
           <div class="item accountTypeItem">
-              <a class="bigTitle accountTypeOption" href="{{ route('notaprinter') }}">Enkel bij andere afdrukken</a>
+              <a class="bigTitle accountTypeOption" href="{{ route('notaprinter') }}">Enkel bij anderen afdrukken</a>
           </div>
           <div class="item accountTypeItem">
               <a class="bigTitle accountTypeOption" href="{{ route('addprinter') }}">Mijn eigen printer beschikbaar stellen</a>

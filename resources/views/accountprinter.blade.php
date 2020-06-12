@@ -102,7 +102,7 @@
     <label for="mailNotif">Ontvang e-mail updates</label><br>
     <br>
     @if($available)
-      <a class="greyLink" href="./notavailable">Ik wil niet (tijdelijk) meer printen</a>
+      <a class="greyLink" href="./notavailable">Ik wil (tijdelijk) niet meer printen</a>
     @else
       <a class="greyLink" href="./setavailable">Ik wil weer printen</a>
     @endif

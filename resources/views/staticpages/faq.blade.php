@@ -21,9 +21,9 @@
           <label for="a1">Welk soort account moet ik kiezen?</label>
           <div class="a-content">
             <h3>Ik wil zelf ook printen</h3>
-            <p>Dit kiest u als u zelf een printer hebt en deze beschikbaar wilt stellen voor andere personen. Je kan zo printopdrachten binnekrijgen.</p>
+            <p>Dit kiest u als u zelf een printer heeft en deze beschikbaar wil stellen voor andere personen. Je kan zo printopdrachten binnenkrijgen.</p>
             <h3>Ik wil niet printen</h3>
-            <p>Indien u kiest om zelf niet te printen kan u bij andere afprinten maar zelf geen opdrachten ontvangen. Dit kan u te allen tijde aanpassen bij uw account.</p>
+            <p>Indien u kiest om zelf niet te printen, kan u bij anderen afprinten maar zelf geen opdrachten ontvangen. Dit kan u te allen tijde aanpassen bij uw account.</p>
           </div>
         </li>
 
@@ -32,9 +32,9 @@
           <label for="a2">Hoe pas ik mijn accounttype aan?</label>
           <div class="a-content">
             <h3>Ik wil zelf ook printen</h3>
-            <p>Indien u bij het registreren hebt gekozen voor een "Enkel printen bij anderen" account maar nu uw eigen printer beschikbaar wil stellen kan u dit aanpassen bij "account" onderaan.</p>
+            <p>Indien u bij het registreren heeft gekozen voor een "Enkel printen bij anderen" account maar nu uw eigen printer beschikbaar wil stellen, kan u dit aanpassen bij "account" onderaan.</p>
             <h3>Ik wil niet meer printen</h3>
-            <p>Indien u bij het registreren hebt gekozen voor een "Zelf printen" account maar nu niet meer wil printen kan u dit aanpassen bij "account" onderaan. Dit is tijdelijk en kan te allen tijde ongedaan gemaakt worden.</p>
+            <p>Indien u bij het registreren heeft gekozen voor een "Zelf printen" account maar nu niet meer wil printen, kan u dit aanpassen bij "account" onderaan. Dit is tijdelijk en kan te allen tijde ongedaan gemaakt worden.</p>
           </div>
         </li>
 
@@ -54,7 +54,7 @@
           <label for="a4">Wat is een goede prijs per pagina?</label>
           <div class="a-content">
             <h3>Kleur</h3>
-            <p>De gemiddelde prijs voor een kleurenprint ligt rond de 10 - 50 cent per pagina. U kan ervoor kiezon om iets meer te vragen om wat meer over te houden.</p>
+            <p>De gemiddelde prijs voor een kleurenprint ligt rond de 10 - 50 cent per pagina. U kan ervoor kiezen om iets meer te vragen om wat meer over te houden.</p>
             <h3>Zwart/wit</h3>
             <p>De prijs van een zwart/wit afdruk ligt in de regel iets lager dan een kleurenprint.</p>
           </div>
@@ -64,7 +64,7 @@
           <input type="radio" name="ac" id="a5" />
           <label for="a5">Waarom kan ik mijn printopdracht niet versturen?</label>
           <div class="a-content">
-            <p>Per printopdracht kan u 5 bestanden versturen. Deze bestanden dienen van het formaat .pdf te zijn en maximum 40MB groot. Als onze server de pdf niet kan verwerken wil dit zeggen dat deze niet geldig is. Probeer deze eventueel te converteren naar een geldige pdf.</p>
+            <p>Per printopdracht kan u 5 bestanden versturen. Deze bestanden dienen van het formaat .pdf te zijn en maximum 40MB groot. Als onze server de pdf niet kan verwerken, wil dit zeggen dat deze niet geldig is. Probeer deze eventueel te converteren naar een geldige pdf.</p>
           </div>
         </li>
 
