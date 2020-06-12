@@ -10,30 +10,44 @@
 
         <li class="a-items">
           <input type="radio" name="ac" id="a1" />
-          <label for="a1">About Us</label>
+          <label for="a1">Voorwoord</label>
           <div class="a-content">
-            <h2>What's Up?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam beatae maiores possimus sequi non quidem ad necessitatibus fugiat consectetur veritatis laboriosam ut soluta quis deleniti deserunt! Voluptate qui excepturi architecto.</p>
+            <h2>Hoi!</h2>
+            <p>Leuk dat je een bezoek brengt aan mijn website! Ik ben Daan De Vry en heb als eindwerk het Socialprint platform op poten gezet.
+              Op deze pagina vindt u wat info over mijn website & het gebruik ervan.
+            </p>
+            <h3>Concept in het kort</h3>
+            <p>Socialprint is een platform waar studenten hun printer met elkaar kunnen delen. Zelf merkte ik onder andere tijdens mij periode op
+              kot dat het voor mijzelf niet de moeite was om een printer aan te schaffen.
+              Dit platform maakt het mogelijk om bij andere personen of vrienden in de buurt af te drukken. Er wordt op een informele manier een prijs opgesteld om zonder schuldgevoel te kunnen printen.
+            </p>
           </div>
         </li>
 
         <li class="a-items">
           <input type="radio" name="ac" id="a2" />
-          <label for="a2">Our Services</label>
+          <label for="a2">Rekening houden bij registreren</label>
           <div class="a-content">
-            <h3>Design</h3>
-            <p>Lorem ipsum dolor sit amet, quidem ad necessitatibus fugiat consectetur veritatis laboriosam ut soluta quis deleniti deserunt! Voluptate qui excepturi architecto.</p>
-            <h3>Development</h3>
-            <p>Lorem ipsum dolor sit amet, quidem ad necessitatibus fugiat consectetur veritatis laboriosam ut soluta quis deleniti deserunt! Voluptate qui excepturi architecto.</p>
+            <h3>E-mail</h3>
+            <p>Om de kosten van een jaarlijkse dedicated IP mailserver te vermijden is het mogelijk dat mijn e-mails
+              voor onder andere de verificatie van uw account worden tegen gehouden door spamfilters of in uw spamfolder terechtkomen.
+              Moest het zijn dat u de e-mails niet ontvangt kan u nogmaals proberen met een <b>Gmail adres</b> of eventueel een tijdelijke online mailbox.
+            </p>
+
+            <h3>Accounttypes</h3>
+            <p>Bij het registreren krijgt u de keuze tussen een "Enkel printen bij anderen" account of een "Zelf printen" account. U kan te allen tijde switchen tussen deze accounts bij "Account"
+            </p>
           </div>
         </li>
 
         <li class="a-items">
           <input type="radio" name="ac" id="a3" />
-          <label for="a3">Keep In Touch</label>
+          <label for="a3">Vragen & contact</label>
           <div class="a-content">
-            <h2>hello world!</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam beatae maiores possimus sequi non quidem ad necessitatibus fugiat consectetur veritatis laboriosam ut soluta.</p>
+            <p>Enkele vragen worden beantwoord op de <a href="{{route('faq')}}">FAQ</a> pagina.</p>
+            <p>Indien uw vraag hier niet tussen staat kan u mij bereiken op:
+            <br>daandevry@live.be
+            <br>info@socialprint.site</p>
           </div>
         </li>
 

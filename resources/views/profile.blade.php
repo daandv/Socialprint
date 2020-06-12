@@ -56,7 +56,7 @@
   @if(!$favourited)
       <a href="{{ route('user.star', [$userThatPrints->id]) }}" class="button-primary button-red" data-tippy-content="Voeg toe aan favorieten." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle">&#128149;</a>
   @endif
-
+      <br><br>
 
   </div>
 </div>

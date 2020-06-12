@@ -176,7 +176,7 @@ class PrintController extends Controller
 
           }
 
-          notify()->success('File(s) geupload naar s3 en DB.', 'Joepie!');
+          notify()->success('De printopdracht is succesvol verzonden. We brengen de printer op de hoogte.', 'Fantastisch!');
           return redirect()->route('home');
         }
 

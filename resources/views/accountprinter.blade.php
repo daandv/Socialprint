@@ -92,7 +92,7 @@
     <input id="zip" type="hidden" name="zip" value="{{$zip}}">
 
     <br><br><br>
-    
+
     <span class="accountSubtitle">Privacy:</span><br>
     <input type="checkbox" name="mailNotif" value="1"
     @if($emailNotif)
@@ -102,13 +102,13 @@
     <label for="mailNotif">Ontvang e-mail updates</label><br>
     <br>
     @if($available)
-      <a class="greyLink" href="./notavailable">Ik wil niet meer printen</a>
+      <a class="greyLink" href="./notavailable">Ik wil niet (tijdelijk) meer printen</a>
     @else
       <a class="greyLink" href="./setavailable">Ik wil weer printen</a>
     @endif
     <br><br><br>
     <input class="button-primary" type="submit" value="Opslaan">
-
+    <br><br>
   </form>
 
 

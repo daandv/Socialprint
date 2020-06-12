@@ -53,7 +53,7 @@
     <a class="greyLink" href="{{route('changetoprinter')}}">Ik wil mijn printer beschikbaar stellen</a>
     <br><br><br>
     <input class="button-primary" type="submit" value="Opslaan">
-
+    <br><br>
   </form>
 
   </div>

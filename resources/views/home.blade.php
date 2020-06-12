@@ -25,7 +25,7 @@
       <form class="algoliabox algoliaboxmap">
         <input type="text" id="adress" placeholder="Zoek in een gemeente">
       </form>
-      <img class="logo_icon" src="{{ asset('images/logo_icon.png')}}">
+      <img onclick="location.href='{{route('welcome')}}';" class="logo_icon" src="{{ asset('images/logo_icon.png')}}">
     </div>
 
 

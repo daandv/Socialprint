@@ -64,7 +64,7 @@
                 @endif
               </a></li>
               <li><a href="{{ route('favorites') }}">Favorieten</a></li>
-              <li><a href="{{ route('editaccount') }}">Profiel</a></li>
+              <li><a href="{{ route('editaccount') }}">Account</a></li>
               @endguest
           </ul>
     	</header>

@@ -593,6 +593,7 @@ a {
   right: 65px;
   z-index: 900;
   height: 28px;
+  cursor:pointer;
 }
 
 
@@ -1039,11 +1040,16 @@ a {
 .a-container input:checked ~ .a-content {
   display: block;
 }
-
+.privacy {
+  width: 70%;
+  line-height: 25px;
+  margin: 0 auto;
+  opacity: 0.8;
+}
 // PROFILE
 .profileProfilePicture {
-  height: 150px;
-  width: 150px;
+  height: 135px;
+  width: 135px;
   object-fit: cover;
   border-radius: 1000px;
 }
@@ -1274,5 +1280,13 @@ footer {
   .button-red {
     margin-left: 0px;
     margin-top: 15px;
+  }
+  .profileProfilePicture {
+    height: 55px;
+    width: 55px;
+    margin-top: 25px;
+  }
+  .privacy {
+    width: 100%;
   }
 }

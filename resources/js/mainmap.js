@@ -1,4 +1,3 @@
-
 //LEAFLET MAP ------------------------------------------------------
 var map = L.map('mymap',
 {
@@ -10,22 +9,14 @@ var map = L.map('mymap',
 }).locate({setView: true, maxZoom: 16});
 
 function onLocationFound(e) {
-  console.log("Locatie gevonden")
-    // var radius = e.accuracy;
-    //
-    // L.marker(e.latlng).addTo(map)
-    //     .bindPopup("You are within " + radius + " meters from this point").openPopup();
-    //
-    // L.circle(e.latlng, radius).addTo(map);
+    map.setView([e.latlng], 12);
 }
 map.on('locationfound', onLocationFound);
 
 function onLocationError(e) {
-    console.log(e.message);
     map.setView([51.050499, 4.410550], 9);
 }
 map.on('locationerror', onLocationError);
-
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -42,13 +33,9 @@ L.control.zoom({
 
 var greenIcon = L.icon({
     iconUrl: './images/marker_pink.png',
-    // shadowUrl: 'leaf-shadow.png',
-
-    iconSize:     [28, 34.5], // size of the icon
-    // shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [10, 45], // point of the icon which will correspond to marker's location
-    // shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [0, -60] // point from which the popup should open relative to the iconAnchor
+    iconSize:     [28, 34.5],
+    iconAnchor:   [10, 45],
+    popupAnchor:  [0, -60]
 });
 
 // Load api data
@@ -56,8 +43,6 @@ fetch("./printers")
   .then(response => response.json())
   .then(data => {
     var printers = data.data;
-    // console.log(printers);
-    //cluster
     var markerClusters = L.markerClusterGroup({
       showCoverageOnHover:false,
       maxClusterRadius:30,
@@ -86,7 +71,6 @@ fetch("./printers")
               notclusteredmarkers.push(feature)
           }
       });
-                    console.log(notclusteredmarkers);
     });
 
 
@@ -94,11 +78,6 @@ fetch("./printers")
   .catch(function(error) {
     console.log(error);
   });
-
-
-
-
-
 
   //ALGOLIA SEARCH ---------------------------------------------------
   (function() {
@@ -117,7 +96,6 @@ fetch("./printers")
     });
 
     placesAutoComplete.on('change', function resultSelected(e) {
-      console.log(e.suggestion);
       map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 13);
 
 

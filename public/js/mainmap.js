@@ -106,18 +106,12 @@ var map = L.map('mymap', {
 });
 
 function onLocationFound(e) {
-  console.log("Locatie gevonden"); // var radius = e.accuracy;
-  //
-  // L.marker(e.latlng).addTo(map)
-  //     .bindPopup("You are within " + radius + " meters from this point").openPopup();
-  //
-  // L.circle(e.latlng, radius).addTo(map);
+  map.setView([e.latlng], 12);
 }
 
 map.on('locationfound', onLocationFound);
 
 function onLocationError(e) {
-  console.log(e.message);
   map.setView([51.050499, 4.410550], 9);
 }
 
@@ -135,23 +129,15 @@ L.control.zoom({
 }).addTo(map);
 var greenIcon = L.icon({
   iconUrl: './images/marker_pink.png',
-  // shadowUrl: 'leaf-shadow.png',
   iconSize: [28, 34.5],
-  // size of the icon
-  // shadowSize:   [50, 64], // size of the shadow
   iconAnchor: [10, 45],
-  // point of the icon which will correspond to marker's location
-  // shadowAnchor: [4, 62],  // the same for the shadow
-  popupAnchor: [0, -60] // point from which the popup should open relative to the iconAnchor
-
+  popupAnchor: [0, -60]
 }); // Load api data
 
 fetch("./printers").then(function (response) {
   return response.json();
 }).then(function (data) {
-  var printers = data.data; // console.log(printers);
-  //cluster
-
+  var printers = data.data;
   var markerClusters = L.markerClusterGroup({
     showCoverageOnHover: false,
     maxClusterRadius: 30
@@ -175,7 +161,6 @@ fetch("./printers").then(function (response) {
         notclusteredmarkers.push(feature);
       }
     });
-    console.log(notclusteredmarkers);
   });
 })["catch"](function (error) {
   console.log(error);
@@ -196,7 +181,6 @@ fetch("./printers").then(function (response) {
     countries: ['BE']
   });
   placesAutoComplete.on('change', function resultSelected(e) {
-    console.log(e.suggestion);
     map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 13);
   });
 })();

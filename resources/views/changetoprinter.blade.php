@@ -51,7 +51,7 @@
 
       <br><br><br>
       <input class="button-primary" type="submit" value="Start met printen">
-
+    <br><br>
     </form>
   </div>
 </div>

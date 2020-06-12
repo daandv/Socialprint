@@ -13,6 +13,3 @@ $('.main-nav').click(function(e) {
 $('.main-nav').find("a").click(function(e) {
     $(this).addClass("brighter");
 })
-
-// CHAT
-$(".chatMessages").scrollTop($(".chatMessages")[0].scrollHeight);

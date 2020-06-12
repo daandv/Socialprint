@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @push('script')
-<!-- <script src="{{ asset('js/fileUpload.js') }}" defer></script> -->
+<script>
+$(".chatMessages").scrollTop($(".chatMessages")[0].scrollHeight);
+</script>
 @endpush
 
 @section('content')
