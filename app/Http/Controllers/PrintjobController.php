@@ -380,6 +380,8 @@ class PrintJobController extends Controller
           ]);
         }
       }
+      notify()->error('Er is een fout opgetreden.', 'Error!');
+      return redirect()->route('home');
     }
 
     public function reject() {
@@ -444,6 +446,8 @@ class PrintJobController extends Controller
           return redirect()->route('home');
         }
       }
+      notify()->error('Er is een fout opgetreden.', 'Error!');
+      return redirect()->route('home');
     }
 
     public function accept() {
@@ -508,6 +512,8 @@ class PrintJobController extends Controller
           return redirect()->route('home');
         }
       }
+      notify()->error('Er is een fout opgetreden.', 'Error!');
+      return redirect()->route('home');
     }
 
     public function markDone() {
@@ -568,6 +574,8 @@ class PrintJobController extends Controller
           return redirect()->route('home');
         }
       }
+      notify()->error('Er is een fout opgetreden.', 'Error!');
+      return redirect()->route('home');
     }
 
 

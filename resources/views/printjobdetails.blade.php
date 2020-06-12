@@ -76,6 +76,7 @@ $(".chatMessages").scrollTop($(".chatMessages")[0].scrollHeight);
     <div class="printJobDetailsFiles">
       <p class="accountSubtitle">Bestanden: ({{count($fileNames)}})</p>
       @foreach ($fileNames as $filename)
+      &#128195;
         <a href="{{ route('getfile', [$filename->file_name]) }}" download>{{$filename->file_name}}</a>
         <br>
       @endforeach
@@ -129,6 +130,7 @@ $(".chatMessages").scrollTop($(".chatMessages")[0].scrollHeight);
     <div class="printJobDetailsFiles">
       <p class="accountSubtitle">Bestanden: ({{count($fileNames)}})</p>
       @foreach ($fileNames as $filename)
+      &#128195;
         <a href="{{ route('getfile', [$filename->file_name]) }}" download>{{$filename->file_name}}</a>
         <br>
       @endforeach

@@ -584,11 +584,22 @@ a {
 }
 .logo_icon {
   position: absolute;
-  bottom: 35px;
+  bottom: 40px;
   right: 65px;
   z-index: 900;
   height: 28px;
   cursor:pointer;
+}
+.faq_icon {
+  position: absolute;
+  bottom: 35px;
+  right: 130px;
+  z-index: 900;
+  cursor:pointer;
+  font-size: 20px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 3px;
 }
 
 

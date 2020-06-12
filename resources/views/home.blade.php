@@ -26,6 +26,7 @@
         <input type="text" id="adress" placeholder="Zoek in een gemeente">
       </form>
       <img onclick="location.href='{{route('welcome')}}';" class="logo_icon" src="{{ asset('images/logo_icon.png')}}">
+      <span onclick="location.href='{{route('faq')}}';" class="faq_icon">&#10067;</span>
     </div>
 
 
