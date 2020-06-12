@@ -120,7 +120,13 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
   id: 'mapbox.light',
   accessToken: 'pk.eyJ1IjoiZGR2bWFwcyIsImEiOiJjamhuaTNlNzgzcWtlM2NwZTA0MDF1YmE5In0._G6QYZsmQZpYEuCD3br8VA',
   noWrap: true
-}).addTo(map); //ALGOLIA SEARCH ---------------------------------------------------
+}).addTo(map);
+var pinkIcon = L.icon({
+  iconUrl: './images/marker_pink.png',
+  iconSize: [28, 34.5],
+  iconAnchor: [10, 45],
+  popupAnchor: [0, -60]
+}); //ALGOLIA SEARCH ---------------------------------------------------
 
 (function () {
   var placesAutoComplete = places({
@@ -148,7 +154,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     }
 
     ;
-    theMarker = L.marker([e.suggestion.latlng.lat, e.suggestion.latlng.lng]).addTo(map);
+    theMarker = L.marker([e.suggestion.latlng.lat, e.suggestion.latlng.lng], {
+      icon: pinkIcon
+    }).addTo(map);
     map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 17);
     console.log(e.suggestion);
   });
@@ -165,7 +173,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
     ; // Add a marker to show where you clicked.
 
-    theMarker = L.marker([lat, lon]).addTo(map);
+    theMarker = L.marker([lat, lon], {
+      icon: pinkIcon
+    }).addTo(map);
   });
 })();
 

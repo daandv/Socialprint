@@ -65,17 +65,11 @@ fetch("./printers")
 
     for ( var i = 0; i < printers.length; ++i )
     {
-      // var popup = markers[i].name +
-      //             '<br/>' + markers[i].city +
-      //             '<br/><b>IATA/FAA:</b> ' + markers[i].iata_faa +
-      //             '<br/><b>ICAO:</b> ' + markers[i].icao +
-      //             '<br/><b>Altitude:</b> ' + Math.round( markers[i].alt * 0.3048 ) + ' m' +
-      //             '<br/><b>Timezone:</b> ' + markers[i].tz;
-
-      var popup =
-      '<a href="./profile/' + printers[i].id  + '">Bekijk profiel van ' + printers[i].name + '</a><br><br>' +
-      '<span>Prijs per pagina: €</span>' + printers[i].price + '<br><br>' +
-       '<a class="btn btn-light" role="button" href="./print_at/' + printers[i].printer_id + '">Print hier</a>';
+      var popup = '<div class="leafletHeader"><img class="leafletProfilePicture" src="' + printers[i].profile_picture_url +'" alt="Profielfoto"><div class="leafletFavoriteTitle"><span class="leafletFavoriteName">' +
+      printers[i].name + '</span><br><span class="leafletFavoriteAddress">' +
+      printers[i].streetAndNr + ', ' + printers[i].busNr + printers[i].city + '</span></div></div><div class="leafletPrice"> €' + printers[i].price + ' per pagina</div>' +
+      '<div class="leafletPrinterTags"><span>' + printers[i].format +'</span> <span>' + printers[i].color + '</span></div>' +
+      '<a href="./print_at/' + printers[i].printer_id + '" class="button-primary leafletButton">Print bij mij</a><a href="./profile/' + printers[i].id + '" class="leafletGreyLink">Of bekijk profiel</a>';
 
       var m = L.marker( [printers[i].lat, printers[i].lng], {title:printers[i].name, icon:greenIcon} )
                       .bindPopup( popup );

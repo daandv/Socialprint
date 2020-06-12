@@ -15,7 +15,7 @@
         <div class="favoriteItem" onclick="location.href='{{route('user.star', [$favorite['fullUserInfo']['id']])}}';">
               <div class="userHeader">
                 <div class="">
-                  <img class="profilePicture" src="{{$favorite['fullUserInfo']['profile_picture_url'] ?? "" }}" alt="Profielfoto {{$favorite['fullUserInfo']['name']}}">
+                  <img class="profilePicture" src="{{$favorite['fullUserInfo']['profile_picture_url']}}" alt="Profielfoto {{$favorite['fullUserInfo']['name']}}">
                 </div>
 
                 <div class="favoriteTitle">

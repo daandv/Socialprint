@@ -71,6 +71,12 @@ Route::get('/printers', 'Api\PrinterController@index');
 
 
 
-Route::get('/test', function () {
-  return view("auth.passwords.reset");
-});
+Route::get('/faq', function () {
+  return view("staticpages.faq");
+})->name('faq');
+Route::get('/info', function () {
+  return view("staticpages.infojurytesters");
+})->name('info');
+Route::get('/privacy', function () {
+  return view("staticpages.privacy");
+})->name('privacy');

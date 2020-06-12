@@ -6,17 +6,14 @@
 
 @section('content')
 <div class="container">
-  @if ($errors->any())
-      <div class="alert alert-danger">
-          <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-      </div>
-  @endif
-
   <div class="centered">
+    @if ($errors->any())
+        <div class="errors">
+            @foreach ($errors->unique() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+        </div>
+    @endif
       <h1 class="bigTitle">Nieuwe printopdracht</h1>
   </div>
   <form class="" action="{{ route('upload', [$printerId]) }}" method="post" enctype="multipart/form-data">

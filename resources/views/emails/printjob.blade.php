@@ -1,7 +1,7 @@
 @component('mail::message')
 # Nieuwe printopdracht
 
-Iemand wil iets bij je afprinten!
+Iemand wil iets bij je afdrukken!
 
 @component('mail::button', ['url' => $url])
 Bekijk

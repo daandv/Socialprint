@@ -103,7 +103,15 @@ var map = L.map('minimap', {
 var theMarker = {};
 var lat_ = document.getElementById("lat").value;
 var lng_ = document.getElementById("lng").value;
-theMarker = L.marker([lat_, lng_]).addTo(map);
+var pinkIcon = L.icon({
+  iconUrl: './images/marker_pink.png',
+  iconSize: [28, 34.5],
+  iconAnchor: [10, 45],
+  popupAnchor: [0, -60]
+});
+theMarker = L.marker([lat_, lng_], {
+  icon: pinkIcon
+}).addTo(map);
 map.setView([lat_, lng_], 17);
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -139,7 +147,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     }
 
     ;
-    theMarker = L.marker([e.suggestion.latlng.lat, e.suggestion.latlng.lng]).addTo(map);
+    theMarker = L.marker([e.suggestion.latlng.lat, e.suggestion.latlng.lng], {
+      icon: pinkIcon
+    }).addTo(map);
     map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 17);
     console.log(e.suggestion);
   });
@@ -156,7 +166,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
     ; // Add a marker to show where you clicked.
 
-    theMarker = L.marker([lat, lon]).addTo(map);
+    theMarker = L.marker([lat, lon], {
+      icon: pinkIcon
+    }).addTo(map);
     map.setView([lat, lon], 17);
   });
 })(); // PROFILE PICTURE
