@@ -47,6 +47,7 @@ class UserController extends Controller
         'address' => 'required',
         'lat' => 'required',
         'busNumber' => 'nullable|numeric',
+        'bio' => 'nullable|max:400',
         'lng' => 'required',
         'pp' => ['required', new ValidPricePerPage]
       ];
@@ -174,6 +175,7 @@ class UserController extends Controller
       $availability = $user->available;
       $emailNotif = $user->email_notifications;
       $profilePictureUrl = $user->profile_picture_url;
+      $bio = $user->bio;
 
       return view('accountprinter', [
         'name' => $name,
@@ -188,6 +190,7 @@ class UserController extends Controller
         'available' => $availability,
         'emailNotif' => $emailNotif,
         'profilePictureUrl' => $profilePictureUrl,
+        'bio' => $bio,
         'email' => $user->email,
       ]);
     }
@@ -251,6 +254,7 @@ class UserController extends Controller
         'name' => 'required|max:25|min:3|regex:/^[\pL\s\-]+$/u',
         'address' => 'required',
         'busNumber' => 'nullable|numeric',
+        'bio' => 'nullable|max:300',
         'lat' => 'required',
         'lng' => 'required',
         'pp' => ['required', new ValidPricePerPage],
@@ -270,6 +274,7 @@ class UserController extends Controller
 
       $user = User::find(Auth::user()->id);
       $user->name = $request->name;
+      $user->bio = $request->bio;
 
       if ($request->mailNotif==1) {
         $user->email_notifications=1;

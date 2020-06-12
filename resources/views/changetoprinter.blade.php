@@ -35,7 +35,7 @@
       <label for="">Exacte locatie op de kaart: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Klikken om exacte locatie aan te passen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
       <div id="minimap" class="accountmap"></div>
 
-      <br>
+      <br><br>
     <span class="accountSubtitle">Mijn printer:</span><br>
       <label><input type="radio" name="printColor" id="color" value="color" checked>Kleur</label>
       <label><input type="radio" name="printColor" id="bw" value="bw">Zwart-wit</label>

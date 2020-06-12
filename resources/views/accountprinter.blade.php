@@ -32,14 +32,24 @@
     <img onclick="document.getElementById('fileBtnHidden').click();" class="profileImageUpload" id="profilePicture" src="{{$profilePictureUrl}}" alt="Profielfoto" data-tippy-content="Klik om te wijzigen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle">
     <input type="file" id="fileBtnHidden" name="profielfoto" accept="image/*" style="display: none;">
 
-
     <br><br>
 
     <label for="name">Naam:</label><br><br>
-    <input type="text" id="name" class="accountInputStyled" name="name" value="{{$name}}"><br><br>
+    <input type="text" id="name" class="accountInputStyled" name="name" value="{{$name}}">
+
+    <br><br>
+
+    <label for="bio">Korte beschrijving (optioneel):</label><br><br>
+    <textarea placeholder="/" rows="2" type="text" id="bio" class="accountInputStyled accountTextareaStyled" name="bio">{{$bio}}</textarea>
+
+    <br><br>
+
+
 
     <label for="name">E-mail: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Deze kan je niet wijzigen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
-    <input type="text" id="name" class="accountInputStyled" name="name" value="{{$email}}" disabled><br><br>
+    <input type="text" id="name" class="accountInputStyled" name="name" value="{{$email}}" disabled>
+
+    <br><br><br>
 
     <span class="accountSubtitle">Adres:</span><br>
     <label for="address">Straat + huisnummer:</label><br><br>
@@ -57,7 +67,9 @@
     <br>
     <label for="">Exacte locatie op de kaart: <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="Klikken om exacte locatie aan te passen." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></label><br><br>
     <div id="minimap" class="accountmap"></div>
-    <br>
+
+    <br><br>
+
     <span class="accountSubtitle">Mijn printer:</span><br>
     <label><input type="radio" name="printColor" id="color" value="color"
       @if($colorId===1)
@@ -79,7 +91,8 @@
     <input id="lng" type="hidden" name="lng" value="{{$lng}}">
     <input id="zip" type="hidden" name="zip" value="{{$zip}}">
 
-    <br><br>
+    <br><br><br>
+    
     <span class="accountSubtitle">Privacy:</span><br>
     <input type="checkbox" name="mailNotif" value="1"
     @if($emailNotif)

@@ -41,6 +41,6 @@ class ValidPricePerPage implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'De prijs per pagina moet tussen 0 en 1 euro liggen.';
     }
 }

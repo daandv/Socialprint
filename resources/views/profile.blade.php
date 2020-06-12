@@ -16,13 +16,8 @@
       @endif
     </h1>
     <div class="biography">
-      <p>biogasdfaskdfasd;flkas biogasdfaskdfasdasd asdf</p>
+      <p>{{$userThatPrints->bio}}</p>
     </div>
-
-  @if(!$userThatPrints->available)
-    Niet beschikbaar
-  @endif
-
 
   <div class="profilePrinterDetails">
     <div class="profileBubble profileAddress">
