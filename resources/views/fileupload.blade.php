@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="wrapper">
-      <span>Upload bestanden:</span>
+      <span>Upload bestanden (pdf):</span>
       <div class="block upload">
           <input id="fileBtnHidden" type="file" name="file[]" multiple style="display: none;">
           <input type="button" class="fileUpload" value="" onclick="document.getElementById('fileBtnHidden').click();" />
