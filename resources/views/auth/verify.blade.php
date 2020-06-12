@@ -14,8 +14,8 @@
 
 
 
-      {{ __('Before proceeding, please check your email for a verification link.') }} <br><br>
-      {{ __('If you did not receive the email') }}<br><br><br>
+      {{ __('Before proceeding, please check your email for a verification link.') }} Dit kan tot 15 minuten duren.<br><br>
+      {{ __('If you did not receive the email') }}<br><br>
       <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
           @csrf
           <button type="submit" class="button-primary">{{ __('click here to request another') }}</button><br><br>
@@ -25,6 +25,7 @@
                        document.getElementById('logout-form').submit();">
           Uitloggen
       </a>
+
       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
           @csrf
       </form>
