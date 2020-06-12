@@ -171,7 +171,7 @@ class PrintController extends Controller
             // Mail to user that prints
             // Maybe queue
             if ($userThatPrints->email_notifications) {
-                Mail::to($userThatPrints->email)->send(new NewPrintjob(route('printjobs'), "test"));
+                Mail::to($userThatPrints->email)->send(new NewPrintjob(route('printjobs')));
             }
 
           }
