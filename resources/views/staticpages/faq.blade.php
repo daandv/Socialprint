@@ -39,6 +39,14 @@
         </li>
 
         <li class="a-items">
+          <input type="radio" name="ac" id="a9" />
+          <label for="a9">Hoe kan ik iemand toevoegen aan mijn favorieten?</label>
+          <div class="a-content">
+            <p>Dit kan door naar het profiel van de printer te gaan en op het hartje onderaan te klikken. U kan naar het profiel gaan door de printer op de kaart te vinden en op "bekijk profiel" te klikken.</p>
+          </div>
+        </li>
+
+        <li class="a-items">
           <input type="radio" name="ac" id="a3" />
           <label for="a3">Wat zijn de printer badges?</label>
           <div class="a-content">
