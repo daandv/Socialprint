@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\NewPrintjob;
+use App\Mail\NewPrintJob;
 use Carbon\Carbon;
 
 use setasign\Fpdi\Fpdi;
@@ -171,7 +171,7 @@ class PrintController extends Controller
             // Mail to user that prints
             // Maybe queue
             if ($userThatPrints->email_notifications) {
-                Mail::to($userThatPrints->email)->send(new NewPrintjob(route('printjobs')));
+                Mail::to($userThatPrints->email)->send(new NewPrintJob(route('printjobs')));
             }
 
           }
