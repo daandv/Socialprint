@@ -100,9 +100,9 @@
               </p>
               <p class="mobileSort">
                  @if ($printJob['requesterId']==$userId)
-                      &#128229; Binnenkomend
-                  @else
                       &#128228; Uitgaand
+                  @else
+                      &#128229; Binnenkomend
                   @endif
               </p>
             <p class="mobileDate">{{Carbon\Carbon::parse($printJob['date'])->format('d/m/Y')}}</p>
