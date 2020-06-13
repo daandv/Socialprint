@@ -5,12 +5,11 @@ var map = L.map('minimap',
 }).locate({setView: true, maxZoom: 16});
 
 function onLocationFound(e) {
-  console.log("Locatie gevonden")
+  map.setView([e.latlng], 12);
 }
 map.on('locationfound', onLocationFound);
 
 function onLocationError(e) {
-    console.log(e.message);
     map.setView([51.050499, 4.410550], 9);
 }
 map.on('locationerror', onLocationError);
@@ -80,6 +79,7 @@ var pinkIcon = L.icon({
 
     // Add a marker to show where you clicked.
      theMarker = L.marker([lat,lon], {icon:pinkIcon}).addTo(map);
+    map.setView([lat,lon], 17);
   });
 
 })();

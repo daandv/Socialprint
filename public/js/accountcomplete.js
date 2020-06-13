@@ -102,13 +102,12 @@ var map = L.map('minimap', {
 });
 
 function onLocationFound(e) {
-  console.log("Locatie gevonden");
+  map.setView([e.latlng], 12);
 }
 
 map.on('locationfound', onLocationFound);
 
 function onLocationError(e) {
-  console.log(e.message);
   map.setView([51.050499, 4.410550], 9);
 }
 
@@ -176,6 +175,7 @@ var pinkIcon = L.icon({
     theMarker = L.marker([lat, lon], {
       icon: pinkIcon
     }).addTo(map);
+    map.setView([lat, lon], 17);
   });
 })();
 

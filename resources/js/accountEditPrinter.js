@@ -2,7 +2,7 @@
 var map = L.map('minimap',
 {
     maxBounds: [[-90,-180],   [90,180]],
-}).locate({setView: true, maxZoom: 16});
+});
 
 
 var theMarker = {};
@@ -48,8 +48,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     countries: ['BE']
   });
 
-
-
   placesAutoComplete.on('change', function resultSelected(e) {
     document.querySelector('#city').value = e.suggestion.city;
     document.querySelector('#lat').value = e.suggestion.latlng.lat;
@@ -61,7 +59,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     };
     theMarker = L.marker([e.suggestion.latlng.lat,e.suggestion.latlng.lng], {icon:pinkIcon}).addTo(map);
     map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 17);
-    console.log(e.suggestion);
   });
 
 

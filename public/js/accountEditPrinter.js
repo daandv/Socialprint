@@ -96,9 +96,6 @@
 //MINIMAP ---------------------------------------------------------
 var map = L.map('minimap', {
   maxBounds: [[-90, -180], [90, 180]]
-}).locate({
-  setView: true,
-  maxZoom: 16
 });
 var theMarker = {};
 var lat_ = document.getElementById("lat").value;
@@ -151,7 +148,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
       icon: pinkIcon
     }).addTo(map);
     map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 17);
-    console.log(e.suggestion);
   });
   map.on('click', function (e) {
     lat = e.latlng.lat;
