@@ -5,7 +5,7 @@ var map = L.map('minimap',
 }).locate({setView: true, maxZoom: 16});
 
 function onLocationFound(e) {
-  map.setView([e.latlng], 12);
+
 }
 map.on('locationfound', onLocationFound);
 

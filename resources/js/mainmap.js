@@ -9,7 +9,7 @@ var map = L.map('mymap',
 }).locate({setView: true, maxZoom: 16});
 
 function onLocationFound(e) {
-    map.setView([e.latlng], 12);
+    
 }
 map.on('locationfound', onLocationFound);
 
