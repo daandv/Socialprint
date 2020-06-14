@@ -22,7 +22,6 @@ Auth::routes(['verify' => true]);
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/map', 'MapController@index');
 
 Route::get('/complete', 'AccountCompleteController@index')->name('complete');
 Route::get('/notaprinter', 'AccountCompleteController@notAPrinter')->name('notaprinter');
@@ -45,12 +44,6 @@ Route::get('/profile/{userid}', 'ProfileController@index')->name('profile');
 Route::get('/favorites', 'ProfileController@showfavorites')->name('favorites');
 Route::get('/star/{userid}', 'ProfileController@star')->name('user.star');
 Route::get('/unstar/{userid}', 'ProfileController@unstar')->name('user.unstar');
-
-// For error when getting to post method
-// Route::get('/adduserprinter', function () {
-//   return "dit gaat niet";
-// });
-
 
 Route::get('/print_at/{id}', 'PrintController@index')->name('printat');
 Route::post('/upload_at/{id}', 'PrintController@uploadFiles')->name('upload');

@@ -84,8 +84,6 @@
 
 
 
-
-
 <div class="container hiddenLarge">
   <div class="centered">
     <h1 class="bigTitle">&#127981; Mijn drukkerij</h1>

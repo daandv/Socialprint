@@ -9,7 +9,7 @@ var map = L.map('mymap',
 }).locate({setView: true, maxZoom: 16});
 
 function onLocationFound(e) {
-    
+
 }
 map.on('locationfound', onLocationFound);
 
@@ -97,7 +97,5 @@ fetch("./printers")
 
     placesAutoComplete.on('change', function resultSelected(e) {
       map.setView([e.suggestion.latlng.lat, e.suggestion.latlng.lng], 13);
-
-
     });
   })();

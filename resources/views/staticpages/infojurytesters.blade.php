@@ -29,7 +29,7 @@
           <label for="a2">Rekening houden bij registreren</label>
           <div class="a-content">
             <h3>E-mail</h3>
-            <p>Om de kosten van een jaarlijkse dedicated IP mailserver, te vermijden is het mogelijk dat mijn e-mails
+            <p>Om de kosten van een jaarlijkse dedicated IP mailserver te vermijden, is het mogelijk dat mijn e-mails
               voor onder andere de verificatie van uw account worden tegen gehouden door spamfilters of in uw spamfolder terechtkomen.
               Moest het zijn dat u de e-mails niet ontvangt, kan u nogmaals proberen met een <b>Gmail adres</b> of eventueel een tijdelijke online mailbox.
             </p>
