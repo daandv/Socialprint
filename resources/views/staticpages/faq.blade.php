@@ -9,6 +9,22 @@
       <ul class="a-container">
 
         <li class="a-items">
+          <input type="radio" name="ac" id="a9" />
+          <label for="a9">Wat is een printopdracht en hoe werkt het?</label>
+          <div class="a-content">
+            <p>Bij het versturen van een printopdracht naar iemand zal hij/zij de opdracht samen met de bestanden ontvangen. Hierna zal de opdracht al dan niet worden goedgekeurd en bestanden kunnen worden gedownload om af te drukken. Er kan gebruik gemaakt worden van de chat bij elke printopdracht om de verdere afhandeling te regelen.</p>
+          </div>
+        </li>
+
+        <li class="a-items">
+          <input type="radio" name="ac" id="a10" />
+          <label for="a10">Wie kan afdrukken?</label>
+          <div class="a-content">
+            <p>Iedereen die zich registreert op Socialprint kan afdrukken. Ook als je zelf je printer beschikbaar stelt, hebben we deze optie open gelaten. Indien je toch eens iets bij iemand anders wil afdrukken, kan dit dus gewoon.</p>
+          </div>
+        </li>
+
+        <li class="a-items">
           <input type="radio" name="ac" id="a7" />
           <label for="a7">Hoe betaal ik mijn prints?</label>
           <div class="a-content">
