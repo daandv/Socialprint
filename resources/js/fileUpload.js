@@ -11,13 +11,11 @@ $(document).ready(function(){
       } else {
         $('.fileUpload').val(files.length + " bestanden geselecteerd").css('background-image', 'none');
       }
-
   });
 
   // Empty input when user presses "back".
   $("#fileBtnHidden").replaceWith($("#fileBtnHidden").val('').clone(true));
-
-  document.getElementById('fileBtnHidden').oninput = async function() {
+  document.getElementById('fileBtnHidden').onchange = async function() {
     var userPP=$("#pp").val();
     var userPPRounded=parseFloat(userPP).toFixed(2)
     var totalPages=0;
@@ -71,7 +69,6 @@ $(document).ready(function(){
         } catch (e) {
           pagesFound=false;
         }
-        // var Pages = raw.match(/\/Type[\s]*\/Page[^s]/g).length;
         var regex = /<xmp.*?:(.*?)>(.*?)</g;
         var meta = [{
           Pages

@@ -1,25 +1,18 @@
 @extends('layouts.app')
 
-@notifyCss
+
 
 
 
 @push('script')
+@notifyCss
 <script src="{{ asset('js/mainmap.js') }}" defer></script>
 @endpush
 
+
+
 @section('content')
 
-
-    <!-- @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-
-        <script>
-
-        </script>
-    @endif -->
 
     <div id="mymap">
       <form class="algoliabox algoliaboxmap">

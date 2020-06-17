@@ -14,7 +14,7 @@
             @endforeach
         </div>
     @endif
-      <h1 class="bigTitle">Nieuwe printopdracht</h1>
+      <h1 class="bigTitle">Nieuwe printopdracht <img class="infoIcon" src="{{asset('images/question.svg')}}" data-tippy-content="{{$userThatPrintsName}} zal deze na verzenden al dan niet goedkeuren." data-tippy-arrow ="false" data-tippy-placement="right" data-tippy-animation="scale-subtle"></img></h1>
   </div>
   <form class="" action="{{ route('upload', [$printerId]) }}" method="post" enctype="multipart/form-data">
   @csrf

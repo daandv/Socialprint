@@ -873,7 +873,7 @@ $(document).ready(function () {
   }); // Empty input when user presses "back".
 
   $("#fileBtnHidden").replaceWith($("#fileBtnHidden").val('').clone(true));
-  document.getElementById('fileBtnHidden').oninput = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+  document.getElementById('fileBtnHidden').onchange = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
     var userPP, userPPRounded, totalPages, totalPrice, maxFileSize, validFileType, validFileSize, i, pdf, details;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
@@ -968,8 +968,7 @@ $(document).ready(function () {
           var Pages = raw.match(/\/Type[\s]*\/Page[^s]/g).length;
         } catch (e) {
           pagesFound = false;
-        } // var Pages = raw.match(/\/Type[\s]*\/Page[^s]/g).length;
-
+        }
 
         var regex = /<xmp.*?:(.*?)>(.*?)</g;
         var meta = [{
